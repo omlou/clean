@@ -34,7 +34,7 @@ const main = {
     const list = range.querySelectorAll(que)
     const obj = this.clear
     Object.assign(obj, list)
-    setLength(obj, list.length)
+    main.setLength(obj, list.length)
     return obj
   },
   /* 原型构造函数 */
@@ -119,9 +119,9 @@ const main = {
     Object.defineProperty(obj, "length", { value: length })
   },
   createOne: function (obj: any, node: any, length: number) { // 添加一个dom元素，有判断
-    if (isElement(node)) {
+    if (main.isElement(node)) {
       obj[length] = node
-      setLength(obj, length + 1)
+      main.setLength(obj, length + 1)
       return true
     } else {
       throw "Parameter is not an element"
@@ -130,20 +130,20 @@ const main = {
   createAll: function (obj: any, length: number, nodelist: any) { // 添加多个dom元素，有判断
     for (const i in nodelist) {
       const dom = nodelist[i]
-      if (isElement(dom)) {
+      if (main.isElement(dom)) {
         obj[length] = dom
         length ++
       } else {
         throw "Parameter items are not all elements"
       }
     }
-    setLength(obj, length)
+    main.setLength(obj, length)
   },
   initOne: function (tar: any, callback: Function) { // 初始化含一个元素的clear对象
     const item = callback()
     if (item) {
       tar[0] = item
-      setLength(tar, 1)
+      main.setLength(tar, 1)
     }
     return tar
   },
@@ -156,7 +156,7 @@ const main = {
         j ++
       }
     }
-    setLength(tar, j)
+    main.setLength(tar, j)
     return tar
   }
 }
@@ -213,11 +213,6 @@ export const setter: any = { // 读取目标都是单元素
   }
 }
 
-
-
-
-
-
 /* DOM 通用方法 */
 function switchType(nodelist: any, value: any, type: string) { // 处理三个参数
   if (nodelist.length === 0) throw "Target has no elements"
@@ -259,60 +254,56 @@ function switchType(nodelist: any, value: any, type: string) { // 处理三个�
 
 function switchTask(nodelist: any, type: string) { // 处理两个参数
   if (nodelist.length === 0) throw "Target has no elements"
-  const obj = clean()
+  const obj = main.clean()
   switch (type) {
     case "parent":
-      return initOne(obj, () => nodelist[0].parentNode)
+      return main.initOne(obj, () => nodelist[0].parentNode)
     case "child":
-      return initAll(obj, Array.from(nodelist[0].children), (item: any) => item)
+      return main.initAll(obj, Array.from(nodelist[0].children), (item: any) => item)
     case "next":
-      return initAll(obj, nodelist, (item: any) => item.nextElementSibling)
+      return main.initAll(obj, nodelist, (item: any) => item.nextElementSibling)
     case "prev":
-      return initAll(obj, nodelist, (item: any) => item.previousElementSibling)
+      return main.initAll(obj, nodelist, (item: any) => item.previousElementSibling)
     case "first":
-      return initAll(obj, nodelist, (item: any) => item.children[0])
+      return main.initAll(obj, nodelist, (item: any) => item.children[0])
     case "last":
-      return initAll(obj, nodelist, (item: any) => {
+      return main.initAll(obj, nodelist, (item: any) => {
         const child = item.children
         return child[child.length - 1]
       })
   }
 }
 
-
-
-
-
 /* mount 钩子函数相关 */
 function listenDOMLoad() {
   document.removeEventListener('DOMContentLoaded', listenDOMLoad)
-  isShow = false
-  for (let item of mountArr) { item() }
-  mountArr = []
+  main.isShow = false
+  for (let item of main.mountArr) { (item as any)() }
+  main.mountArr = []
 }
 
 /* 初始化 Clean */
 function initClear() {
   document.addEventListener('DOMContentLoaded', listenDOMLoad.bind(this))
   window.addEventListener('load', () => {
-    for (let item of loadArr) { item() }
+    for (let item of main.loadArr) { (item as any)() }
   })
   window.addEventListener('pageshow', () => {
-    if (isShow) for (let item of showArr) { item() }
+    if (main.isShow) for (let item of main.showArr) { (item as any)() }
   })
   window.addEventListener('beforeunload', () => {
-    for (let item of beforeunloadArr) { item() }
+    for (let item of main.beforeunloadArr) { (item as any)() }
   })
   window.addEventListener('pagehide', () => {
-    isShow = true
-    for (let item of hideArr) { item() }
+    main.isShow = true
+    for (let item of main.hideArr) { (item as any)() }
   })
   window.addEventListener('unload', () => {
-    for (let item of unloadArr) { item() }
+    for (let item of main.unloadArr) { (item as any)() }
   })
-  window.C = C.bind(this) // 挂载C
+  window.C = main.C.bind(this) // 挂载C
   // 为C挂载工具方法
-  Object.assign(window.C, ctool)
-  window.C.ajax = chttp.ajax
-  window.C.getQueryString = chttp.getQueryString
+  Object.assign(window.C, tool)
+  window.C.ajax = ajax.ajax
+  window.C.getQueryString = ajax.getQueryString
 }
