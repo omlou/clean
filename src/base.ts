@@ -1,7 +1,7 @@
-import main from "./main"
+import { Clean, initOne, createOne, createAll } from "./main"
 import tool from "./tool"
 
-const { createOne, createAll, clean, initOne } = main
+// const { createOne, createAll, clean, initOne } = main
 const { createDOM } = tool
 
 const base = {
@@ -21,7 +21,7 @@ const base = {
     }
   },
   nth: function (index: number) { // 选取某个索引的元素生成一个clear对象
-    const obj = clean()
+    const obj = new Clean()
     return initOne(obj, () => this[index])
   },
   /* 增删DOM */

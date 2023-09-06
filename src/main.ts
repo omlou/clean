@@ -1,167 +1,167 @@
 import tool from "./tool"
-import ajax from "./ajax"
+import ajax, { queryString } from "@xlou/ajax"
 import base from "./base"
 
-const { createDOM } = tool
-const { getQueryString } = ajax
+// const { createDOM } = tool
 
-const main = {
-  /* 生成表格 DOM 相关 */
-  tagReg: /<([a-z][^\/\0>\x20\t\r\n\f]*)/i,
-  tagMap: {
-    thead: "table",
-    tbody: "table",
-    col: "colgroup",
-    tr: "tbody",
-    td: "tr"
-  },
-  /* 钩子函数相关 */
-  isShow: true,
-  mountArr: [],
-  loadArr: [],
-  showArr: [],
-  beforeunloadArr: [],
-  hideArr: [],
-  unloadArr: [],
-  /* 初始化一个 Clean 对象 */
-  clean: function () {
-    const obj = Object.create(new (main.Clean as any)())
-    Object.defineProperty(obj, "length", { value: 0, configurable: true })
-  },
-  /* 将匹配css选择器的dom转换成clear对象 */
-  C: function (que: string, range: any) {
-    range = range || document
-    const list = range.querySelectorAll(que)
-    const obj = this.clear
-    Object.assign(obj, list)
-    main.setLength(obj, list.length)
-    return obj
-  },
-  /* 原型构造函数 */
-  Clean: function () {
-    for(let i in getter){ // 挂载原型的getter
-      Object.defineProperty(this,i,{
-        get: getter[i]
-      })
-    }
-    for(let i in setter){ // 挂载原型的setter
-      let item=setter[i]
-      Object.defineProperty(this,i,{
-        get: item.get,
-        set: item.set
-      })
-    }
-    for(const i in base){ // 挂载原型的方法
-      Object.defineProperty(this, i, {
-        value: (base as any)[i]
-      })
-    }
-  },
-  /* 框架通用方法 */
-  creatCoputed: function (conta: any, arg: any) { // 创建computed
-    for (const i in arg) {
-      Object.defineProperty(conta, i, {
-        get: arg[i]
-      })
-    }
-  },
-  creatProxy: function (conta: any, arg: any) { // 创建proxy
-    for (const i in arg) {
-      const item = arg[i]
-      Object.defineProperty(conta, i, {
-        get() {
-          return item.value
-        },
-        set(value) {
-          const ov = item.value
-          item.value = value
-          item.watch(value, ov)
-          return true
-        }
-      })
-      if (item.immediate) item.watch(item.value, null)
-    }
-  },
-  /* 处理路径参数 */
-  getUrl: function (msg: any) { // 将url和参数字符串凭借在一起
-    if (!msg.url) return ""
-    const oparams = msg.params ? encodeURIComponent(JSON.stringify(msg.params)) : ""
-    let oquery = getQueryString(msg.query)
-    if (oparams) {
-      oquery ? (oquery += "&clearparams=" + oparams) : (oquery = "clearparams=" + oparams)
-    }
-    const ourl = msg.url.indexOf('?') !== -1 ? '&' + oquery : '?' + oquery
-    return msg.url + ourl
-  },
-  getAllQuery: function () { // 将地址参数转换为对象
-    const qurl = (window.location.href.match(/\?([\S\s]*)/) || [])[1]
-    if (!qurl) return {}
-    const qlarr = qurl.split("&")
-    const qlobj: any = {}
-    for (const item of qlarr) {
-      const itemarr = item.split("=")
-      qlobj[decodeURIComponent(itemarr[0])] = decodeURIComponent(itemarr[1])
-    }
-    return qlobj
-  },
-  getPath: function () { // 获取到当前的路由
-    const { pathname } = window.location
-    const starti = pathname.lastIndexOf("/") + 1
-    const endi = pathname.indexOf(".", starti)
-    const path = (endi !== -1) ? pathname.slice(starti, endi) : pathname.slice(starti)
-    return path || "index"
-  },
-  /* 将原始 DOM 转换为 Clean 对象相关 */
-  isElement: function (dom: any) { // 判断是不是一个 DOM 对象
-    return (dom.nodeType === 1) && (typeof dom.nodeName === 'string') ? true : false
-  },
-  setLength: function (obj: any, length: number) { // 设置clear对象的长度
-    Object.defineProperty(obj, "length", { value: length })
-  },
-  createOne: function (obj: any, node: any, length: number) { // 添加一个dom元素，有判断
-    if (main.isElement(node)) {
-      obj[length] = node
-      main.setLength(obj, length + 1)
-      return true
-    } else {
-      throw "Parameter is not an element"
-    }
-  },
-  createAll: function (obj: any, length: number, nodelist: any) { // 添加多个dom元素，有判断
-    for (const i in nodelist) {
-      const dom = nodelist[i]
-      if (main.isElement(dom)) {
-        obj[length] = dom
-        length ++
-      } else {
-        throw "Parameter items are not all elements"
-      }
-    }
-    main.setLength(obj, length)
-  },
-  initOne: function (tar: any, callback: Function) { // 初始化含一个元素的clear对象
-    const item = callback()
-    if (item) {
-      tar[0] = item
-      main.setLength(tar, 1)
-    }
-    return tar
-  },
-  initAll: function (tar: any, list: any, callback: Function) { // 初始化含多个元素的clear对象
-    let j = 0
-    for (const i in list) {
-      const item = callback(list[i])
-      if (item) {
-        tar[j] = item
-        j ++
-      }
-    }
-    main.setLength(tar, j)
-    return tar
+// const main = {
+//   /* 生成表格 DOM 相关 */
+//   tagReg: /<([a-z][^\/\0>\x20\t\r\n\f]*)/i,
+//   tagMap: {
+//     thead: "table",
+//     tbody: "table",
+//     col: "colgroup",
+//     tr: "tbody",
+//     td: "tr"
+//   },
+//   /* 钩子函数相关 */
+//   isShow: true,
+//   mountArr: [],
+//   loadArr: [],
+//   showArr: [],
+//   beforeunloadArr: [],
+//   hideArr: [],
+//   unloadArr: [],
+//   /* 初始化一个 Clean 对象 */
+//   clean: function () {
+//     const obj = Object.create(new (main.Clean as any)())
+//     Object.defineProperty(obj, "length", { value: 0, configurable: true })
+//   },
+//   /* 将匹配css选择器的dom转换成clear对象 */
+//   C: function (que: string, range: any) {
+//     range = range || document
+//     const list = range.querySelectorAll(que)
+//     const obj = this.clear
+//     Object.assign(obj, list)
+//     main.setLength(obj, list.length)
+//     return obj
+//   },
+//   /* 原型构造函数 */
+//   Clean: function () {
+//     for(let i in getter){ // 挂载原型的getter
+//       Object.defineProperty(this,i,{
+//         get: getter[i]
+//       })
+//     }
+//     for(let i in setter){ // 挂载原型的setter
+//       let item=setter[i]
+//       Object.defineProperty(this,i,{
+//         get: item.get,
+//         set: item.set
+//       })
+//     }
+//     for(const i in base){ // 挂载原型的方法
+//       Object.defineProperty(this, i, {
+//         value: (base as any)[i]
+//       })
+//     }
+//   },
+//   /* 框架通用方法 */
+//   creatCoputed: function (conta: any, arg: any) { // 创建computed
+//     for (const i in arg) {
+//       Object.defineProperty(conta, i, {
+//         get: arg[i]
+//       })
+//     }
+//   },
+//   creatProxy: function (conta: any, arg: any) { // 创建proxy
+//     for (const i in arg) {
+//       const item = arg[i]
+//       Object.defineProperty(conta, i, {
+//         get() {
+//           return item.value
+//         },
+//         set(value) {
+//           const ov = item.value
+//           item.value = value
+//           item.watch(value, ov)
+//           return true
+//         }
+//       })
+//       if (item.immediate) item.watch(item.value, null)
+//     }
+//   },
+//   /* 处理路径参数 */
+//   getUrl: function (msg: any) { // 将url和参数字符串凭借在一起
+//     if (!msg.url) return ""
+//     const oparams = msg.params ? encodeURIComponent(JSON.stringify(msg.params)) : ""
+//     let oquery = queryString(msg.query)
+//     if (oparams) {
+//       oquery ? (oquery += "&clearparams=" + oparams) : (oquery = "clearparams=" + oparams)
+//     }
+//     const ourl = msg.url.indexOf('?') !== -1 ? '&' + oquery : '?' + oquery
+//     return msg.url + ourl
+//   },
+//   getAllQuery: function () { // 将地址参数转换为对象
+//     const qurl = (window.location.href.match(/\?([\S\s]*)/) || [])[1]
+//     if (!qurl) return {}
+//     const qlarr = qurl.split("&")
+//     const qlobj: any = {}
+//     for (const item of qlarr) {
+//       const itemarr = item.split("=")
+//       qlobj[decodeURIComponent(itemarr[0])] = decodeURIComponent(itemarr[1])
+//     }
+//     return qlobj
+//   },
+//   getPath: function () { // 获取到当前的路由
+//     const { pathname } = window.location
+//     const starti = pathname.lastIndexOf("/") + 1
+//     const endi = pathname.indexOf(".", starti)
+//     const path = (endi !== -1) ? pathname.slice(starti, endi) : pathname.slice(starti)
+//     return path || "index"
+//   },
+//   /* 将原始 DOM 转换为 Clean 对象相关 */
+function isElement(dom: any) { // 判断是不是一个 DOM 对象
+  return (dom.nodeType === 1) && (typeof dom.nodeName === 'string') ? true : false
+}
+//   setLength: function (obj: any, length: number) { // 设置clear对象的长度
+//     Object.defineProperty(obj, "length", { value: length })
+//   },
+export function createOne(obj: any, node: any, length: number) { // 添加一个dom元素，有判断
+  if (isElement(node)) {
+    obj[length] = node
+    setLength(obj, length + 1)
+    return true
+  } else {
+    throw "Parameter is not an element"
   }
 }
+export function createAll(obj: any, length: number, nodelist: any) { // 添加多个dom元素，有判断
+  for (const i in nodelist) {
+    const dom = nodelist[i]
+    if (isElement(dom)) {
+      obj[length] = dom
+      length ++
+    } else {
+      throw "Parameter items are not all elements"
+    }
+  }
+  setLength(obj, length)
+}
+export function initOne(tar: any, callback: Function) { // 初始化含一个元素的clear对象
+  const item = callback()
+  if (item) {
+    tar[0] = item
+    setLength(tar, 1)
+  }
+  return tar
+}
 
-export default main
+export function initAll(tar: any, list: any, callback: Function) { // 初始化含多个元素的clear对象
+  let j = 0
+  for (const i in list) {
+    const item = callback(list[i])
+    if (item) {
+      tar[j] = item
+      j ++
+    }
+  }
+  setLength(tar, j)
+  return tar
+}
+// }
+
+// export default main
 
 /* Clear 原型 getter */
 export const getter: any = {
@@ -254,56 +254,101 @@ function switchType(nodelist: any, value: any, type: string) { // 处理三个�
 
 function switchTask(nodelist: any, type: string) { // 处理两个参数
   if (nodelist.length === 0) throw "Target has no elements"
-  const obj = main.clean()
+  const obj = new Clean()
   switch (type) {
     case "parent":
-      return main.initOne(obj, () => nodelist[0].parentNode)
+      return initOne(obj, () => nodelist[0].parentNode)
     case "child":
-      return main.initAll(obj, Array.from(nodelist[0].children), (item: any) => item)
+      return initAll(obj, Array.from(nodelist[0].children), (item: any) => item)
     case "next":
-      return main.initAll(obj, nodelist, (item: any) => item.nextElementSibling)
+      return initAll(obj, nodelist, (item: any) => item.nextElementSibling)
     case "prev":
-      return main.initAll(obj, nodelist, (item: any) => item.previousElementSibling)
+      return initAll(obj, nodelist, (item: any) => item.previousElementSibling)
     case "first":
-      return main.initAll(obj, nodelist, (item: any) => item.children[0])
+      return initAll(obj, nodelist, (item: any) => item.children[0])
     case "last":
-      return main.initAll(obj, nodelist, (item: any) => {
+      return initAll(obj, nodelist, (item: any) => {
         const child = item.children
         return child[child.length - 1]
       })
   }
 }
 
-/* mount 钩子函数相关 */
-function listenDOMLoad() {
-  document.removeEventListener('DOMContentLoaded', listenDOMLoad)
-  main.isShow = false
-  for (let item of main.mountArr) { (item as any)() }
-  main.mountArr = []
+// /* mount 钩子函数相关 */
+// function listenDOMLoad() {
+//   document.removeEventListener('DOMContentLoaded', listenDOMLoad)
+//   main.isShow = false
+//   for (let item of main.mountArr) { (item as any)() }
+//   main.mountArr = []
+// }
+
+// /* 初始化 Clean */
+// function initClear() {
+//   document.addEventListener('DOMContentLoaded', listenDOMLoad.bind(this))
+//   window.addEventListener('load', () => {
+//     for (let item of main.loadArr) { (item as any)() }
+//   })
+//   window.addEventListener('pageshow', () => {
+//     if (main.isShow) for (let item of main.showArr) { (item as any)() }
+//   })
+//   window.addEventListener('beforeunload', () => {
+//     for (let item of main.beforeunloadArr) { (item as any)() }
+//   })
+//   window.addEventListener('pagehide', () => {
+//     main.isShow = true
+//     for (let item of main.hideArr) { (item as any)() }
+//   })
+//   window.addEventListener('unload', () => {
+//     for (let item of main.unloadArr) { (item as any)() }
+//   })
+//   window.C = main.C.bind(this) // 挂载C
+//   // 为C挂载工具方法
+//   Object.assign(window.C, tool)
+//   window.C.ajax = ajax.ajax
+//   window.C.queryString = ajax.queryString
+// }
+
+function setLength(obj: Clean, length: number) { // 设置 clean 对象的长度
+  Object.defineProperty(obj, "length", { value: length })
 }
 
-/* 初始化 Clean */
-function initClear() {
-  document.addEventListener('DOMContentLoaded', listenDOMLoad.bind(this))
-  window.addEventListener('load', () => {
-    for (let item of main.loadArr) { (item as any)() }
-  })
-  window.addEventListener('pageshow', () => {
-    if (main.isShow) for (let item of main.showArr) { (item as any)() }
-  })
-  window.addEventListener('beforeunload', () => {
-    for (let item of main.beforeunloadArr) { (item as any)() }
-  })
-  window.addEventListener('pagehide', () => {
-    main.isShow = true
-    for (let item of main.hideArr) { (item as any)() }
-  })
-  window.addEventListener('unload', () => {
-    for (let item of main.unloadArr) { (item as any)() }
-  })
-  window.C = main.C.bind(this) // 挂载C
-  // 为C挂载工具方法
-  Object.assign(window.C, tool)
-  window.C.ajax = ajax.ajax
-  window.C.getQueryString = ajax.getQueryString
+class CleanCore {
+  constructor() {
+    for (let i in getter) { // 挂载原型的getter
+      Object.defineProperty(this, i, {
+        get: getter[i]
+      })
+    }
+    for (let i in setter) { // 挂载原型的setter
+      let item = setter[i]
+      Object.defineProperty(this, i, {
+        get: item.get,
+        set: item.set
+      })
+    }
+    for (const i in base) { // 挂载原型的方法
+      Object.defineProperty(this, i, {
+        value: (base as any)[i]
+      })
+    }
+  }
 }
+
+export class Clean extends CleanCore {
+  constructor() {
+    super()
+    Object.assign(this, "length", { value: 0, configurable: true })
+  }
+}
+
+function C(que: string, range?: Document): Clean {
+  range = range || document
+  const list = range.querySelectorAll(que)
+  const clean = new Clean()
+  Object.assign(clean, list)
+  setLength(clean, list.length)
+  return clean
+}
+
+
+export default C
