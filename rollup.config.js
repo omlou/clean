@@ -5,20 +5,19 @@ import commonjs from '@rollup/plugin-commonjs'
 import json from "@rollup/plugin-json"
 import dts from 'rollup-plugin-dts'
 
-const name="xfetch"
-const globalName="xfetch"
-const {NODE_ENV}=process.env
-const commonPlugins=[
+const name = "clean"
+const globalName = "C"
+const commonPlugins = [
   resolve(),
   commonjs(),
   json(),
   typescript()
 ]
 
-const config=[
+const config = [
   {
-    input:"src/index.umd.ts",
-    output:[
+    input: "src/index.umd.ts",
+    output: [
       {
         file: `dist/umd/${name}.js`,
         format: 'umd',
@@ -29,14 +28,18 @@ const config=[
         format: 'umd',
         name: globalName,
         sourcemap: true,
-        plugins: [terser()]
+        plugins: [terser({
+          mangle: {
+            reserved: ['Clean', 'CleanCore']
+          }
+        })]
       }
     ],
     plugins: commonPlugins
   },
   {
-    input:"index.ts",
-    output:[
+    input: "src/index.ts",
+    output: [
       {
         file: `dist/es/${name}.js`,
         format: 'es'
@@ -45,13 +48,17 @@ const config=[
         file: `dist/es/${name}.min.js`,
         format: 'es',
         sourcemap: true,
-        plugins: [terser()]
+        plugins: [terser({
+          mangle: {
+            reserved: ['Clean', 'CleanCore']
+          }
+        })]
       }
     ],
     plugins: commonPlugins
   },
   {
-    input: "index.ts",
+    input: "src/index.ts",
     output: {
       file: 'index.d.ts',
       format: 'es',

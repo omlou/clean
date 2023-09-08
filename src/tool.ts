@@ -1,40 +1,25 @@
 import webtools from "@xlou/webtools"
-import main from "./main"
-const {
-  tagReg,
-  tagMap,
-  clean,
-  createOne,
-  createAll,
-  creatCoputed,
-  creatProxy,
-  mountArr,
-  loadArr,
-  showArr,
-  beforeunloadArr,
-  hideArr,
-  unloadArr,
-  getUrl,
-  getAllQuery,
-  getPath
-}: any = main
+import variable, { tagReg, TagMap } from "./variable"
 
-/* 工具方法，直接挂载在 C 方法下 */
+function getUrl(msg: any) { // 将url和参数字符串凭借在一起
+  if (typeof msg === "string") return msg
+  if (!msg.url) return ""
+  msg.url = msg.url || window.location.href
+  const oparams = msg.params ? encodeURIComponent(JSON.stringify(msg.params)) : ""
+  let oquery = webtools.queryString(msg.query)
+  if (oparams) {
+    oquery = oquery ? (oquery + "&__CLEANDATA__=" + oparams) : ("__CLEANDATA__=" + oparams)
+  }
+  let ourl = msg.url.indexOf('?') !== -1 ? '&' + oquery : '?' + oquery
+  return msg.url + ourl
+}
+
 export default {
   /* DOM 相关 */
-  create: function (node: any) { // 将dom转换为clear对象
-    const obj = clean()
-    if ((node instanceof NodeList) || (node instanceof Array)) {
-      const j = 0
-      createAll(obj, j, node)
-      return obj
-    }
-    if (createOne(obj, node, 0)) return obj
-  },
   createDOM: function (str: string) { // 将html转换为dom数组
     const res = tagReg.exec(str)
     const tag = res ? res[1] : null
-    const parentTag = tag ? ((tagMap as any)[tag] || "div") : "div"
+    const parentTag = tag ? ((TagMap as any)[tag] || "div") : "div"
     const contdom = document.createElement(parentTag)
     contdom.innerHTML = str
     return Array.from(contdom.childNodes)
@@ -60,38 +45,9 @@ export default {
     range = range || document
     return Array.from(range.querySelectorAll(target))
   },
-  /* 页面框架部分 */
-  page: function ({ data, computed, proxy, methods, create, mount, load, show, beforeunload, hide, unload }: any) {
-    // data&methods
-    Object.assign(window,data,methods)
-    // computed
-    creatCoputed(window, computed)
-    // proxy
-    creatProxy(window, proxy)
-    // 生命周期钩子函数
-    if (create) create()
-    if (mount) mountArr.push(mount)
-    if (load) loadArr.push(load)
-    if (show) showArr.push(show)
-    if (beforeunload) beforeunloadArr.push(beforeunload)
-    if (hide) hideArr.push(hide)
-    if (unload) unloadArr.push(unload)
-  },
-  component: function (obj: any) {
-    let { name, data, computed, proxy, methods, render, mount } = obj
-    if (!name) throw "Component must have a name"
-    const compobj = {}
-    // 复制
-    Object.assign(compobj, data, methods, render, mount)
-    // computed
-    creatCoputed(compobj, computed)
-    // proxy
-    creatProxy(compobj, proxy);
-    // 挂载
-    (window as any)[name] = compobj
-    return compobj
-  },
-  setData: function (obj: any, str: any) { // 设置全局变量
+
+  /* 变量相关 */
+  setState: function (obj: any, str: any) { // 设置全局变量
     if (str) {
       const arr = str.split(",")
       for (const item of arr) {
@@ -101,19 +57,44 @@ export default {
       Object.assign(window, obj)
     }
   },
-  setProxy: function (obj: any, target: any = window) { // 设置属性的set
-    creatProxy(target, obj)
+  watch(conta: any, arg: any) { // 创建 watch
+    for (const i in arg) {
+      const item = arg[i]
+      Object.defineProperty(conta, i, {
+        get() {
+          return item.value
+        },
+        set(value) {
+          const ov = item.value
+          item.value = value
+          item.handler(value, ov)
+          return true
+        }
+      })
+      if (item.immediate) item.handler(item.value, null)
+    }
   },
+
   /* 独立钩子函数 */
-  mount: function (callback: Function) {
-    mountArr.push(callback)
+  mounted: function (callback: Function) {
+    (variable as any).mountArr.push(callback)
   },
-  pageshow: function (callback: Function) {
-    showArr.push(callback)
+  loaded: function (callback: Function) {
+    (variable as any).loadArr.push(callback)
   },
-  pagehide: function (callback: Function) {
-    hideArr.push(callback)
+  beforeUnload: function (callback: Function) {
+    (variable as any).beforeunloadArr.push(callback)
   },
+  unload: function (callback: Function) {
+    (variable as any).unloadArr.push(callback)
+  },
+  pageShow: function (callback: Function) {
+    (variable as any).showArr.push(callback)
+  },
+  pageHide: function (callback: Function) {
+    (variable as any).hideArr.push(callback)
+  },
+
   /* 绑定事件的扩展，如：<div class="hello" onclick="C.self(sayHello,'123',this)"> */
   prevent: function (callback: Function, ev: Event, ...arg: any){ // 阻止默认事件
     ev.preventDefault()
@@ -127,12 +108,13 @@ export default {
     const { currentTarget, target } = ev
     if (currentTarget === target) callback(...arg)
   },
+
   /* 路由 */
   push: function (msg: any) { // 跳转
-    window.location.href = msg instanceof Object ? getUrl(msg) : msg
+    window.location.href = getUrl(msg)
   },
   replace: function (msg: any) { // 替换
-    window.location.replace(msg instanceof Object ? getUrl(msg) : msg)
+    window.location.replace(getUrl(msg))
   },
   reload: function () { // 重新加载
     window.location.reload()
@@ -146,6 +128,17 @@ export default {
   go: function (str: any){ // 跳转历史记录
     window.history.go(str)
   },
+  route: function () { // 获取路由地址和参数
+    const res: any = {}
+    const allQuery: any = webtools.getQuery()
+    let params = decodeURIComponent(allQuery["__CLEANDATA__"])
+    res.params = !(params === 'undefined' || params === '') ? JSON.parse(params) : {}
+    delete res['__CLEANDATA__']
+    res.query = allQuery
+    return res
+  },
+
+  /* Form 表单相关 */
   formatInput: function (msg: any) { // 正则限制input输入
     let { el, rules, reg, nopass, pass } = msg
     const doc = window.document
@@ -188,16 +181,5 @@ export default {
         }
       }
     }
-  },
-  clearRoute: function () { // 获取路由地址和参数
-    const res: any = {}
-    const allquery = getAllQuery()
-    let params = decodeURIComponent(allquery.clearparams)
-    res.params = !(params == 'undefined' || params == '') ? JSON.parse(params) : {}
-    delete res['clearparams']
-    res.query = allquery
-    res.path = getPath()
-    return res
-  },
-  ...webtools
+  }
 }

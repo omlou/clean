@@ -7,9 +7,16 @@
   "exports": {
     ".": {
       "types": "./index.d.ts",
-      "umd": "./dist/umd/clean.min.js",
-      "es": "./dist/es/clean.min.js",
+      "require": "./dist/umd/clean.min.js",
       "default": "./dist/es/clean.min.js"
+    },
+    "./es": {
+      "types": "./index.d.ts",
+      "default": "./dist/es/clean.min.js"
+    },
+    "./umd": {
+      "types": "./index.d.ts",
+      "default": "./dist/umd/clean.min.js"
     }
   },
   "type": "module",
@@ -17,6 +24,7 @@
   "keywords": [
     "clean",
     "query",
+    "ES6",
     "ajax"
   ],
   "description": "Make development easier, make code cleaner.",
@@ -27,10 +35,9 @@
   "unpkg": "dist/umd/clean.min.js",
   "jsdelivr": "dist/umd/clean.min.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production rollup -c",
+    "build": "gulp clear && rollup -c",
     "start": "gulp serve",
-    "update": "cross-env NODE_ENV=development && gulp clear && rollup -c",
-    "commit": "gulp simplify&&npm publish --access public&&gulp dev",
+    "upgrade": "gulp upgrade --host %npm_config_host%",
     "serve": "node app.js"
   },
   "author": "Louis Xu",
