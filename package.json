@@ -37,8 +37,7 @@
   "scripts": {
     "build": "gulp clear && rollup -c",
     "start": "gulp serve",
-    "upgrade": "gulp upgrade --host %npm_config_host%",
-    "serve": "node app.js"
+    "upgrade": "gulp upgrade --host %npm_config_host%"
   },
   "author": "Louis Xu",
   "license": "MIT",

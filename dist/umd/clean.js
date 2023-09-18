@@ -372,8 +372,8 @@
             if (createOne(obj, node, 0))
                 return obj;
         },
-        ajax: l,
         ...tool,
+        ajax: l,
         ...g
     };
     const instance = {
@@ -509,7 +509,7 @@
         first() { return switchTask(this, "first"); },
         last() { return switchTask(this, "last"); },
         /* 工具 */
-        toArray() { return Array.from(this); } // 转换为数组
+        array() { return Array.from(this); } // 转换为数组
     };
     class Clean {
         constructor() {
@@ -536,14 +536,14 @@
         }
         return new Clean();
     }
-    function C(que, range) {
+    const C = function (que, range) {
         range = range || document;
         const list = range.querySelectorAll(que);
         const clean = createClean();
         Object.assign(clean, list);
         setLength(clean, list.length);
         return clean;
-    }
+    };
     /* mount 钩子函数相关 */
     function DOMLoaded() {
         variable.isShow = false;

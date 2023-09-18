@@ -17,8 +17,8 @@ const tools = {
     }
     if (createOne(obj, node, 0)) return obj
   },
-  ajax,
   ...tool,
+  ajax,
   ...webtools
 }
 
@@ -159,13 +159,55 @@ const getter: any = {
   first() { return switchTask(this, "first") }, // 获取子元素里的第一个元素
   last() { return switchTask(this, "last") }, // 获取子元素里的最后一个元素
   /* 工具 */
-  toArray() { return Array.from(this) } // 转换为数组
+  array() { return Array.from(this) } // 转换为数组
 }
 
 /* 创建 Clean 对象相关 */
 interface Clean {
+  readonly length: number
   get parent(): Clean
+  get child(): Clean
+  get next(): Clean
+  get prev(): Clean
+  get first(): Clean
+  get last(): Clean
+  get array(): Array<any>
+  get style(): string
+  set style(value: any)
+  get value(): any
+  set value(value: any)
+  get checked(): boolean | undefined
+  set checked(value: boolean)
+  get text(): string
+  set text(value: any)
+  push: (dom: any) => void
+  concat: (...arg: any) => void
+  nth: (index: number) => Clean
+  append: (str: string) => void
+  prepend: (str: string) => void
+  before: (str: string) => void
+  after: (str: string) => void
+  map: (callback: (item: Clean, i: string) => void) => void
+  render: (str: string) => void
+  remove: () => void
+  show: (type?: string) => void
+  hide: () => void
+  getAttr: (attr: string) => null | string
+  setAttr: (attr: string, value: any) => void
+  addClass: (name: string) => void
+  removeClass: (name: string) => void
+  hasClass: (name: string) => boolean
+  bind: (type: string, callback: Function, option: any) => void
+  unbind: (type: string, callback: Function, option: any) => void
 }
+
+interface ToolOption {
+  [prop: string]: Function
+}
+
+type CFuncion = (que: string, range?: Document) => Clean
+
+type COption = CFuncion | ToolOption
 
 class Clean {
   constructor() {
@@ -194,7 +236,7 @@ function createClean(): Clean {
   return new Clean()
 }
 
-function C(que: string, range?: Document): Clean {
+const C: COption = function(que: string, range?: Document): Clean {
   range = range || document
   const list = range.querySelectorAll(que)
   const clean = createClean()
@@ -250,4 +292,8 @@ function DOMLoaded() {
   })
 })()
 
-export default C
+export {
+  C as default,
+  COption,
+  Clean
+}
