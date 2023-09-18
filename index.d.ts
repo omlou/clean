@@ -1,17 +1,56 @@
+import * as _xlou_ajax from '@xlou/ajax';
+import * as _xlou_webtools from '@xlou/webtools';
+
+declare const tools: {
+    Base64: _xlou_webtools.Base64Options;
+    deepCopy: typeof _xlou_webtools.deepCopy;
+    filterObject: typeof _xlou_webtools.filterObject;
+    getQuery: typeof _xlou_webtools.getQuery;
+    queryString: typeof _xlou_webtools.queryString;
+    toFixed: typeof _xlou_webtools.toFixed;
+    formSubmit: typeof _xlou_webtools.formSubmit;
+    readText: typeof _xlou_webtools.readText;
+    readJSON: typeof _xlou_webtools.readJSON;
+    getStore: typeof _xlou_webtools.getStore;
+    setStore: typeof _xlou_webtools.setStore;
+    unid: typeof _xlou_webtools.unid;
+    colorRGB: typeof _xlou_webtools.colorRGB;
+    ajax: _xlou_ajax.AjaxOptions;
+    createDOM: (str: string) => unknown[];
+    htmlCir: (obj: any, callback: Function) => string;
+    str: (arg: any) => any;
+    one: (target: any, range: any) => any;
+    all: (target: any, range: any) => unknown[];
+    setState: (obj: any, str: any) => void;
+    watch(conta: any, arg: any): void;
+    mounted: (callback: Function) => void;
+    loaded: (callback: Function) => void;
+    beforeUnload: (callback: Function) => void;
+    unload: (callback: Function) => void;
+    pageShow: (callback: Function) => void;
+    pageHide: (callback: Function) => void;
+    prevent: (callback: Function, ev: Event, ...arg: any) => void;
+    stop: (callback: Function, ev: Event, ...arg: any) => void;
+    self: (callback: Function, ev: Event, ...arg: any) => void;
+    push: (msg: any) => void;
+    replace: (msg: any) => void;
+    reload: () => void;
+    back: () => void;
+    forward: () => void;
+    go: (str: any) => void;
+    route: () => any;
+    formatInput: (msg: any) => void;
+    create: (node: any) => Clean | undefined;
+};
+declare const getter: any;
 interface ToolOption {
-    [prop: string]: Function;
+    create: typeof tools.create;
 }
 type CFuncion = (que: string, range?: Document) => Clean;
 type COption = CFuncion | ToolOption;
 interface Clean {
     readonly length: number;
-    get parent(): Clean;
-    get child(): Clean;
-    get next(): Clean;
-    get prev(): Clean;
-    get first(): Clean;
-    get last(): Clean;
-    get array(): Array<any>;
+    get parent(): typeof getter.parent;
     get style(): string;
     set style(value: any);
     get value(): any;

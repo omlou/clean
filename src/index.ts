@@ -202,7 +202,14 @@ interface Clean {
 }
 
 interface ToolOption {
-  [prop: string]: Function
+  // [prop: string]: Function
+  create: typeof tools.create
+  createDOM: typeof tools.createDOM
+  htmlCir: typeof tools.htmlCir
+  str: typeof tools.str
+  one: typeof tools.one
+  all: typeof tools.all
+  setState: typeof tools.setState
 }
 
 type CFuncion = (que: string, range?: Document) => Clean

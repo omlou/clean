@@ -16,7 +16,7 @@ function getUrl(msg: any) { // 将url和参数字符串凭借在一起
 
 export default {
   /* DOM 相关 */
-  createDOM: function (str: string) { // 将html转换为dom数组
+  createDOM: function (str: string): Array<Element> { // 将html转换为dom数组
     const res = tagReg.exec(str)
     const tag = res ? res[1] : null
     const parentTag = tag ? ((TagMap as any)[tag] || "div") : "div"
