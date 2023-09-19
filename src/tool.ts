@@ -24,40 +24,49 @@ export default {
     contdom.innerHTML = str
     return Array.from(contdom.childNodes)
   },
-  htmlCir: function (obj: any, callback: Function) { // 循环数组或对象生成html
+  htmlCir: function (obj: any, callback: (item: any, i: any) => string): string { // 循环数组或对象生成html
     let html = ""
     for (let i in obj) {
       html += callback(obj[i], i)
     }
     return html
   },
-  str: function (arg: any) { // 在模板字符串中绑定属性和传递参数时处理变量
+  str: function (arg: any): string { // 在模板字符串中绑定属性和传递参数时处理变量
     if ((typeof arg === "object" || typeof arg === "string") && typeof arg !== null) {
       return JSON.stringify(arg).replace(/"/g, "&quot;")
     }
     return arg
   },
-  one: function (target: any, range: any) { // 按css选择器选取一个dom，返回dom对象
+  one: function (target: any, range: any): Element { // 按css选择器选取一个dom，返回dom对象
     range = range || document
     return range.querySelector(target)
   },
-  all: function (target: any, range: any) { // 按css选择器选取多个dom，返回数组
+  all: function (target: any, range: any): Array<Element> { // 按css选择器选取多个dom，返回数组
     range = range || document
     return Array.from(range.querySelectorAll(target))
   },
 
   /* 变量相关 */
-  setState: function (obj: any, str: any) { // 设置全局变量
+  setState: function (obj: any, str?: string) { // 设置全局变量
     if (str) {
       const arr = str.split(",")
       for (const item of arr) {
-        window[item] = obj[item]
+        window[item as any] = obj[item]
       }
     } else {
       Object.assign(window, obj)
     }
   },
-  watch(conta: any, arg: any) { // 创建 watch
+  watch(
+    conta: any,
+    arg: {
+      [prop: string | number | symbol]: {
+        value: any,
+        handler: (nv: any, ov: any) => any,
+        immediate: boolean
+      }
+    }
+  ): void { // 创建 watch
     for (const i in arg) {
       const item = arg[i]
       Object.defineProperty(conta, i, {
@@ -76,59 +85,59 @@ export default {
   },
 
   /* 独立钩子函数 */
-  mounted: function (callback: Function) {
+  mounted: function (callback: Function): void {
     (variable as any).mountArr.push(callback)
   },
-  loaded: function (callback: Function) {
+  loaded: function (callback: Function): void {
     (variable as any).loadArr.push(callback)
   },
-  beforeUnload: function (callback: Function) {
+  beforeUnload: function (callback: Function): void {
     (variable as any).beforeunloadArr.push(callback)
   },
-  unload: function (callback: Function) {
+  unload: function (callback: Function): void {
     (variable as any).unloadArr.push(callback)
   },
-  pageShow: function (callback: Function) {
+  pageShow: function (callback: Function): void {
     (variable as any).showArr.push(callback)
   },
-  pageHide: function (callback: Function) {
+  pageHide: function (callback: Function): void {
     (variable as any).hideArr.push(callback)
   },
 
   /* 绑定事件的扩展，如：<div class="hello" onclick="C.self(sayHello,'123',this)"> */
-  prevent: function (callback: Function, ev: Event, ...arg: any){ // 阻止默认事件
+  prevent: function (callback: Function, ev: Event, ...arg: any): void { // 阻止默认事件
     ev.preventDefault()
     if (callback) callback(...arg)
   },
-  stop: function (callback: Function, ev: Event, ...arg: any) { // 阻止事件冒泡
+  stop: function (callback: Function, ev: Event, ...arg: any): void { // 阻止事件冒泡
     ev.stopPropagation()
     if (callback) callback(...arg)
   },
-  self: function (callback: Function, ev: Event, ...arg: any) { // 只有目标是自身才触发
+  self: function (callback: Function, ev: Event, ...arg: any): void { // 只有目标是自身才触发
     const { currentTarget, target } = ev
     if (currentTarget === target) callback(...arg)
   },
 
   /* 路由 */
-  push: function (msg: any) { // 跳转
+  push: function (msg: any): void { // 跳转
     window.location.href = getUrl(msg)
   },
-  replace: function (msg: any) { // 替换
+  replace: function (msg: any): void { // 替换
     window.location.replace(getUrl(msg))
   },
-  reload: function () { // 重新加载
+  reload: function (): void { // 重新加载
     window.location.reload()
   },
-  back: function (){ // 返回
+  back: function (): void { // 返回
     window.history.back()
   },
-  forward: function (){ // 下一个页面
+  forward: function (): void { // 下一个页面
     window.history.forward()
   },
-  go: function (str: any){ // 跳转历史记录
+  go: function (str: any): void { // 跳转历史记录
     window.history.go(str)
   },
-  route: function () { // 获取路由地址和参数
+  route: function (): { params: any, query: any } { // 获取路由地址和参数
     const res: any = {}
     const allQuery: any = webtools.getQuery()
     let params = decodeURIComponent(allQuery["__CLEANDATA__"])
@@ -139,7 +148,7 @@ export default {
   },
 
   /* Form 表单相关 */
-  formatInput: function (msg: any) { // 正则限制input输入
+  formatInput: function (msg: any): void { // 正则限制input输入
     let { el, rules, reg, nopass, pass } = msg
     const doc = window.document
     const domArr = doc.querySelectorAll(el)

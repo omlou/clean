@@ -80,62 +80,57 @@ function switchType(nodelist: any, value: any, type: string) { // 处理三个�
 
 export default {
   /* DOM 相关 */
-  map: function (callback: Function) { // 遍历clear对象，类似数组的map
-    for (let i in this) {
-      callback(this[i], i)
-    }
-  },
-  render: function (str: string) { // 向容器里渲染html
+  render: function (str: string): void { // 向容器里渲染html
     for (let i in this) {
       this[i].innerHTML = str
     }
   },
-  remove: function () { // 移除元素
+  remove: function (): void { // 移除元素
     for (let i in this) {
       const tar = this[i]
       tar.parentNode.removeChild(tar)
     }
   },
   /* 修改dom */
-  show: function (type: any) { // 显示元素
+  show: function (type?: string): void { // 显示元素
     type = type || ""
     for (const i in this) {
       this[i].style.display = type
     }
   },
-  hide: function () { // 隐藏元素
+  hide: function (): void { // 隐藏元素
     for (const i in this) {
       this[i].style.display = "none"
     }
   },
-  getAttr(attr: string) { // 目标为单元素，获取属性
+  getAttr: function (attr: string): null | string { // 目标为单元素，获取属性
     return this[0].getAttribute(attr)
   },
-  setAttr: function (attr: string, value: string) { // 设置属性
+  setAttr: function (attr: string, value: any) : void { // 设置属性
     for (const i in this) {
       this[i].setAttribute(attr, value)
     }
   },
-  addClass: function (name: string) { // 添加class
+  addClass: function (name: string): void { // 添加class
     for (const i in this) {
       this[i].classList.add(name)
     }
   },
-  removeClass: function (name: string) { // 移除class
+  removeClass: function (name: string): void { // 移除class
     for (const i in this) {
       this[i].classList.remove(name)
     }
   },
-  hasClass: function (name: string) { // 目标为单元素
+  hasClass: function (name: string): boolean { // 目标为单元素
     return this[0].classList.contains(name)
   },
   /* 绑定事件监听 */
-  bind: function (type: any, callback: Function, option: any) {
+  bind: function (type: string, callback: Function, option: any): void {
     for (const i in this) {
       this[i].addEventListener(type, callback, option)
     }
   },
-  unbind: function (type: any, callback: any, option: any) {
+  unbind: function (type: string, callback: Function, option: any): void {
     for (const i in this) {
       this[i].removeEventListener(type, callback, option)
     }

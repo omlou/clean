@@ -22,30 +22,37 @@ const tools = {
   ...webtools
 }
 
-const instance: any = {
+const instance = {
   /* 基本方法 */
-  push: function (dom: any) { // 添加对象
+  map: function (callback: (item: Clean, i: string) => any): Array<any> { // 遍历clear对象，类似数组的map
+    const arr = []
+    for (let i in this) {
+      arr.push(callback(this[i], i))
+    }
+    return arr
+  },
+  push: function (dom: any): void { // 添加对象
     createOne(this, dom, this.length)
   },
-  concat: function (...arg: any) { // 拼接clear对象或NodeList对象等
+  concat: function (...arg: any): void { // 拼接clear对象或NodeList对象等
     for (let item of arg) {
       const j = this.length
       createAll(this, j, item)
     }
   },
-  nth: function (index: number) { // 选取某个索引的元素生成一个clear对象
+  nth: function (index: number): Clean { // 选取某个索引的元素生成一个clear对象
     const obj = createClean()
     return initOne(obj, () => this[index])
   },
   /* 增删DOM */
-  append: function (str: string) { // 向容器里后面追加html
+  append: function (str: string): void { // 向容器里后面追加html
     for (let i in this) {
       tools.createDOM(str).map(item => {
         this[i].appendChild(item)
       })
     }
   },
-  prepend: function (str: string) { // 向容器里前面添加html
+  prepend: function (str: string): void { // 向容器里前面添加html
     for (const i in this) {
       const tar = this[i]
       const first = tar.firstChild
@@ -54,7 +61,7 @@ const instance: any = {
       })
     }
   },
-  before: function (str: string) { // 向元素前面添加html
+  before: function (str: string): void { // 向元素前面添加html
     for (let i in this) {
       const tar = this[i]
       const parent = tar.parentNode
@@ -63,7 +70,7 @@ const instance: any = {
       })
     }
   },
-  after: function (str: string) { // 向元素后面添加html
+  after: function (str: string): void { // 向元素后面添加html
     for (let i in this) {
       const tar = this[i]
       const parent = tar.parentNode
@@ -104,7 +111,7 @@ function createAll(obj: any, length: number, nodelist: any) { // 添加多个dom
   setLength(obj, length)
 }
 
-function initOne(tar: any, callback: Function) { // 初始化含一个元素的clear对象
+function initOne(tar: any, callback: Function): Clean { // 初始化含一个元素的clear对象
   const item = callback()
   if (item) {
     tar[0] = item
@@ -163,7 +170,8 @@ const getter: any = {
 }
 
 /* 创建 Clean 对象相关 */
-interface Clean {
+type Instance = typeof instance
+interface Clean extends Instance {
   readonly length: number
   get parent(): Clean
   get child(): Clean
@@ -171,7 +179,7 @@ interface Clean {
   get prev(): Clean
   get first(): Clean
   get last(): Clean
-  get array(): Array<any>
+  get array(): Array<Element>
   get style(): string
   set style(value: any)
   get value(): any
@@ -180,41 +188,7 @@ interface Clean {
   set checked(value: boolean)
   get text(): string
   set text(value: any)
-  push: (dom: any) => void
-  concat: (...arg: any) => void
-  nth: (index: number) => Clean
-  append: (str: string) => void
-  prepend: (str: string) => void
-  before: (str: string) => void
-  after: (str: string) => void
-  map: (callback: (item: Clean, i: string) => void) => void
-  render: (str: string) => void
-  remove: () => void
-  show: (type?: string) => void
-  hide: () => void
-  getAttr: (attr: string) => null | string
-  setAttr: (attr: string, value: any) => void
-  addClass: (name: string) => void
-  removeClass: (name: string) => void
-  hasClass: (name: string) => boolean
-  bind: (type: string, callback: Function, option: any) => void
-  unbind: (type: string, callback: Function, option: any) => void
 }
-
-interface ToolOption {
-  // [prop: string]: Function
-  create: typeof tools.create
-  createDOM: typeof tools.createDOM
-  htmlCir: typeof tools.htmlCir
-  str: typeof tools.str
-  one: typeof tools.one
-  all: typeof tools.all
-  setState: typeof tools.setState
-}
-
-type CFuncion = (que: string, range?: Document) => Clean
-
-type COption = CFuncion | ToolOption
 
 class Clean {
   constructor() {
@@ -237,11 +211,17 @@ function createClean(): Clean {
   }
   for (const i in instance) { // 挂载原型的方法
     Object.defineProperty(Clean.prototype, i, {
-      value: instance[i]
+      value: (instance as any)[i]
     })
   }
   return new Clean()
 }
+
+type ToolOption = typeof tools
+
+type CFuncion = (que: string, range?: Document) => Clean
+
+type COption = CFuncion | ToolOption
 
 const C: COption = function(que: string, range?: Document): Clean {
   range = range || document

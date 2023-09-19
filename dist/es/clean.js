@@ -104,11 +104,6 @@ function switchType(nodelist, value, type) {
 }
 var method = {
     /* DOM 相关 */
-    map: function (callback) {
-        for (let i in this) {
-            callback(this[i], i);
-        }
-    },
     render: function (str) {
         for (let i in this) {
             this[i].innerHTML = str;
@@ -132,7 +127,7 @@ var method = {
             this[i].style.display = "none";
         }
     },
-    getAttr(attr) {
+    getAttr: function (attr) {
         return this[0].getAttribute(attr);
     },
     setAttr: function (attr, value) {
@@ -372,6 +367,13 @@ const tools = {
 };
 const instance = {
     /* 基本方法 */
+    map: function (callback) {
+        const arr = [];
+        for (let i in this) {
+            arr.push(callback(this[i], i));
+        }
+        return arr;
+    },
     push: function (dom) {
         createOne(this, dom, this.length);
     },

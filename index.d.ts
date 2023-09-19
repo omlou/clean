@@ -16,13 +16,29 @@ declare const tools: {
     unid: typeof _xlou_webtools.unid;
     colorRGB: typeof _xlou_webtools.colorRGB;
     ajax: _xlou_ajax.AjaxOptions;
-    createDOM: (str: string) => unknown[];
-    htmlCir: (obj: any, callback: Function) => string;
-    str: (arg: any) => any;
-    one: (target: any, range: any) => any;
-    all: (target: any, range: any) => unknown[];
-    setState: (obj: any, str: any) => void;
-    watch(conta: any, arg: any): void;
+    createDOM: (str: string) => Element[];
+    htmlCir: (obj: any, callback: (item: any, i: any) => string) => string;
+    str: (arg: any) => string;
+    one: (target: any, range: any) => Element;
+    all: (target: any, range: any) => Element[];
+    setState: (obj: any, str?: string | undefined) => void;
+    watch(conta: any, arg: {
+        [prop: string]: {
+            value: any;
+            handler: (nv: any, ov: any) => any;
+            immediate: boolean;
+        };
+        [prop: number]: {
+            value: any;
+            handler: (nv: any, ov: any) => any;
+            immediate: boolean;
+        };
+        [prop: symbol]: {
+            value: any;
+            handler: (nv: any, ov: any) => any;
+            immediate: boolean;
+        };
+    }): void;
     mounted: (callback: Function) => void;
     loaded: (callback: Function) => void;
     beforeUnload: (callback: Function) => void;
@@ -38,19 +54,44 @@ declare const tools: {
     back: () => void;
     forward: () => void;
     go: (str: any) => void;
-    route: () => any;
+    route: () => {
+        params: any;
+        query: any;
+    };
     formatInput: (msg: any) => void;
     create: (node: any) => Clean | undefined;
 };
-declare const getter: any;
-interface ToolOption {
-    create: typeof tools.create;
-}
-type CFuncion = (que: string, range?: Document) => Clean;
-type COption = CFuncion | ToolOption;
-interface Clean {
+declare const instance: {
+    render: (str: string) => void;
+    remove: () => void;
+    show: (type?: string | undefined) => void;
+    hide: () => void;
+    getAttr: (attr: string) => string | null;
+    setAttr: (attr: string, value: any) => void;
+    addClass: (name: string) => void;
+    removeClass: (name: string) => void;
+    hasClass: (name: string) => boolean;
+    bind: (type: string, callback: Function, option: any) => void;
+    unbind: (type: string, callback: Function, option: any) => void;
+    map: (callback: (item: Clean, i: string) => any) => Array<any>;
+    push: (dom: any) => void;
+    concat: (...arg: any) => void;
+    nth: (index: number) => Clean;
+    append: (str: string) => void;
+    prepend: (str: string) => void;
+    before: (str: string) => void;
+    after: (str: string) => void;
+};
+type Instance = typeof instance;
+interface Clean extends Instance {
     readonly length: number;
-    get parent(): typeof getter.parent;
+    get parent(): Clean;
+    get child(): Clean;
+    get next(): Clean;
+    get prev(): Clean;
+    get first(): Clean;
+    get last(): Clean;
+    get array(): Array<Element>;
     get style(): string;
     set style(value: any);
     get value(): any;
@@ -59,29 +100,13 @@ interface Clean {
     set checked(value: boolean);
     get text(): string;
     set text(value: any);
-    push: (dom: any) => void;
-    concat: (...arg: any) => void;
-    nth: (index: number) => Clean;
-    append: (str: string) => void;
-    prepend: (str: string) => void;
-    before: (str: string) => void;
-    after: (str: string) => void;
-    map: (callback: (item: Clean, i: string) => void) => void;
-    render: (str: string) => void;
-    remove: () => void;
-    show: (type?: string) => void;
-    hide: () => void;
-    getAttr: (attr: string) => null | string;
-    setAttr: (attr: string, value: any) => void;
-    addClass: (name: string) => void;
-    removeClass: (name: string) => void;
-    hasClass: (name: string) => boolean;
-    bind: (type: string, callback: Function, option: any) => void;
-    unbind: (type: string, callback: Function, option: any) => void;
 }
 declare class Clean {
     constructor();
 }
+type ToolOption = typeof tools;
+type CFuncion = (que: string, range?: Document) => Clean;
+type COption = CFuncion | ToolOption;
 declare const C: COption;
 
 export { COption, Clean, C as default };
