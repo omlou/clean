@@ -61,26 +61,26 @@ export default {
     conta: any,
     arg: {
       [prop: string | number | symbol]: {
-        value: any,
         handler: (nv: any, ov: any) => any,
-        immediate: boolean
+        immediate?: boolean
       }
     }
   ): void { // 创建 watch
     for (const i in arg) {
+      const data = conta[i]
       const item = arg[i]
       Object.defineProperty(conta, i, {
         get() {
-          return item.value
+          return data.value
         },
         set(value) {
-          const ov = item.value
-          item.value = value
+          const ov = data.value
+          data.value = value
           item.handler(value, ov)
           return true
         }
       })
-      if (item.immediate) item.handler(item.value, null)
+      if (item.immediate) item.handler(data.value, null)
     }
   },
 
@@ -134,10 +134,10 @@ export default {
   forward: function (): void { // 下一个页面
     window.history.forward()
   },
-  go: function (str: any): void { // 跳转历史记录
-    window.history.go(str)
+  go: function (index: number): void { // 跳转历史记录
+    window.history.go(index)
   },
-  route: function (): { params: any, query: any } { // 获取路由地址和参数
+  route: function (): { params: any, query: any } { // 获取路由参数
     const res: any = {}
     const allQuery: any = webtools.getQuery()
     let params = decodeURIComponent(allQuery["__CLEANDATA__"])

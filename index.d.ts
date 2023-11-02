@@ -2,7 +2,7 @@ import * as _xlou_ajax from '@xlou/ajax';
 import * as _xlou_webtools from '@xlou/webtools';
 
 declare const tools: {
-    Base64: _xlou_webtools.Base64Options;
+    Base64: typeof _xlou_webtools.Base64;
     deepCopy: typeof _xlou_webtools.deepCopy;
     filterObject: typeof _xlou_webtools.filterObject;
     getQuery: typeof _xlou_webtools.getQuery;
@@ -15,6 +15,7 @@ declare const tools: {
     setStore: typeof _xlou_webtools.setStore;
     unid: typeof _xlou_webtools.unid;
     colorRGB: typeof _xlou_webtools.colorRGB;
+    clipboardWrite: typeof _xlou_webtools.clipboardWrite;
     ajax: _xlou_ajax.AjaxOptions;
     createDOM: (str: string) => Element[];
     htmlCir: (obj: any, callback: (item: any, i: any) => string) => string;
@@ -24,19 +25,16 @@ declare const tools: {
     setState: (obj: any, str?: string | undefined) => void;
     watch(conta: any, arg: {
         [prop: string]: {
-            value: any;
             handler: (nv: any, ov: any) => any;
-            immediate: boolean;
+            immediate?: boolean | undefined;
         };
         [prop: number]: {
-            value: any;
             handler: (nv: any, ov: any) => any;
-            immediate: boolean;
+            immediate?: boolean | undefined;
         };
         [prop: symbol]: {
-            value: any;
             handler: (nv: any, ov: any) => any;
-            immediate: boolean;
+            immediate?: boolean | undefined;
         };
     }): void;
     mounted: (callback: Function) => void;
@@ -53,7 +51,7 @@ declare const tools: {
     reload: () => void;
     back: () => void;
     forward: () => void;
-    go: (str: any) => void;
+    go: (index: number) => void;
     route: () => {
         params: any;
         query: any;
@@ -62,7 +60,6 @@ declare const tools: {
     create: (node: any) => Clean | undefined;
 };
 declare const instance: {
-    render: (str: string) => void;
     remove: () => void;
     show: (type?: string | undefined) => void;
     hide: () => void;
@@ -73,10 +70,11 @@ declare const instance: {
     hasClass: (name: string) => boolean;
     bind: (type: string, callback: Function, option: any) => void;
     unbind: (type: string, callback: Function, option: any) => void;
+    nth: (index: number) => Clean;
     map: (callback: (item: Clean, i: string) => any) => Array<any>;
     push: (dom: any) => void;
     concat: (...arg: any) => void;
-    nth: (index: number) => Clean;
+    render: (str: string) => void;
     append: (str: string) => void;
     prepend: (str: string) => void;
     before: (str: string) => void;

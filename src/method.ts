@@ -80,11 +80,6 @@ function switchType(nodelist: any, value: any, type: string) { // 处理三个�
 
 export default {
   /* DOM 相关 */
-  render: function (str: string): void { // 向容器里渲染html
-    for (let i in this) {
-      this[i].innerHTML = str
-    }
-  },
   remove: function (): void { // 移除元素
     for (let i in this) {
       const tar = this[i]

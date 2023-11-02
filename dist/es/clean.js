@@ -1,4 +1,4 @@
-const e$1="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",t$1={encode:function(t){let r,n,o,i,a,f,l,c="",d=0;for(t=function(e){e=e.replace(/\r\n/g,"\n");let t="";for(let r=0;r<e.length;r++){let n=e.charCodeAt(r);n<128?t+=String.fromCharCode(n):n>127&&n<2048?(t+=String.fromCharCode(n>>6|192),t+=String.fromCharCode(63&n|128)):(t+=String.fromCharCode(n>>12|224),t+=String.fromCharCode(n>>6&63|128),t+=String.fromCharCode(63&n|128));}return t}(t);d<t.length;)r=t.charCodeAt(d++),n=t.charCodeAt(d++),o=t.charCodeAt(d++),i=r>>2,a=(3&r)<<4|n>>4,f=(15&n)<<2|o>>6,l=63&o,isNaN(n)?f=l=64:isNaN(o)&&(l=64),c=c+e$1.charAt(i)+e$1.charAt(a)+e$1.charAt(f)+e$1.charAt(l);return c},decode:function(t){let r,n,o,i,a,f,l,c="",d=0;for(t=t.replace(/[^A-Za-z0-9\+\/\=]/g,"");d<t.length;)i=e$1.indexOf(t.charAt(d++)),a=e$1.indexOf(t.charAt(d++)),f=e$1.indexOf(t.charAt(d++)),l=e$1.indexOf(t.charAt(d++)),r=i<<2|a>>4,n=(15&a)<<4|f>>2,o=(3&f)<<6|l,c+=String.fromCharCode(r),64!=f&&(c+=String.fromCharCode(n)),64!=l&&(c+=String.fromCharCode(o));return c=function(e){let t="",r=0,n=0,o=0,i=0;for(;r<e.length;)n=e.charCodeAt(r),n<128?(t+=String.fromCharCode(n),r++):n>191&&n<224?(o=e.charCodeAt(r+1),t+=String.fromCharCode((31&n)<<6|63&o),r+=2):(o=e.charCodeAt(r+1),i=e.charCodeAt(r+2),t+=String.fromCharCode((15&n)<<12|(63&o)<<6|63&i),r+=3);return t}(c).replace(/\u0000/g,""),c}};function r$1(e,t=new Set){if("object"!=typeof e||null===e)return e;if(t.has(e))return e;let n;switch(t.add(e),e.constructor){case Array:n=[];for(let o of e)n.push(r$1(o,t));break;case Set:n=new Set,e.forEach((e=>{n.add(r$1(e,t));}));break;case Map:n=new Map,e.forEach(((e,o)=>{n.set(r$1(o,t),r$1(e,t));}));break;default:n={};for(let o in e)n[o]=r$1(e[o],t);}return n}function n$1(e,t,r){let n={};if(!t)return Object.assign(n,e);let o=t.split(",");if(void 0===r&&(r=!0),r)for(let t of o)t=t.trim(),e[t]&&(n[t]=e[t]);else {Object.assign(n,e);for(let e of o)delete n[e];}return n}function o$1(e=window.location.href){let t={},r=e.indexOf("?");if(-1===r)return t;let n=e.indexOf("#");(-1===n||r>n)&&(n=void 0);let o=e.slice(r+1,n);if(""===o)return t;let i=o.split("&");for(let e of i){if(!e)continue;let r=e.split("=");t[decodeURIComponent(r[0])]=decodeURIComponent(r[1]||"");}return t}function i(e,t=!1){let r=[];for(let t in e)null!==e[t]&&void 0!==e[t]||(e[t]=""),r.push(encodeURIComponent(t)+"="+encodeURIComponent(e[t]));let n=r.join("&");return n&&t?"?"+n:n}function a$1(e,t){if(void 0===e)return;let r=Number(e);if(isNaN(r))throw "argument for toFixed error";if(r>Math.pow(10,21))return String(r);let n=Number(t);if(void 0===t||0==n)return String(Math.round(r));if(isNaN(n))throw "The argument of C.toFixed must be a number";if(n>20||n<0)throw "The second argument of C.toFixed must be between 0 and 20";let o=String(r),i=o.split(".");if(i.length<2){o+=".";for(let e=0;e<n;e++)o+="0";return o}let a=i[0],f=i[1];if(f.length==n)return o;if(f.length<n){for(let e=0;e<n-f.length;e++)o+="0";return o}o=a+"."+f.slice(0,n);let l=f.slice(n,n+1);if(parseInt(l,10)>=5){let e=10**n;o=(parseFloat(o)*e+1)/e,o=o.toFixed(n);}return o}function f(e){const{document:t}=window,r=t.createElement("form"),{data:n}=e;delete e.data;for(let t in e)e[t]&&(r[t]=e[t]);r.style.display="none";for(let e in n){const o=t.createElement("input");o.setAttribute("type","hidden"),o.setAttribute("name",e),o.value=n[e],r.appendChild(o);}t.body.appendChild(r),r.submit();}function l$1(e){return new Promise(((t,r)=>{const n=new XMLHttpRequest;n.onload=e=>{t(n.response);},n.onerror=e=>{r(e);},n.open("GET",e,!0),n.send();}))}function c(e){return new Promise(((t,r)=>{const n=new XMLHttpRequest;n.onload=e=>{t(JSON.parse(n.response));},n.onerror=e=>{r(e);},n.open("GET",e,!0),n.send();}))}function d$1(e){let t=localStorage.getItem(e);if("string"==typeof t)try{t=JSON.parse(t);}catch(e){}return t}function u(e,t){if("object"==typeof t&&null!==t)try{t=JSON.stringify(t);}catch(e){}localStorage.setItem(e,t);}function s$1(){return Math.floor(1e14*Math.random()).toString(36)+Date.now().toString(36)}function h(e){let t=e.toLowerCase(),r=[];if(/^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/.test(t)){if(4===t.length){let e="#";for(let r=1;r<4;r+=1)e+=t.slice(r,r+1).concat(t.slice(r,r+1));t=e;}for(let e=1;e<7;e+=2)r.push(parseInt("0x"+t.slice(e,e+2)));return r}if(/^(rgb\(|RGB\()[\s\S]+\)/.test(t))return r=t.replace(/( |\(|\)|rgb|RGB)+/g,"").split(","),r.map(Number)}var g={Base64:t$1,deepCopy:r$1,filterObject:n$1,getQuery:o$1,queryString:i,toFixed:a$1,formSubmit:f,readText:l$1,readJSON:c,getStore:d$1,setStore:u,unid:s$1,colorRGB:h};
+let e$1 = class e{constructor(e){e&&(this.key=e);}key="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";encode(e){let t,r,o,n,i,a,l,f="",c=0;for(e=this.utf8_encode(e);c<e.length;)t=e.charCodeAt(c++),r=e.charCodeAt(c++),o=e.charCodeAt(c++),n=t>>2,i=(3&t)<<4|r>>4,a=(15&r)<<2|o>>6,l=63&o,isNaN(r)?a=l=64:isNaN(o)&&(l=64),f=f+this.key.charAt(n)+this.key.charAt(i)+this.key.charAt(a)+this.key.charAt(l);return f}decode(e){let t,r,o,n,i,a,l,f="",c=0;for(e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");c<e.length;)n=this.key.indexOf(e.charAt(c++)),i=this.key.indexOf(e.charAt(c++)),a=this.key.indexOf(e.charAt(c++)),l=this.key.indexOf(e.charAt(c++)),t=n<<2|i>>4,r=(15&i)<<4|a>>2,o=(3&a)<<6|l,f+=String.fromCharCode(t),64!=a&&(f+=String.fromCharCode(r)),64!=l&&(f+=String.fromCharCode(o));return f=this.utf8_decode(f).replace(/\u0000/g,""),f}utf8_encode(e){e=e.replace(/\r\n/g,"\n");let t="";for(let r=0;r<e.length;r++){let o=e.charCodeAt(r);o<128?t+=String.fromCharCode(o):o>127&&o<2048?(t+=String.fromCharCode(o>>6|192),t+=String.fromCharCode(63&o|128)):(t+=String.fromCharCode(o>>12|224),t+=String.fromCharCode(o>>6&63|128),t+=String.fromCharCode(63&o|128));}return t}utf8_decode(e){let t="",r=0,o=0,n=0,i=0;for(;r<e.length;)o=e.charCodeAt(r),o<128?(t+=String.fromCharCode(o),r++):o>191&&o<224?(n=e.charCodeAt(r+1),t+=String.fromCharCode((31&o)<<6|63&n),r+=2):(n=e.charCodeAt(r+1),i=e.charCodeAt(r+2),t+=String.fromCharCode((15&o)<<12|(63&n)<<6|63&i),r+=3);return t}};function t$1(e,r=new Set){if("object"!=typeof e||null===e)return e;if(r.has(e))return e;let o;switch(r.add(e),e.constructor){case Array:o=[];for(let n of e)o.push(t$1(n,r));break;case Set:o=new Set,e.forEach((e=>{o.add(t$1(e,r));}));break;case Map:o=new Map,e.forEach(((e,n)=>{o.set(t$1(n,r),t$1(e,r));}));break;default:o={};for(let n in e)o[n]=t$1(e[n],r);}return o}function r$1(e,t,r){let o={};if(!t)return Object.assign(o,e);let n=t.split(",");if(void 0===r&&(r=!0),r)for(let t of n)t=t.trim(),e[t]&&(o[t]=e[t]);else {Object.assign(o,e);for(let e of n)delete o[e];}return o}function o$1(e=window.location.href){let t={},r=e.indexOf("?");if(-1===r)return t;let o=e.indexOf("#");(-1===o||r>o)&&(o=void 0);let n=e.slice(r+1,o);if(""===n)return t;let i=n.split("&");for(let e of i){if(!e)continue;let r=e.split("=");t[decodeURIComponent(r[0])]=decodeURIComponent(r[1]||"");}return t}function n$1(e,t=!1){let r=[];for(let t in e)null!==e[t]&&void 0!==e[t]||(e[t]=""),r.push(encodeURIComponent(t)+"="+encodeURIComponent(e[t]));let o=r.join("&");return o&&t?"?"+o:o}function i(e,t){if(void 0===e)return;let r=Number(e);if(isNaN(r))throw "argument for toFixed error";if(r>Math.pow(10,21))return String(r);let o=Number(t);if(void 0===t||0==o)return String(Math.round(r));if(isNaN(o))throw "The argument of C.toFixed must be a number";if(o>20||o<0)throw "The second argument of C.toFixed must be between 0 and 20";let n=String(r),i=n.split(".");if(i.length<2){n+=".";for(let e=0;e<o;e++)n+="0";return n}let a=i[0],l=i[1];if(l.length==o)return n;if(l.length<o){for(let e=0;e<o-l.length;e++)n+="0";return n}n=a+"."+l.slice(0,o);let f=l.slice(o,o+1);if(parseInt(f,10)>=5){let e=10**o;n=(parseFloat(n)*e+1)/e,n=n.toFixed(o);}return n}function a$1(e){const{document:t}=window,r=t.createElement("form"),{data:o}=e;delete e.data;for(let t in e)e[t]&&(r[t]=e[t]);r.style.display="none";for(let e in o){const n=t.createElement("input");n.setAttribute("type","hidden"),n.setAttribute("name",e),n.value=o[e],r.appendChild(n);}t.body.appendChild(r),r.submit();}function l$1(e){return new Promise(((t,r)=>{const o=new XMLHttpRequest;o.onload=e=>{t(o.response);},o.onerror=e=>{r(e);},o.open("GET",e,!0),o.send();}))}function f(e){return new Promise(((t,r)=>{const o=new XMLHttpRequest;o.onload=e=>{t(JSON.parse(o.response));},o.onerror=e=>{r(e);},o.open("GET",e,!0),o.send();}))}function c(e){let t=localStorage.getItem(e);if("string"==typeof t)try{t=JSON.parse(t);}catch(e){}return t}function d$1(e,t){if("object"==typeof t&&null!==t)try{t=JSON.stringify(t);}catch(e){}localStorage.setItem(e,t);}function s$1(){return Math.floor(1e14*Math.random()).toString(36)+Date.now().toString(36)}function u(e){let t=e.toLowerCase(),r=[];if(/^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/.test(t)){if(4===t.length){let e="#";for(let r=1;r<4;r+=1)e+=t.slice(r,r+1).concat(t.slice(r,r+1));t=e;}for(let e=1;e<7;e+=2)r.push(parseInt("0x"+t.slice(e,e+2)));return r}if(/^(rgb\(|RGB\()[\s\S]+\)/.test(t))return r=t.replace(/( |\(|\)|rgb|RGB)+/g,"").split(","),r.map(Number)}function h(e,t="text/plain"){let r=null;return r="[object Blob]"===Object.prototype.toString.call(e)?new ClipboardItem({[t]:e}):Array.isArray(e)?new ClipboardItem({[t]:new Blob(e,{type:t})}):new ClipboardItem({[t]:new Blob([e],{type:t})}),navigator.clipboard.write([r])}var p={Base64:e$1,deepCopy:t$1,filterObject:r$1,getQuery:o$1,queryString:n$1,toFixed:i,formSubmit:a$1,readText:l$1,readJSON:f,getStore:c,setStore:d$1,unid:s$1,colorRGB:u,clipboardWrite:h};
 
 function e(e,t=!1){let o=[];for(let t in e)null!==e[t]&&void 0!==e[t]||(e[t]=""),o.push(encodeURIComponent(t)+"="+encodeURIComponent(e[t]));let n=o.join("&");return n&&t?"?"+n:n}var t,o;!function(e){e.DF="",e.AB="arraybuffer",e.Blob="blob",e.DOC="document",e.JSON="json",e.TXT="text";}(t||(t={})),function(e){e.json="application/json;charset=UTF-8",e.urlencoded="application/x-www-form-urlencoded;charset=UTF-8",e.formData="multipart/form-data",e.text="text/plain;charset=UTF-8",e.xml="application/xml;charset=UTF-8",e.stream="application/octet-stream";}(o||(o={}));const n=new Set(["[object String]","[object FormData]","[object Blob]","[object ArrayBuffer]","[object URLSearchParams]","[object Null]","[object Undefined]"]),r=new Set(["GET","DELETE","HEAD","OPTIONS","TRACE"]);function s(t,o){if(!o)return "";let n="string"==typeof o?o:e(o);return n?-1!==t.indexOf("?")?"&"+n:"?"+n:""}function a(t,s,a,d){return r.has(d)?null:(n.has(Object.prototype.toString.call(t))||(s?s.includes("application/json")?t=JSON.stringify(t):s.includes("application/x-www-form-urlencoded")&&(t=e(t)):(a.setRequestHeader("Content-Type",o.json),t=JSON.stringify(t))),t)}function d(e){const t={};if(null!==e){const o=e.trim().split(/[\r\n]+/);for(const e of o){const o=e.split(": ");t[o[0]]=o[1];}}return t}const l=function(e){return new Promise((function(o,n){const r=new XMLHttpRequest;r.addEventListener("load",(t=>{const s=d(r.getAllResponseHeaders()),a={request:r,config:e,headers:s,response:r.response,status:r.status,statusText:r.statusText};var l;(l=r.status)>=200&&l<=299?o(a):n(a);})),r.addEventListener("error",(e=>{n(e);})),r.addEventListener("timeout",(e=>{n(e);})),e.uploadProgress&&(r.upload.addEventListener("loadstart",(t=>{e.uploadProgress(t);})),r.upload.addEventListener("progress",(t=>{e.uploadProgress(t);})),r.upload.addEventListener("load",(t=>{e.uploadProgress(t);})),r.upload.addEventListener("loadend",(t=>{e.uploadProgress(t);})),r.upload.addEventListener("error",(t=>{e.uploadProgress(t);}))),e.downloadProgress&&(r.addEventListener("loadstart",(t=>{e.downloadProgress(t);})),r.addEventListener("progress",(t=>{e.downloadProgress(t);})),r.addEventListener("loadend",(t=>{e.downloadProgress(t);})));let{method:l,url:i,params:u,data:p,headers:c,timeout:f,responseType:g,withCredentials:m}=e;if(l=l?l.toUpperCase():"GET",u&&(i+=s(i,u)),r.open(l,i,!0),void 0!==m&&(r.withCredentials=m),r.responseType=g||t.JSON,c){let e="";for(const t in c){let o=c[t];o=null==o?"":String(o),r.setRequestHeader(t,o);"content-type"===t.toLowerCase()&&(e=o);}p=a(p,e,r,l);}else p=a(p,"",r,l);r.timeout=f||0,r.send(p);}))};
 
@@ -104,11 +104,6 @@ function switchType(nodelist, value, type) {
 }
 var method = {
     /* DOM 相关 */
-    render: function (str) {
-        for (let i in this) {
-            this[i].innerHTML = str;
-        }
-    },
     remove: function () {
         for (let i in this) {
             const tar = this[i];
@@ -168,7 +163,7 @@ function getUrl(msg) {
         return "";
     msg.url = msg.url || window.location.href;
     const oparams = msg.params ? encodeURIComponent(JSON.stringify(msg.params)) : "";
-    let oquery = g.queryString(msg.query);
+    let oquery = p.queryString(msg.query);
     if (oparams) {
         oquery = oquery ? (oquery + "&__CLEANDATA__=" + oparams) : ("__CLEANDATA__=" + oparams);
     }
@@ -220,20 +215,21 @@ var tool = {
     },
     watch(conta, arg) {
         for (const i in arg) {
+            const data = conta[i];
             const item = arg[i];
             Object.defineProperty(conta, i, {
                 get() {
-                    return item.value;
+                    return data.value;
                 },
                 set(value) {
-                    const ov = item.value;
-                    item.value = value;
+                    const ov = data.value;
+                    data.value = value;
                     item.handler(value, ov);
                     return true;
                 }
             });
             if (item.immediate)
-                item.handler(item.value, null);
+                item.handler(data.value, null);
         }
     },
     /* 独立钩子函数 */
@@ -287,12 +283,12 @@ var tool = {
     forward: function () {
         window.history.forward();
     },
-    go: function (str) {
-        window.history.go(str);
+    go: function (index) {
+        window.history.go(index);
     },
     route: function () {
         const res = {};
-        const allQuery = g.getQuery();
+        const allQuery = p.getQuery();
         let params = decodeURIComponent(allQuery["__CLEANDATA__"]);
         res.params = !(params === 'undefined' || params === '') ? JSON.parse(params) : {};
         delete res['__CLEANDATA__'];
@@ -363,10 +359,14 @@ const tools = {
     },
     ...tool,
     ajax: l,
-    ...g
+    ...p
 };
 const instance = {
     /* 基本方法 */
+    nth: function (index) {
+        const obj = createClean();
+        return initOne(obj, () => this[index]);
+    },
     map: function (callback) {
         const arr = [];
         for (let i in this) {
@@ -383,11 +383,12 @@ const instance = {
             createAll(this, j, item);
         }
     },
-    nth: function (index) {
-        const obj = createClean();
-        return initOne(obj, () => this[index]);
-    },
     /* 增删DOM */
+    render: function (str) {
+        for (let i in this) {
+            this[i].innerHTML = str;
+        }
+    },
     append: function (str) {
         for (let i in this) {
             tools.createDOM(str).map(item => {

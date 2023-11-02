@@ -1,10 +1,10 @@
 ## 语言
 
 * [English](https://github.com/omlou/clean#readme)
-* [简体中文](https://github.com/omlou/clean/blob/master/public/markdowns/readme-zh.md)
-* [日本語](https://github.com/omlou/clean/blob/master/public/markdowns/readme-ja.md)
-* [한국어](https://github.com/omlou/clean/blob/master/public/markdowns/readme-ko.md)
-* [Français](https://github.com/omlou/clean/blob/master/public/markdowns/readme-fr.md)
+* [简体中文](https://github.com/omlou/clean/blob/master/public/md/readme-zh.md)
+* [日本語](https://github.com/omlou/clean/blob/master/public/md/readme-ja.md)
+* [한국어](https://github.com/omlou/clean/blob/master/public/md/readme-ko.md)
+* [Français](https://github.com/omlou/clean/blob/master/public/md/readme-fr.md)
 
 ## 简介
 
@@ -61,110 +61,7 @@ C.mounted(function () {
 C.ajax(/* ... */)
 ```
 
-类型和参数说明：
-
-```typescript
-/* que 为 CSS 选择器，range 为查询范围 */
-type CFuncion = (que: string, range?: Document) => Clean;
-
-type ToolOption = {
-    createDOM: (str: string) => Element[];
-    htmlCir: (obj: any, callback: (item: any, i: any) => string) => string;
-    str: (arg: any) => string;
-    one: (target: any, range: any) => Element;
-    all: (target: any, range: any) => Element[];
-    setState: (obj: any, str?: string | undefined) => void;
-    watch(conta: any, arg: {
-        [prop: string | number | symbol]: {
-            value: any;
-            handler: (nv: any, ov: any) => any;
-            immediate: boolean;
-        };
-    }): void;
-    mounted: (callback: Function) => void;
-    loaded: (callback: Function) => void;
-    beforeUnload: (callback: Function) => void;
-    unload: (callback: Function) => void;
-    pageShow: (callback: Function) => void;
-    pageHide: (callback: Function) => void;
-    prevent: (callback: Function, ev: Event, ...arg: any) => void;
-    stop: (callback: Function, ev: Event, ...arg: any) => void;
-    self: (callback: Function, ev: Event, ...arg: any) => void;
-    push: (msg: any) => void;
-    replace: (msg: any) => void;
-    reload: () => void;
-    back: () => void;
-    forward: () => void;
-    go: (str: any) => void;
-    route: () => {
-        params: any;
-        query: any;
-    };
-    formatInput: (msg: any) => void;
-    create: (node: any) => Clean | undefined;
-    ajax: ajax.AjaxOptions;
-    Base64: webtools.Base64Options;
-    deepCopy: typeof webtools.deepCopy;
-    filterObject: typeof webtools.filterObject;
-    getQuery: typeof webtools.getQuery;
-    queryString: typeof webtools.queryString;
-    toFixed: typeof webtools.toFixed;
-    formSubmit: typeof webtools.formSubmit;
-    readText: typeof webtools.readText;
-    readJSON: typeof webtools.readJSON;
-    getStore: typeof webtools.getStore;
-    setStore: typeof webtools.setStore;
-    unid: typeof webtools.unid;
-    colorRGB: typeof webtools.colorRGB;
-};
-
-type COption = CFuncion | ToolOption;
-
-const C: COption;
-
-type Instance = {
-    render: (str: string) => void;
-    remove: () => void;
-    show: (type?: string | undefined) => void;
-    hide: () => void;
-    getAttr: (attr: string) => string | null;
-    setAttr: (attr: string, value: any) => void;
-    addClass: (name: string) => void;
-    removeClass: (name: string) => void;
-    hasClass: (name: string) => boolean;
-    bind: (type: string, callback: Function, option: any) => void;
-    unbind: (type: string, callback: Function, option: any) => void;
-    push: (dom: any) => void;
-    concat: (...arg: any) => void;
-    nth: (index: number) => Clean;
-    append: (str: string) => void;
-    prepend: (str: string) => void;
-    before: (str: string) => void;
-    after: (str: string) => void;
-    map: (callback: (item: Clean, i: string) => any) => Array<any>;
-};
-
-interface Clean extends Instance {
-    readonly length: number;
-    get parent(): Clean;
-    get child(): Clean;
-    get next(): Clean;
-    get prev(): Clean;
-    get first(): Clean;
-    get last(): Clean;
-    get array(): Array<Element>;
-    get style(): string;
-    set style(value: any);
-    get value(): any;
-    set value(value: any);
-    get checked(): boolean | undefined;
-    set checked(value: boolean);
-    get text(): string;
-    set text(value: any);
-}
-```
-
-### Getter 获取元素
+### Getter (获取元素、转换为数组)
 
 返回结果为 Clean 对象
 
@@ -234,8 +131,6 @@ get first(): Clean;
 get last(): Clean;
 ```
 
-### Getter 其它
-
 #### array
 
 返回已转换为数组的 Clean 对象
@@ -244,7 +139,7 @@ get last(): Clean;
 get array(): Array<Element>;
 ```
 
-### Getter & Setter 获取属性和修改属性
+### Getter & Setter (获取属性、修改属性)
 
 使用方法以获取行内样式和设置行内样式为例
 
@@ -302,7 +197,7 @@ get text(): string;
 set text(value: any);
 ```
 
-### Clean 实例对象的基本方法
+### Clean 实例对象方法
 
 #### nth
 
@@ -363,18 +258,6 @@ C("#app").concat(C(".mydiv"), C.all(".hello"))
 concat: (...arg: any) => void;
 ```
 
-### 操作 DOM
-
-目标支持多个 DOM 元素的 Clean 对象
-
-参数为 HTML 字符串
-
-使用方法以 render 为例
-
-```javascript
-C("#app").render(`<div>Hello, World!</div>`)
-```
-
 #### render
 
 向容器里渲染 HTML
@@ -382,6 +265,18 @@ C("#app").render(`<div>Hello, World!</div>`)
 ```typescript
 render: (str: string) => void;
 ```
+
+说明：
+
+```javascript
+C("#app").render(`<div>Hello, World!</div>`)
+```
+
+目标支持多个 DOM 元素的 Clean 对象
+
+参数为 HTML 字符串
+
+其他操作 DOM 元素的方法用法同 render
 
 #### append
 
@@ -422,10 +317,6 @@ after: (str: string) => void;
 ```typescript
 remove: () => void;
 ```
-
-### 操作 DOM 的属性
-
-除了 getAttr 和 hasClass 只操作单个元素以外，其他方法均支持操作多个元素
 
 #### show
 
@@ -518,8 +409,6 @@ C("#app").hasClass("hello")
 hasClass: (name: string) => boolean;
 ```
 
-### 给 DOM 绑定事件监听
-
 #### bind
 
 绑定事件监听
@@ -559,7 +448,7 @@ unbind: (type: string, callback: Function, option: any) => void;
 */
 ```
 
-### C 对象下的方法，DOM 相关
+### C 对象下的方法
 
 #### create
 
@@ -699,10 +588,426 @@ all: (target: any, range: any) => Element[];
 /* target ：CSS 选择器，range ：查询范围 */
 ```
 
-### C 对象下的方法，变量和监听
-
 #### setData
 
 添加全局变量
 
-obj 包含需要被添加的变量的对象
+```javascript
+const data = {
+  id: 1,
+  name: "Tom",
+  age: 18,
+  hobby: "swim"
+}
+C.setData(data) // data 的全部属性都会变为全局变量
+C.setData(info, "name,age") // 只将 name 和 age 属性提升至全局
+```
+
+说明：
+
+``` typescript
+setState: (obj: any, str?: string | undefined) => void;
+```
+
+#### watch
+
+监听某个对象某个属性值的变化
+
+```javascript
+const data = {
+  name: "Tom",
+  age: 18
+}
+C.watch(data, {
+  name: {
+    handler(nv, ov) {
+      C(".name").value = nv
+    }
+  }
+})
+```
+
+说明：
+
+``` typescript
+watch(conta: any, arg: {
+  [prop: string | number | symbol]: {
+    handler: (nv: any, ov: any) => any;
+    immediate: boolean;
+  };
+}): void;
+/* 如果指定了 immediate: true ，则添加监听时就会执行一次 handler 方法 */
+```
+
+#### mounted
+
+页面构建完成的钩子函数，不包括图片等网络资源的加载完成
+
+```javascript
+C.mounted(function() {
+  console.log("mounted")
+})
+```
+
+说明：
+
+``` typescript
+mounted: (callback: Function) => void;
+```
+
+#### loaded
+
+页面加载完成的钩子函数
+
+说明：
+
+``` typescript
+loaded: (callback: Function) => void;
+```
+
+#### beforeUnload
+
+页面关闭之前的钩子函数
+
+说明：
+
+``` typescript
+beforeUnload: (callback: Function) => void;
+```
+
+#### unload
+
+页面关闭时钩子函数
+
+说明：
+
+``` typescript
+unload: (callback: Function) => void;
+```
+
+#### pageShow
+
+页面展示时的钩子函数
+
+说明：
+
+``` typescript
+pageShow: (callback: Function) => void;
+```
+
+#### pageHide
+
+页面隐藏时的钩子函数
+
+说明：
+
+``` typescript
+pageHide: (callback: Function) => void;
+```
+
+#### prevent
+
+阻止默认事件
+
+```html
+<a class="hello" onclick="C.prevent(sayHello, event, 123)">
+```
+
+说明：
+
+``` typescript
+prevent: (callback: Function, ev: Event, ...arg: any) => void;
+/* callback 为需要绑定的方法， ev 为事件对象， arg 为需要向方法中传递的参数 */
+```
+
+#### stop
+
+阻止事件冒泡
+
+说明：
+
+``` typescript
+stop: (callback: Function, ev: Event, ...arg: any) => void;
+```
+
+#### self
+
+只有目标是自身才触发
+
+说明：
+
+``` typescript
+self: (callback: Function, ev: Event, ...arg: any) => void;
+```
+
+#### push
+
+保留历史记录并跳转页面
+
+```javascript
+C.push("./page/home.html?id=1")
+C.push({
+  url: "./page/home.html",
+  query: {
+    id: 1
+  },
+  params: {
+    name: "tom",
+    age: 18
+  }
+})
+```
+
+说明：
+
+``` typescript
+push: (msg: any) => void;
+```
+
+#### replace
+
+替换当前页面，不保留历史记录
+
+说明：
+
+``` typescript
+replace: (msg: any) => void;
+```
+
+#### reload
+
+重新加载当前页面
+
+说明：
+
+``` typescript
+reload: () => void;
+```
+
+#### back
+
+返回上一个历史页面
+
+说明：
+
+``` typescript
+back: () => void;
+```
+
+#### forward
+
+前进到下一个历史页面
+
+说明：
+
+``` typescript
+forward: () => void;
+```
+
+#### go
+
+跳转历史记录页面
+
+```javascript
+C.go(-1) // 向前跳一个页面，即返回上个页面
+C.go(1) // 向后跳1个页面
+```
+
+说明：
+
+``` typescript
+go: (index: number) => void;
+/* index 表示跳转的页面数，负数表示之前的页面，正数表示之后的页面 */
+```
+
+#### route
+
+获取路由参数
+
+```javascript
+const route = C.route()
+```
+
+说明：
+
+``` typescript
+route: () => {
+  params: any;
+  query: any;
+};
+```
+
+#### formatInput
+
+正则限制 input 输入
+
+支持多个规则的限制
+
+```javascript
+/* 单个规则 */
+C.formatInput({
+  el: "", // css 选择器，支持一类元素
+  reg: "", // 需要满足的正则
+  nopass: e => {}, // 不通过的回调
+  pass: (nv, ov) => {} // 满足正则的回调，nv 为新值，ov 为旧值
+})
+
+/* 多个规则 */
+C.formatInput({
+  el: "",
+  rules: [
+    {
+      reg: "",
+      nopass: e => {}
+    },
+    {
+      reg: "",
+      nopass: e => {}
+    }
+  ],
+  pass: (nv, ov) => {}
+})
+```
+
+说明：
+
+``` typescript
+formatInput: (msg: any) => void;
+```
+
+#### ajax
+
+发送 ajax 请求
+
+详细用法请查看 https://github.com/omlou/ajax
+
+
+#### webtools
+
+集成了 webtools 的所有方法
+
+用法请查看 https://github.com/omlou/webtools
+
+举例：
+
+```javascript
+C.clipboardWrite("Hello, World!")
+.then(() => {
+  console.log("Copy successful")
+})
+```
+
+### 类型说明
+
+```typescript
+import * as _xlou_ajax from '@xlou/ajax';
+import * as _xlou_webtools from '@xlou/webtools';
+
+declare const tools: {
+    Base64: typeof _xlou_webtools.Base64;
+    deepCopy: typeof _xlou_webtools.deepCopy;
+    filterObject: typeof _xlou_webtools.filterObject;
+    getQuery: typeof _xlou_webtools.getQuery;
+    queryString: typeof _xlou_webtools.queryString;
+    toFixed: typeof _xlou_webtools.toFixed;
+    formSubmit: typeof _xlou_webtools.formSubmit;
+    readText: typeof _xlou_webtools.readText;
+    readJSON: typeof _xlou_webtools.readJSON;
+    getStore: typeof _xlou_webtools.getStore;
+    setStore: typeof _xlou_webtools.setStore;
+    unid: typeof _xlou_webtools.unid;
+    colorRGB: typeof _xlou_webtools.colorRGB;
+    clipboardWrite: typeof _xlou_webtools.clipboardWrite;
+    ajax: _xlou_ajax.AjaxOptions;
+    createDOM: (str: string) => Element[];
+    htmlCir: (obj: any, callback: (item: any, i: any) => string) => string;
+    str: (arg: any) => string;
+    one: (target: any, range: any) => Element;
+    all: (target: any, range: any) => Element[];
+    setState: (obj: any, str?: string | undefined) => void;
+    watch(conta: any, arg: {
+        [prop: string]: {
+            handler: (nv: any, ov: any) => any;
+            immediate?: boolean | undefined;
+        };
+        [prop: number]: {
+            handler: (nv: any, ov: any) => any;
+            immediate?: boolean | undefined;
+        };
+        [prop: symbol]: {
+            handler: (nv: any, ov: any) => any;
+            immediate?: boolean | undefined;
+        };
+    }): void;
+    mounted: (callback: Function) => void;
+    loaded: (callback: Function) => void;
+    beforeUnload: (callback: Function) => void;
+    unload: (callback: Function) => void;
+    pageShow: (callback: Function) => void;
+    pageHide: (callback: Function) => void;
+    prevent: (callback: Function, ev: Event, ...arg: any) => void;
+    stop: (callback: Function, ev: Event, ...arg: any) => void;
+    self: (callback: Function, ev: Event, ...arg: any) => void;
+    push: (msg: any) => void;
+    replace: (msg: any) => void;
+    reload: () => void;
+    back: () => void;
+    forward: () => void;
+    go: (index: number) => void;
+    route: () => {
+        params: any;
+        query: any;
+    };
+    formatInput: (msg: any) => void;
+    create: (node: any) => Clean | undefined;
+};
+declare const instance: {
+    remove: () => void;
+    show: (type?: string | undefined) => void;
+    hide: () => void;
+    getAttr: (attr: string) => string | null;
+    setAttr: (attr: string, value: any) => void;
+    addClass: (name: string) => void;
+    removeClass: (name: string) => void;
+    hasClass: (name: string) => boolean;
+    bind: (type: string, callback: Function, option: any) => void;
+    unbind: (type: string, callback: Function, option: any) => void;
+    nth: (index: number) => Clean;
+    map: (callback: (item: Clean, i: string) => any) => Array<any>;
+    push: (dom: any) => void;
+    concat: (...arg: any) => void;
+    render: (str: string) => void;
+    append: (str: string) => void;
+    prepend: (str: string) => void;
+    before: (str: string) => void;
+    after: (str: string) => void;
+};
+type Instance = typeof instance;
+interface Clean extends Instance {
+    readonly length: number;
+    get parent(): Clean;
+    get child(): Clean;
+    get next(): Clean;
+    get prev(): Clean;
+    get first(): Clean;
+    get last(): Clean;
+    get array(): Array<Element>;
+    get style(): string;
+    set style(value: any);
+    get value(): any;
+    set value(value: any);
+    get checked(): boolean | undefined;
+    set checked(value: boolean);
+    get text(): string;
+    set text(value: any);
+}
+declare class Clean {
+    constructor();
+}
+type ToolOption = typeof tools;
+type CFuncion = (que: string, range?: Document) => Clean;
+type COption = CFuncion | ToolOption;
+declare const C: COption;
+
+export { COption, Clean, C as default };
+```

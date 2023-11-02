@@ -24,6 +24,10 @@ const tools = {
 
 const instance = {
   /* 基本方法 */
+  nth: function (index: number): Clean { // 选取某个索引的元素生成一个clear对象
+    const obj = createClean()
+    return initOne(obj, () => this[index])
+  },
   map: function (callback: (item: Clean, i: string) => any): Array<any> { // 遍历clear对象，类似数组的map
     const arr = []
     for (let i in this) {
@@ -40,11 +44,12 @@ const instance = {
       createAll(this, j, item)
     }
   },
-  nth: function (index: number): Clean { // 选取某个索引的元素生成一个clear对象
-    const obj = createClean()
-    return initOne(obj, () => this[index])
-  },
   /* 增删DOM */
+  render: function (str: string): void { // 向容器里渲染html
+    for (let i in this) {
+      this[i].innerHTML = str
+    }
+  },
   append: function (str: string): void { // 向容器里后面追加html
     for (let i in this) {
       tools.createDOM(str).map(item => {

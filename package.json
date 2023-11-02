@@ -61,6 +61,6 @@
   },
   "dependencies": {
     "@xlou/ajax": "^1.0.1",
-    "@xlou/webtools": "^1.1.6"
+    "@xlou/webtools": "^1.1.8"
   }
 }
