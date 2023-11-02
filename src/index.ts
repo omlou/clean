@@ -35,7 +35,7 @@ const instance = {
     }
     return arr
   },
-  push: function (dom: any): void { // 添加对象
+  push: function (dom: Element): void { // 添加对象
     createOne(this, dom, this.length)
   },
   concat: function (...arg: any): void { // 拼接clear对象或NodeList对象等
@@ -248,7 +248,7 @@ function DOMLoaded() {
 
 /* 初始化 Clean */
 (function initClear() {
-  Object.assign(C, tool)
+  Object.assign(C, tools)
   if (document.readyState === "loading") {
     document.addEventListener('DOMContentLoaded', DOMLoaded)
   } else {

@@ -72,7 +72,7 @@ declare const instance: {
     unbind: (type: string, callback: Function, option: any) => void;
     nth: (index: number) => Clean;
     map: (callback: (item: Clean, i: string) => any) => Array<any>;
-    push: (dom: any) => void;
+    push: (dom: Element) => void;
     concat: (...arg: any) => void;
     render: (str: string) => void;
     append: (str: string) => void;

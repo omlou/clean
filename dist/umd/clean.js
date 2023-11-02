@@ -557,7 +557,7 @@
     }
     /* 初始化 Clean */
     (function initClear() {
-        Object.assign(C, tool);
+        Object.assign(C, tools);
         if (document.readyState === "loading") {
             document.addEventListener('DOMContentLoaded', DOMLoaded);
         }

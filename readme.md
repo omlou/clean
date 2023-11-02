@@ -235,13 +235,14 @@ map: (callback: (item: Clean, i: string) => any) => Array<any>;
 向 Clean 对象中添加 DOM 元素
 
 ```javascript
-C("#app").push(C.one(".myapp"))
+let divs = C(".app")
+divs.push(C.one(".myapp"))
 ```
 
 说明：
 
 ```typescript
-push: (dom: any) => void;
+push: (dom: Element) => void;
 ```
 
 #### concat
