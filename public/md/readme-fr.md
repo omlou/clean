@@ -1,4 +1,4 @@
-## Language
+## Langue
 
 * [English](https://github.com/omlou/clean#readme)
 * [简体中文](https://github.com/omlou/clean/blob/master/public/md/readme-zh.md)
@@ -8,30 +8,30 @@
 
 ## Introduction
 
-* Clean is a front-end toolkit that makes development more convenient.
+* Clean est une boîte à outils frontend pour faciliter le développement.
 
-## Usage
+## Utilisation
 
-### Script Tag Inclusion
+### Inclure via une balise de script
 
 ```html
 <script src="https://unpkg.com/@xlou/clean@1.0.0/dist/umd/clean.min.js"></script>
-<!-- Recommended to download and use locally -->
+<!-- Il est recommandé de télécharger localement et d'utiliser -->
 <script>
-  /* After including this JS file, the C object will be globally available */
+  /* Après avoir inclus ce fichier JS, l'objet C sera disponible globalement */
   C("#app").render(`<div>Hello, World!</div>`)
 </script>
 ```
 
-### Import in Node Projects
+### Inclure dans un projet Node
 
-Installation
+Installer
 
-```bash
+``` bash
 npm i @xlou/clean
 ```
 
-Usage
+Utiliser
 
 ```javascript
 import C from '@xlou/clean'
@@ -41,31 +41,31 @@ C("#app").render(`<div>Hello, World!</div>`)
 
 ## API
 
-### Method C
+### Méthode C
 
-Converts DOM elements matching a CSS selector into Clean instance objects.
+Transforme les DOM correspondants aux sélecteurs CSS en objets Clean.
 
-Usage:
+Utilisation :
 
 ```javascript
 C("#app").render(`<div>Hello, World!</div>`)
-C("#app", C.one(".mydiv")) // Find within .mydiv
+C("#app", C.one(".mydiv")) // Rechercher dans .mydiv
 
-/* The returned Clean object is similar to an array; you can access DOM elements by index */
+/* L'objet Clean renvoyé est semblable à un tableau, et vous pouvez le convertir en objet DOM en utilisant l'indice */
 C("#app")[0]
 
-/* Use methods under C */
+/* Utiliser les méthodes sous C */
 C.mounted(function () {
   /* ... */
 })
 C.ajax(/* ... */)
 ```
 
-### Getter (Retrieve Elements, Convert to an Array)
+### Getter (Obtenir un élément, convertir en tableau)
 
-Returns a Clean object as a result.
+Le résultat est un objet Clean.
 
-For example, retrieving the parent element:
+Prenons l'exemple de l'obtention de l'élément parent :
 
 ```javascript
 C("#app").parent
@@ -73,9 +73,9 @@ C("#app").parent
 
 #### parent
 
-Get the parent element of the target.
+Obtient l'élément parent de la cible.
 
-If the target Clean object contains multiple DOM elements, the first element is considered.
+Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
 
 ```typescript
 get parent(): Clean;
@@ -83,9 +83,9 @@ get parent(): Clean;
 
 #### child
 
-Get all child elements of the target.
+Obtient tous les éléments enfants de la cible.
 
-If the target Clean object contains multiple DOM elements, the first element is considered.
+Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
 
 ```typescript
 get child(): Clean;
@@ -93,9 +93,9 @@ get child(): Clean;
 
 #### next
 
-Get the next element of the target.
+Obtient l'élément suivant de la cible.
 
-The target Clean object can contain multiple DOM elements.
+La cible de l'objet Clean peut contenir plusieurs éléments DOM.
 
 ```typescript
 get next(): Clean;
@@ -103,9 +103,9 @@ get next(): Clean;
 
 #### prev
 
-Get the previous element.
+Obtient l'élément précédent.
 
-The target Clean object can contain multiple DOM elements.
+La cible de l'objet Clean peut contenir plusieurs éléments DOM.
 
 ```typescript
 get prev(): Clean;
@@ -113,9 +113,9 @@ get prev(): Clean;
 
 #### first
 
-Get the first element among the child elements.
+Obtient le premier élément parmi les éléments enfants.
 
-The target Clean object can contain multiple DOM elements.
+La cible de l'objet Clean peut contenir plusieurs éléments DOM.
 
 ```typescript
 get first(): Clean;
@@ -123,9 +123,9 @@ get first(): Clean;
 
 #### last
 
-Get the last element among the child elements.
+Obtient le dernier élément parmi les éléments enfants.
 
-The target Clean object can contain multiple DOM elements.
+La cible de l'objet Clean peut contenir plusieurs éléments DOM.
 
 ```typescript
 get last(): Clean;
@@ -133,31 +133,31 @@ get last(): Clean;
 
 #### array
 
-Returns the Clean object converted to an array.
+Renvoie un objet Clean converti en tableau.
 
 ```typescript
 get array(): Array<Element>;
 ```
 
-### Getter & Setter (Retrieve and Modify Attributes)
+### Getter et Setter (Obtenir une propriété, définir une propriété)
 
-For example, retrieving and setting inline styles:
+Prenons l'exemple de l'obtention de styles et de la définition de styles en ligne :
 
 ```javascript
-/* Retrieve */
+/* Obtenir */
 let style = C("#app").style
 
-/* Set */
+/* Définir */
 C("#app").style = "font-size: 14px;"
 ```
 
 #### style
 
-Retrieve and set the element's styles.
+Obtient et définit les styles de l'élément.
 
-When retrieving, if the target Clean object contains multiple DOM elements, the first element is considered.
+Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
 
-The value can be a CSS string, e.g., "display: none;" or an object { display: none, fontSize: "20px" }.
+La valeur peut être une chaîne CSS, par exemple "display:none;", ou un objet { display: none, fontSize: "20px" }.
 
 ```typescript
 get style(): string;
@@ -166,9 +166,9 @@ set style(value: any);
 
 #### value
 
-Retrieve and set the value of form elements.
+Obtient et définit la valeur des éléments de formulaire.
 
-When retrieving, if the target Clean object contains multiple DOM elements, the first element is considered.
+Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
 
 ```typescript
 get value(): any;
@@ -177,9 +177,9 @@ set value(value: any);
 
 #### checked
 
-Retrieve and set the checked state of radio buttons or checkboxes.
+Obtient et définit l'état coché des boutons radio ou des cases à cocher.
 
-When retrieving, if the target Clean object contains multiple DOM elements, the first element is considered.
+Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
 
 ```typescript
 get checked(): boolean | undefined;
@@ -188,26 +188,26 @@ set checked(value: boolean);
 
 #### text
 
-Retrieve and modify the innerText of the element.
+Obtient et modifie la propriété innerText de l'élément.
 
-When retrieving, if the target Clean object contains multiple DOM elements, the first element is considered.
+Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
 
 ```typescript
 get text(): string;
 set text(value: any);
 ```
 
-### Clean Instance Object Methods
+### Méthodes de l'objet Clean
 
 #### nth
 
-Get the element at the specified index in the Clean object. The result is still a Clean object.
+Obtient un élément à partir de l'objet Clean en fonction de l'indice et renvoie toujours un objet Clean.
 
 ```javascript
 C("#app").nth(0)
 ```
 
-Description:
+Explication :
 
 ```typescript
 nth: (index: number) => Clean;
@@ -215,7 +215,7 @@ nth: (index: number) => Clean;
 
 #### map
 
-Iterate over the Clean object and return an array of the same length.
+Parcourt l'objet Clean et renvoie un tableau de même longueur.
 
 ```javascript
 C("#app").map((item, i) => {
@@ -224,7 +224,7 @@ C("#app").map((item, i) => {
 }) // [0]
 ```
 
-Description:
+Explication :
 
 ```typescript
 map: (callback: (item: Clean, i: string) => any) => Array<any>;
@@ -232,14 +232,14 @@ map: (callback: (item: Clean, i: string) => any) => Array<any>;
 
 #### push
 
-Add DOM elements to the Clean object.
+Ajoute des éléments DOM à l'objet Clean.
 
 ```javascript
 let divs = C(".app")
 divs.push(C.one(".myapp"))
 ```
 
-Description:
+Explication :
 
 ```typescript
 push: (dom: Element) => void;
@@ -247,13 +247,13 @@ push: (dom: Element) => void;
 
 #### concat
 
-Concatenate Clean objects or NodeList objects, etc.
+Concatène des objets Clean ou des objets NodeList, etc.
 
 ```javascript
 C("#app").concat(C(".mydiv"), C.all(".hello"))
 ```
 
-Description:
+Explication :
 
 ```typescript
 concat: (...arg: any) => void;
@@ -261,35 +261,37 @@ concat: (...arg: any) => void;
 
 #### render
 
-Render HTML into a container.
+Rend du HTML dans un conteneur.
 
 ```typescript
 render: (str: string) => void;
 ```
 
-Description:
+Explication :
 
 ```javascript
 C("#app").render(`<div>Hello, World!</div>`)
 ```
 
-The target supports a Clean object with multiple DOM elements.
+La cible prend en charge plusieurs éléments DOM dans l'objet Clean.
 
-The parameter is an HTML string.
+Le paramètre est une chaîne HTML.
 
-Other methods for manipulating DOM elements are used similarly to render.
+Les autres méthodes de manipulation des éléments DOM peuvent être utilisées de la même manière que render.
 
 #### append
 
-Append HTML to the end of the container.
+Ajoute du HTML à la fin d'un conteneur.
 
 ```typescript
 append: (str: string) => void;
 ```
 
+
+
 #### prepend
 
-Add HTML to the beginning of the container.
+Ajoute du HTML au début d'un conteneur.
 
 ```typescript
 prepend: (str: string) => void;
@@ -297,7 +299,7 @@ prepend: (str: string) => void;
 
 #### before
 
-Add HTML before the element.
+Ajoute du HTML avant un élément.
 
 ```typescript
 before: (str: string) => void;
@@ -305,7 +307,7 @@ before: (str: string) => void;
 
 #### after
 
-Add HTML after the element.
+Ajoute du HTML après un élément.
 
 ```typescript
 after: (str: string) => void;
@@ -313,7 +315,7 @@ after: (str: string) => void;
 
 #### remove
 
-Remove the target element.
+Supprime un élément cible.
 
 ```typescript
 remove: () => void;
@@ -321,14 +323,14 @@ remove: () => void;
 
 #### show
 
-Show the element.
+Affiche un élément.
 
 ```javascript
 C("#app").show()
-C("#app").show("block") // Type is optional, defaults to ""
+C("#app").show("block") // Le type est facultatif, par défaut, c'est ""
 ```
 
-Description:
+Explication :
 
 ```typescript
 show: (type?: string | undefined) => void;
@@ -336,9 +338,9 @@ show: (type?: string | undefined) => void;
 
 #### hide
 
-Hide the element by setting the display style to "none."
+Cache un élément en définissant le style sur display:none;.
 
-Description:
+Explication :
 
 ```typescript
 hide: () => void;
@@ -346,51 +348,49 @@ hide: () => void;
 
 #### getAttr
 
-Retrieve the value of an element's attribute.
+Obtient la valeur d'un attribut de l'élément.
 
-If the target Clean object contains multiple DOM elements, the first element is considered.
+Cette méthode prend le premier élément en compte si l'objet Clean cible contient plusieurs éléments DOM.
 
 ```javascript
 C("#app").getAttr("id")
 ```
 
-Description:
+Explication :
 
 ```typescript
-getAttr: (attr: string) => string | null; // attr is the attribute name
+getAttr: (attr: string) => string | null; // attr est le nom de l'attribut
 ```
 
 #### setAttr
 
-Set the value of an element's attribute.
+Définit la valeur d'un attribut de l'élément.
 
 ```javascript
 C("#app").setAttr("data", 1)
 ```
 
-Description:
+Explication :
 
 ```typescript
-setAttr: (attr
-
-: string, value: any) => void; // attr is the attribute name, value is the attribute value
+setAttr: (attr: string, value: any) => void; // attr est le nom de l'attribut et value est la valeur de l'attribut
 ```
 
 #### addClass
 
-Add a class to the element.
+Ajoute une classe à un élément.
 
-Description:
+Explication :
 
 ```typescript
-addClass: (name: string) => void; // name is the class name to be added
+addClass: (name: string) => void; // name est le nom de la classe à ajouter
 ```
 
 #### removeClass
 
-Remove a specified class.
+Supprime une classe spécifique d'un élément.
 
-Description:
+Explication :
 
 ```typescript
 removeClass: (name: string) => void;
@@ -398,15 +398,15 @@ removeClass: (name: string) => void;
 
 #### hasClass
 
-Check if the element has a specified class and return a boolean.
+Vérifie si un élément possède une classe spécifiée et renvoie un booléen.
 
-If the target Clean object contains multiple DOM elements, the first element is considered.
+Cette méthode prend le premier élément en compte si l'objet Clean cible contient plusieurs éléments DOM.
 
 ```javascript
 C("#app").hasClass("hello")
 ```
 
-Description:
+Explication :
 
 ```typescript
 hasClass: (name: string) => boolean;
@@ -414,69 +414,69 @@ hasClass: (name: string) => boolean;
 
 #### bind
 
-Bind an event listener.
+Lie un écouteur d'événements.
 
 ```javascript
-C("#app").bind("click", function () {
+C("#app").bind("click", function(){
   console.log("click")
 }, false)
 ```
 
-Description:
+Explication :
 
 ```typescript
 bind: (type: string, callback: Function, option: any) => void;
 /* 
-  type: event type
-  callback: event method to bind
-  option: optional, event parameters
+  type : type d'événement
+  callback : méthode d'événement à lier
+  option : option d'écoute d'événement (facultatif)
 */
 ```
 
 #### unbind
 
-Remove an event listener.
+Supprime un écouteur d'événements.
 
 ```javascript
 C("#app").unbind("click", sayHello)
 ```
 
-Description:
+Explication :
 
 ```typescript
 unbind: (type: string, callback: Function, option: any) => void;
 /* 
-  type: event type
-  callback: event method to remove; must be a variable and not an anonymous function
+  type : type d'événement
+  callback : méthode d'événement à supprimer (doit être une variable, ne peut pas être une fonction anonyme)
 */
 ```
 
-### Methods Under C Object
+### Méthodes de l'objet C
 
 #### create
 
-Convert DOM into Clean objects.
+Transforme le DOM en un objet Clean
 
 ```javascript
 C.create(C.createDOM(`<div>Hello, World!</div>`))
 ```
 
-Description:
+Description :
 
 ```typescript
 create: (node: any) => Clean | undefined;
-/* node can be a single DOM element, a NodeList object, or an array of DOM objects */
+/* node peut être un élément DOM unique, une liste de nœuds NodeList ou un tableau d'objets DOM */
 ```
 
 #### createDOM
 
-Convert HTML strings into an array containing DOM objects.
+Transforme une chaîne HTML en un tableau contenant des objets DOM
 
 ```javascript
 C.createDOM(`<div>Hello, World!</div>`)
 ```
 
-Description:
+Description :
 
 ```typescript
 createDOM: (str: string) => Element[];
@@ -484,7 +484,7 @@ createDOM: (str: string) => Element[];
 
 #### htmlCir
 
-Generate HTML strings by looping through an array or object.
+Parcourt un tableau ou un objet pour générer une chaîne HTML
 
 ```javascript
 let arr = [
@@ -501,22 +501,21 @@ C("#app").render(C.htmlCir(arr, (item, i) => {
 }))
 ```
 
-Description:
+Description :
 
 ```typescript
 htmlCir: (obj: any, callback: (item: any, i: any) => string) => string;
 /* 
-  obj: the array or object to loop through
-  item: the key-value, i: the index
-  Returns an HTML string
+  obj est le tableau ou l'objet à parcourir, item est la clé et i est l'indice
+  Retourne une chaîne HTML
 */
 ```
 
 #### str
 
-Process variables when binding attributes and passing parameters in template strings.
+Utilisé pour lier des propriétés et passer des paramètres dans les chaînes de modèle
 
-Only objects and strings need to be processed with `C.str()` when binding attributes and passing parameters in template strings. Other types can be passed directly.
+Seuls les paramètres de type objet et chaîne doivent être traités avec str(). Les autres types peuvent être directement transmis.
 
 ```javascript
 let arr = [
@@ -533,8 +532,8 @@ C("#app").render(C.htmlCir(arr, (item, i) => {
 }))
 
 /*
-  When the parameter is an object, keys with types Function, Symbol, RegExp cannot be passed.
-  In such cases, you can use the keys to pass the parameters.
+  Lorsque le paramètre est un objet, les clés de type Function, Symbol et RegExp de l'objet ne peuvent pas être transmises
+  Dans ce cas, les clés peuvent être utilisées pour transmettre des paramètres
 */
 let obj = {
   name: "tom",
@@ -550,7 +549,7 @@ C("#app").render(C.htmlCir(obj, (item, i) => {
 }))
 ```
 
-Description:
+Description :
 
 ```typescript
 str: (arg: any) => string;
@@ -558,41 +557,41 @@ str: (arg: any) => string;
 
 #### one
 
-Select a DOM element based on a CSS selector and return the DOM object.
+Sélectionne un DOM en fonction d'un sélecteur CSS et renvoie un objet DOM
 
-Similar to `querySelector()`.
+Équivalent à querySelector()
 
 ```javascript
 C.one(".mydiv")
 ```
 
-Explanation:
+Description :
 
 ```typescript
 one: (target: any, range: any) => Element;
-/* target: CSS selector, range: query range */
+/* target: sélecteur CSS, range: plage de recherche */
 ```
 
 #### all
 
-Select multiple DOM elements based on a CSS selector and return an array.
+Sélectionne plusieurs DOM en fonction d'un sélecteur CSS et renvoie un tableau
 
-Unlike `querySelectorAll()`, this method returns an array.
+Contrairement à querySelectorAll(), cette méthode renvoie un tableau
 
 ```javascript
-C.all(".mydiv, .hello")
+C.all(".mydiv,.hello")
 ```
 
-Explanation:
+Description :
 
 ```typescript
 all: (target: any, range: any) => Element[];
-/* target: CSS selector, range: query range */
+/* target: sélecteur CSS, range: plage de recherche */
 ```
 
 #### setState
 
-Add global variables.
+Ajoute des variables globales
 
 ```javascript
 const data = {
@@ -601,11 +600,11 @@ const data = {
   age: 18,
   hobby: "swim"
 }
-C.setState(data) // All properties of data become global variables
-C.setState(data, "name,age") // Only elevate the name and age properties to global variables
+C.setState(data) // Toutes les propriétés de data deviendront des variables globales
+C.setState(data, "name,age") // Seules les propriétés name et age sont élevées en tant que variables globales
 ```
 
-Explanation:
+Description :
 
 ```typescript
 setState: (obj: any, str?: string | undefined) => void;
@@ -613,7 +612,7 @@ setState: (obj: any, str?: string | undefined) => void;
 
 #### proxy
 
-Listen for changes in a specific property of an object.
+Écoute les modifications de la valeur d'une propriété d'un objet donné
 
 ```javascript
 const data = {
@@ -630,7 +629,7 @@ let dataProxy = C.proxy(data, {
 })
 ```
 
-Explanation:
+Description :
 
 ```typescript
 proxy(conta: any, arg: {
@@ -639,12 +638,12 @@ proxy(conta: any, arg: {
     immediate?: boolean | undefined;
   };
 }): void;
-/* If immediate: true is specified, the handler method will be executed once when the listener is added */
+/* Si immediate: true est spécifié, le gestionnaire sera exécuté une fois lors de l'ajout de l'auditeur */
 ```
 
 #### mounted
 
-A hook function that is called when the page is constructed, excluding the loading of images and other network resources.
+Crochet de fonction appelé lorsque la construction de la page est terminée, à l'exclusion du chargement d'images et d'autres ressources réseau
 
 ```javascript
 C.mounted(function() {
@@ -652,7 +651,7 @@ C.mounted(function() {
 })
 ```
 
-Explanation:
+Description :
 
 ```typescript
 mounted: (callback: (event: Event | null) => any) => void;
@@ -660,9 +659,9 @@ mounted: (callback: (event: Event | null) => any) => void;
 
 #### loaded
 
-A hook function that is called when the page is fully loaded.
+Crochet de fonction appelé lorsque la page est chargée
 
-Explanation:
+Description :
 
 ```typescript
 loaded: (callback: (event: Event) => any) => void;
@@ -670,7 +669,7 @@ loaded: (callback: (event: Event) => any) => void;
 
 #### beforeUnload
 
-A hook function called before the page is closed.
+Crochet de fonction appelé avant la fermeture de la page
 
 ```javascript
 C.beforeUnload(function(event) {
@@ -678,11 +677,11 @@ C.beforeUnload(function(event) {
     event.preventDefault()
     event.returnValue = true
   } catch () {}
-  /* When the page is about to close and the page form has been modified, a dialog will be displayed as a warning */
+  /* Lorsque vous essayez de fermer la page et qu'il y a des modifications dans le formulaire de la page, une boîte de dialogue de confirmation s'affiche */
 })
 ```
 
-Explanation:
+Description :
 
 ```typescript
 beforeUnload: (callback: (event: Event) => any) => void;
@@ -690,16 +689,16 @@ beforeUnload: (callback: (event: Event) => any) => void;
 
 #### visible
 
-A hook function that is triggered when the page is closed, navigated, the window is switched, or the browser is minimized.
+Crochet de fonction appelé lorsque la page se ferme, bascule, se réduit ou se minimise
 
 ```javascript
 C.visible(function(msg) {
   console.log("C.visible", msg.event, msg.state)
-  /* state is hidden when hidden, visible when shown */
+  /* state est hidden s'il est caché, visible s'il est affiché */
 })
 ```
 
-Explanation:
+Description :
 
 ```typescript
 visible: (callback: (event: {
@@ -710,20 +709,22 @@ visible: (callback: (event: {
 
 #### pageShow
 
-A hook function called when the page is shown.
+Crochet de fonction appelé lorsque la page est affichée
 
-Explanation:
+Description :
 
 ```typescript
 pageShow: (callback: (event: PageTransitionEvent) => any) => void;
-/* You can use event.persisted to check if the document is loaded from the cache */
+/* Utilisez event.persisted pour vérifier si le document est chargé à partir du cache */
 ```
 
 #### pageHide
 
-A hook function called when the page is hidden.
+Cro
 
-Explanation:
+chet de fonction appelé lorsque la page est masquée
+
+Description :
 
 ```typescript
 pageHide: (callback: (event: PageTransitionEvent) => any) => void;
@@ -731,24 +732,24 @@ pageHide: (callback: (event: PageTransitionEvent) => any) => void;
 
 #### prevent
 
-Prevent the default event.
+Empêche l'événement par défaut
 
 ```html
-<a class="hello" onclick="C.prevent(sayHello, event, 123)">Click me</a>
+<a class="hello" onclick="C.prevent(sayHello, event, 123)">Cliquez</a>
 ```
 
-Explanation:
+Description :
 
 ```typescript
 prevent: (callback: Function, ev: Event, ...arg: any) => void;
-/* callback is the method to be bound, ev is the event object, arg is the parameters to be passed to the method */
+/* callback est la méthode à lier, ev est l'objet événement, arg est le paramètre à transmettre à la méthode */
 ```
 
 #### stop
 
-Stop event propagation.
+Empêche la propagation de l'événement
 
-Explanation:
+Description :
 
 ```typescript
 stop: (callback: Function, ev: Event, ...arg: any) => void;
@@ -756,9 +757,9 @@ stop: (callback: Function, ev: Event, ...arg: any) => void;
 
 #### self
 
-Only trigger the event if the target is itself.
+Le déclencheur se produit uniquement si la cible est elle-même
 
-Explanation:
+Description :
 
 ```typescript
 self: (callback: Function, ev: Event, ...arg: any) => void;
@@ -766,7 +767,7 @@ self: (callback: Function, ev: Event, ...arg: any) => void;
 
 #### push
 
-Preserve the browsing history and navigate to a new page.
+Conserve l'historique et navigue vers une page
 
 ```javascript
 C.push("./page/home.html?id=1")
@@ -782,7 +783,7 @@ C.push({
 })
 ```
 
-Explanation:
+Description :
 
 ```typescript
 push: (msg: any) => void;
@@ -790,9 +791,9 @@ push: (msg: any) => void;
 
 #### replace
 
-Replace the current page without preserving the browsing history.
+Remplace la page actuelle sans conserver l'historique
 
-Explanation:
+Description :
 
 ```typescript
 replace: (msg: any) => void;
@@ -800,9 +801,9 @@ replace: (msg: any) => void;
 
 #### reload
 
-Reload the current page.
+Recharge la page actuelle
 
-Explanation:
+Description :
 
 ```typescript
 reload: () => void;
@@ -810,9 +811,9 @@ reload: () => void;
 
 #### back
 
-Navigate to the previous page in the browsing history.
+Revenir à la page d'historique précédente
 
-Explanation:
+Description :
 
 ```typescript
 back: () => void;
@@ -820,9 +821,9 @@ back: () => void;
 
 #### forward
 
-Navigate to the next page in the browsing history.
+Avancer vers la page d'historique suivante
 
-Explanation:
+Description :
 
 ```typescript
 forward: () => void;
@@ -830,29 +831,29 @@ forward: () => void;
 
 #### go
 
-Navigate to a specific page in the browsing history.
+Accéder à une page de l'historique
 
 ```javascript
-C.go(-1) // Go back one page, i.e., return to the previous page
-C.go(1) // Go forward one page
+C.go(-1) // Revenir en arrière d'une page, c'est-à-dire revenir à la page précédente
+C.go(1) // Avancer d'une page
 ```
 
-Explanation:
+Description :
 
 ```typescript
 go: (index: number) => void;
-/* index indicates the number of pages to navigate, negative numbers mean going back to previous pages, positive numbers mean going forward to subsequent pages */
+/* index représente le nombre de pages à naviguer, un nombre négatif signifie les pages précédentes, un nombre positif signifie les pages suivantes */
 ```
 
 #### route
 
-Get route parameters.
+Obtient les paramètres de la route
 
 ```javascript
 const route = C.route()
 ```
 
-Explanation:
+Description :
 
 ```typescript
 route: () => {
@@ -863,20 +864,20 @@ route: () => {
 
 #### formatInput
 
-Restrict input using regular expressions.
+Limite l'entrée en utilisant des expressions régulières
 
-Supports multiple rules for input restrictions.
+Prend en charge plusieurs règles
 
 ```javascript
-/* Single rule */
+/* Règle unique */
 C.formatInput({
-  el: "", // CSS selector, supports a class of elements
-  reg: "", // Regular expression to match
-  nopass: e => {}, // Callback for non-matching input
-  pass: (nv, ov) => {} // Callback for matching the regular expression, nv is the new value, ov is the old value
+  el: "", // Sélecteur CSS, prenant en charge un type d'élément
+  reg: "", // L'expression régulière à satisfaire
+  nopass: e => {}, // Callback en cas d'échec
+  pass: (nv, ov) => {} // Callback en cas de réussite de l'expression régulière, nv est la nouvelle valeur, ov est l'ancienne valeur
 })
 
-/* Multiple rules */
+/* Plusieurs règles */
 C.formatInput({
   el: "",
   rules: [
@@ -893,7 +894,7 @@ C.formatInput({
 })
 ```
 
-Explanation:
+Description :
 
 ```typescript
 formatInput: (msg: any) => void;
@@ -901,28 +902,26 @@ formatInput: (msg: any) => void;
 
 #### ajax
 
-Send an AJAX request.
+Envoie une requête Ajax
 
-For detailed usage, please refer to https://github.com/omlou/ajax.
+Pour des exemples détaillés, veuillez consulter https://github.com/omlou/ajax
 
 #### webtools
 
-Integrates all methods of webtools.
+Intègre toutes les méthodes de webtools
 
-Usage can be found at https://github.com/omlou/webtools.
+Pour des exemples d'utilisation, veuillez consulter https://github.com/omlou/webtools
 
-Example:
+Exemple :
 
 ```javascript
-C.clipboardWrite("Hello, World!")
+C.clipboardWrite("Bonjour, le monde !")
 .then(() => {
-  console.log("Copy successful
-
-")
+  console.log("Copie réussie")
 })
 ```
 
-### Type Explanations
+### Description des types
 
 ```typescript
 import * as _xlou_ajax from '@xlou/ajax';
