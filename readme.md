@@ -946,7 +946,7 @@ declare const tools: {
     one: (target: any, range: any) => Element;
     all: (target: any, range: any) => Element[];
     setState: (obj: any, str?: string | undefined) => void;
-    watch(conta: any, arg: {
+    proxy(conta: any, arg: {
         [prop: string]: {
             handler: (nv: any, ov: any) => any;
             immediate?: boolean | undefined;
@@ -960,12 +960,15 @@ declare const tools: {
             immediate?: boolean | undefined;
         };
     }): void;
-    mounted: (callback: Function) => void;
-    loaded: (callback: Function) => void;
-    beforeUnload: (callback: Function) => void;
-    unload: (callback: Function) => void;
-    pageShow: (callback: Function) => void;
-    pageHide: (callback: Function) => void;
+    mounted: (callback: (event: Event | null) => any) => void;
+    loaded: (callback: (event: Event) => any) => void;
+    beforeUnload: (callback: (event: Event) => any) => void;
+    visible: (callback: (event: {
+        event: Event;
+        state: string;
+    }) => any) => void;
+    pageShow: (callback: (event: PageTransitionEvent) => any) => void;
+    pageHide: (callback: (event: PageTransitionEvent) => any) => void;
     prevent: (callback: Function, ev: Event, ...arg: any) => void;
     stop: (callback: Function, ev: Event, ...arg: any) => void;
     self: (callback: Function, ev: Event, ...arg: any) => void;
@@ -995,7 +998,7 @@ declare const instance: {
     unbind: (type: string, callback: Function, option: any) => void;
     nth: (index: number) => Clean;
     map: (callback: (item: Clean, i: string) => any) => Array<any>;
-    push: (dom: any) => void;
+    push: (dom: Element) => void;
     concat: (...arg: any) => void;
     render: (str: string) => void;
     append: (str: string) => void;
