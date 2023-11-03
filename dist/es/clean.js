@@ -188,8 +188,11 @@ var tool = {
         return html;
     },
     str: function (arg) {
-        if ((typeof arg === "object" || typeof arg === "string") && typeof arg !== null) {
+        if (typeof arg === "string" || (typeof arg === "object" && typeof arg !== null)) {
             return JSON.stringify(arg).replace(/"/g, "&quot;");
+        }
+        if (typeof arg === "function") {
+            return `(${arg})`.replace(/"/g, "&quot;");
         }
         return arg;
     },
@@ -213,24 +216,26 @@ var tool = {
             Object.assign(window, obj);
         }
     },
-    watch(conta, arg) {
-        for (const i in arg) {
-            const data = conta[i];
+    proxy(conta, arg) {
+        for (let i in arg) {
             const item = arg[i];
-            Object.defineProperty(conta, i, {
-                get() {
-                    return data.value;
-                },
-                set(value) {
-                    const ov = data.value;
-                    data.value = value;
-                    item.handler(value, ov);
-                    return true;
-                }
-            });
-            if (item.immediate)
-                item.handler(data.value, null);
+            if (item.immediate) {
+                item.handler(conta[i], undefined);
+            }
         }
+        return new Proxy(conta, {
+            get(target, property) {
+                return Reflect.get(target, property);
+            },
+            set(target, property, value) {
+                const oldValue = Reflect.get(target, property);
+                Reflect.set(target, property, value);
+                if (arg[property]) {
+                    arg[property].handler(value, oldValue);
+                }
+                return true;
+            }
+        });
     },
     /* 独立钩子函数 */
     mounted: function (callback) {
@@ -542,10 +547,10 @@ const C = function (que, range) {
     return clean;
 };
 /* mount 钩子函数相关 */
-function DOMLoaded() {
+function DOMLoaded(event) {
     variable.isShow = false;
     for (const item of variable.mountArr) {
-        item();
+        item(event);
     }
     variable.mountArr = [];
 }
@@ -556,34 +561,34 @@ function DOMLoaded() {
         document.addEventListener('DOMContentLoaded', DOMLoaded);
     }
     else {
-        DOMLoaded();
+        DOMLoaded(null);
     }
-    window.addEventListener('load', () => {
+    window.addEventListener('load', (event) => {
         for (const item of variable.loadArr) {
-            item();
+            item(event);
         }
     });
-    window.addEventListener('pageshow', () => {
+    window.addEventListener('pageshow', (event) => {
         if (variable.isShow) {
             for (const item of variable.showArr) {
-                item();
+                item(event);
             }
         }
     });
-    window.addEventListener('beforeunload', () => {
+    window.addEventListener('beforeunload', (event) => {
         for (const item of variable.beforeunloadArr) {
-            item();
+            item(event);
         }
     });
-    window.addEventListener('pagehide', () => {
+    window.addEventListener('pagehide', (event) => {
         variable.isShow = true;
         for (const item of variable.hideArr) {
-            item();
+            item(event);
         }
     });
-    window.addEventListener('unload', () => {
+    window.addEventListener('unload', (event) => {
         for (const item of variable.unloadArr) {
-            item();
+            item(event);
         }
     });
 })();

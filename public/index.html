@@ -3,9 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <title>clean</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <script src="../dist/umd/clean.min.js"></script>
   <script>
-    
+    C.mounted(function(event) {
+      console.log("mounted", event)
+    })
+    C.loaded(function(event) {
+      console.log("loaded", event)
+    })
+    C.beforeUnload(function(event) {
+      window.alert("beforeUnload")
+      console.log("beforeUnload", event)
+    })
+    C.unload(function(event) {
+      console.log("unload", event)
+    })
+    C.pageShow(function(event) {
+      console.log("pageShow", event)
+    })
+    C.pageHide(function(event) {
+      console.log("pageHide", event)
+    })
   </script>
 </head>
 <body>
@@ -13,7 +32,7 @@
     <div class="one">111</div>
     <div class="two">222</div>
     <div class="three">333</div>
-    <input id="A" type="text">
+    <input id="name" type="text">
     <input id="B" type="checkbox">
     <input id="C" type="radio">
     <div id="divA"></div>

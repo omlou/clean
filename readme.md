@@ -520,33 +520,31 @@ let arr = [
   { name: "tom", age: 18 },
   { name: "lili", age: 25 }
 ]
-C.htmlCir(arr, (item, i) => {
+C("#app").render(C.htmlCir(arr, (item, i) => {
   return `
     <div onclick="sayHello(${C.str(item)})">
       <div class="name" onclick="sayName(${C.str(item.name)})">${item.name}</div>
       <div class="age" onclick="sayAge(${item.age})">${item.age}</div>
     </div>
   `
-})
+}))
 
 /*
   当参数为对象时，对象中类型为 Function Symbol RegExp 的键值不能传递
   此时可以使用键来传参
 */
-let arr = [
-  {
-    name: "tom",
-    say: function () {
-      console.log("hello")
-    },
-    [Symbol("hobby")]: "swim"
-  }
-]
-C.htmlCir(arr, (item, i) => {
+let obj = {
+  name: "tom",
+  say: function (str) {
+    console.log("hello" + str)
+  },
+  [Symbol("hobby")]: "swim"
+}
+C("#app").render(C.htmlCir(obj, (item, i) => {
   return `
-    <div onclick="sayHello(arr[${C.str(i)}])">${item.name}</div>
+    <div onclick="${C.str(obj.say)}('tom')">${C.str(i)}-${C.str(item)}</div>
   `
-})
+}))
 ```
 
 说明：
@@ -589,7 +587,7 @@ all: (target: any, range: any) => Element[];
 /* target ：CSS 选择器，range ：查询范围 */
 ```
 
-#### setData
+#### setState
 
 添加全局变量
 
@@ -600,8 +598,8 @@ const data = {
   age: 18,
   hobby: "swim"
 }
-C.setData(data) // data 的全部属性都会变为全局变量
-C.setData(info, "name,age") // 只将 name 和 age 属性提升至全局
+C.setState(data) // data 的全部属性都会变为全局变量
+C.setState(data, "name,age") // 只将 name 和 age 属性提升至全局
 ```
 
 说明：
@@ -610,7 +608,7 @@ C.setData(info, "name,age") // 只将 name 和 age 属性提升至全局
 setState: (obj: any, str?: string | undefined) => void;
 ```
 
-#### watch
+#### proxy
 
 监听某个对象某个属性值的变化
 
@@ -619,11 +617,12 @@ const data = {
   name: "Tom",
   age: 18
 }
-C.watch(data, {
+let dataProxy = C.proxy(data, {
   name: {
     handler(nv, ov) {
       C(".name").value = nv
-    }
+    },
+    immediate: true
   }
 })
 ```
@@ -631,10 +630,10 @@ C.watch(data, {
 说明：
 
 ``` typescript
-watch(conta: any, arg: {
+proxy(conta: any, arg: {
   [prop: string | number | symbol]: {
     handler: (nv: any, ov: any) => any;
-    immediate: boolean;
+    immediate?: boolean | undefined;
   };
 }): void;
 /* 如果指定了 immediate: true ，则添加监听时就会执行一次 handler 方法 */

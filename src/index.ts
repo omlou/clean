@@ -238,10 +238,10 @@ const C: COption = function(que: string, range?: Document): Clean {
 }
 
 /* mount 钩子函数相关 */
-function DOMLoaded() {
+function DOMLoaded(event: Event | null) {
   variable.isShow = false
   for (const item of variable.mountArr as any) {
-    item()
+    item(event)
   }
   variable.mountArr = []
 }
@@ -252,34 +252,34 @@ function DOMLoaded() {
   if (document.readyState === "loading") {
     document.addEventListener('DOMContentLoaded', DOMLoaded)
   } else {
-    DOMLoaded()
+    DOMLoaded(null)
   }
-  window.addEventListener('load', () => {
+  window.addEventListener('load', (event) => {
     for (const item of variable.loadArr as any) {
-      item()
+      item(event)
     }
   })
-  window.addEventListener('pageshow', () => {
+  window.addEventListener('pageshow', (event) => {
     if (variable.isShow) {
       for (const item of variable.showArr as any) {
-        item()
+        item(event)
       }
     }
   })
-  window.addEventListener('beforeunload', () => {
+  window.addEventListener('beforeunload', (event) => {
     for (const item of variable.beforeunloadArr as any) {
-      item()
+      item(event)
     }
   })
-  window.addEventListener('pagehide', () => {
+  window.addEventListener('pagehide', (event) => {
     variable.isShow = true
     for (const item of variable.hideArr as any) {
-      item()
+      item(event)
     }
   })
-  window.addEventListener('unload', () => {
+  window.addEventListener('unload', (event) => {
     for (const item of variable.unloadArr as any) {
-      item()
+      item(event)
     }
   })
 })()

@@ -23,7 +23,7 @@ declare const tools: {
     one: (target: any, range: any) => Element;
     all: (target: any, range: any) => Element[];
     setState: (obj: any, str?: string | undefined) => void;
-    watch(conta: any, arg: {
+    proxy(conta: any, arg: {
         [prop: string]: {
             handler: (nv: any, ov: any) => any;
             immediate?: boolean | undefined;
@@ -37,12 +37,12 @@ declare const tools: {
             immediate?: boolean | undefined;
         };
     }): void;
-    mounted: (callback: Function) => void;
-    loaded: (callback: Function) => void;
-    beforeUnload: (callback: Function) => void;
-    unload: (callback: Function) => void;
-    pageShow: (callback: Function) => void;
-    pageHide: (callback: Function) => void;
+    mounted: (callback: (event: Event | null) => any) => void;
+    loaded: (callback: (event: Event | null) => any) => void;
+    beforeUnload: (callback: (event: Event | null) => any) => void;
+    unload: (callback: (event: Event | null) => any) => void;
+    pageShow: (callback: (event: Event | null) => any) => void;
+    pageHide: (callback: (event: Event | null) => any) => void;
     prevent: (callback: Function, ev: Event, ...arg: any) => void;
     stop: (callback: Function, ev: Event, ...arg: any) => void;
     self: (callback: Function, ev: Event, ...arg: any) => void;

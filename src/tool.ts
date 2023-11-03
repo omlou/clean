@@ -14,6 +14,8 @@ function getUrl(msg: any) { // 将url和参数字符串凭借在一起
   return msg.url + ourl
 }
 
+type CallbackType = (event: Event | null) => any
+
 export default {
   /* DOM 相关 */
   createDOM: function (str: string): Array<Element> { // 将html转换为dom数组
@@ -32,8 +34,11 @@ export default {
     return html
   },
   str: function (arg: any): string { // 在模板字符串中绑定属性和传递参数时处理变量
-    if ((typeof arg === "object" || typeof arg === "string") && typeof arg !== null) {
+    if (typeof arg === "string" || (typeof arg === "object" && typeof arg !== null)) {
       return JSON.stringify(arg).replace(/"/g, "&quot;")
+    }
+    if (typeof arg === "function") {
+      return `(${arg})`.replace(/"/g, "&quot;")
     }
     return arg
   },
@@ -57,7 +62,7 @@ export default {
       Object.assign(window, obj)
     }
   },
-  watch(
+  proxy(
     conta: any,
     arg: {
       [prop: string | number | symbol]: {
@@ -66,41 +71,44 @@ export default {
       }
     }
   ): void { // 创建 watch
-    for (const i in arg) {
-      const data = conta[i]
+    for (let i in arg) {
       const item = arg[i]
-      Object.defineProperty(conta, i, {
-        get() {
-          return data.value
-        },
-        set(value) {
-          const ov = data.value
-          data.value = value
-          item.handler(value, ov)
-          return true
-        }
-      })
-      if (item.immediate) item.handler(data.value, null)
+      if (item.immediate) {
+        item.handler(conta[i], undefined)
+      }
     }
+    return new Proxy(conta, {
+      get(target, property) {
+        return Reflect.get(target, property)
+      },
+      set(target, property, value) {
+        const oldValue = Reflect.get(target, property)
+        Reflect.set(target, property, value)
+        if (arg[property]) {
+          arg[property].handler(value, oldValue)
+        }
+        return true
+      }
+    })
   },
 
   /* 独立钩子函数 */
-  mounted: function (callback: Function): void {
+  mounted: function (callback: CallbackType): void {
     (variable as any).mountArr.push(callback)
   },
-  loaded: function (callback: Function): void {
+  loaded: function (callback: CallbackType): void {
     (variable as any).loadArr.push(callback)
   },
-  beforeUnload: function (callback: Function): void {
+  beforeUnload: function (callback: CallbackType): void {
     (variable as any).beforeunloadArr.push(callback)
   },
-  unload: function (callback: Function): void {
+  unload: function (callback: CallbackType): void {
     (variable as any).unloadArr.push(callback)
   },
-  pageShow: function (callback: Function): void {
+  pageShow: function (callback: CallbackType): void {
     (variable as any).showArr.push(callback)
   },
-  pageHide: function (callback: Function): void {
+  pageHide: function (callback: CallbackType): void {
     (variable as any).hideArr.push(callback)
   },
 
