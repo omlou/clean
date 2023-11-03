@@ -29,6 +29,18 @@
       console.log(ev, arg)
     }
   </script>
+  <style>
+    #divA{
+      width: 100px;
+      height: 100px;
+      background-color: #f00;
+    }
+    #divB{
+      width: 50px;
+      height: 50px;
+      background-color: #fff;
+    }
+  </style>
 </head>
 <body>
   <div id="app">
@@ -38,7 +50,9 @@
     <input id="A" type="text">
     <input id="B" type="checkbox">
     <input id="C" type="radio">
-    <div id="divA"></div>
+    <div id="divA" onclick="C.self(sayHello, event, 'divA')">
+      <div id="divB"></div>
+    </div>
     <a href="#abc" onclick="C.prevent(sayHello, event, 123)">haha</a>
   </div>
 </body>

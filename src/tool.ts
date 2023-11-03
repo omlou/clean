@@ -116,13 +116,12 @@ export default {
   },
   stop: function (callback: Function, ev: Event, ...arg: any): void { // 阻止事件冒泡
     ev.stopPropagation()
-    if (callback) callback(...arg)
+    if (callback) callback(ev, ...arg)
   },
   self: function (callback: Function, ev: Event, ...arg: any): void { // 只有目标是自身才触发
     const { currentTarget, target } = ev
-    if (currentTarget === target) callback(...arg)
+    if (currentTarget === target) callback(ev, ...arg)
   },
-
   /* 路由 */
   push: function (msg: any): void { // 跳转
     window.location.href = getUrl(msg)
@@ -147,11 +146,10 @@ export default {
     const allQuery: any = webtools.getQuery()
     let params = decodeURIComponent(allQuery["__CLEANDATA__"])
     res.params = !(params === 'undefined' || params === '') ? JSON.parse(params) : {}
-    delete res['__CLEANDATA__']
+    delete allQuery['__CLEANDATA__']
     res.query = allQuery
     return res
   },
-
   /* Form 表单相关 */
   formatInput: function (msg: any): void { // 正则限制input输入
     let { el, rules, reg, nopass, pass } = msg

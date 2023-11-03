@@ -281,7 +281,6 @@ function DOMLoaded(event: Event | null) {
       item(event)
     }
   })
-
 })()
 
 export {

@@ -265,17 +265,17 @@
         prevent: function (callback, ev, ...arg) {
             ev.preventDefault();
             if (callback)
-                callback(...arg);
+                callback(ev, ...arg);
         },
         stop: function (callback, ev, ...arg) {
             ev.stopPropagation();
             if (callback)
-                callback(...arg);
+                callback(ev, ...arg);
         },
         self: function (callback, ev, ...arg) {
             const { currentTarget, target } = ev;
             if (currentTarget === target)
-                callback(...arg);
+                callback(ev, ...arg);
         },
         /* 路由 */
         push: function (msg) {
@@ -301,7 +301,7 @@
             const allQuery = p.getQuery();
             let params = decodeURIComponent(allQuery["__CLEANDATA__"]);
             res.params = !(params === 'undefined' || params === '') ? JSON.parse(params) : {};
-            delete res['__CLEANDATA__'];
+            delete allQuery['__CLEANDATA__'];
             res.query = allQuery;
             return res;
         },
