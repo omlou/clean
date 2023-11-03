@@ -13,18 +13,21 @@
       console.log("loaded", event)
     })
     C.beforeUnload(function(event) {
-      window.alert("beforeUnload")
       console.log("beforeUnload", event)
     })
-    C.unload(function(event) {
-      console.log("unload", event)
+    C.visible(function(msg) {
+      A.value="visible"
+      console.log("C.visible", msg.event, msg.state)
     })
     C.pageShow(function(event) {
-      console.log("pageShow", event)
+      console.log("pageShow", event, event.persisted)
     })
     C.pageHide(function(event) {
-      console.log("pageHide", event)
+      console.log("pageHide", event, event.persisted)
     })
+    function sayHello(ev, arg) {
+      console.log(ev, arg)
+    }
   </script>
 </head>
 <body>
@@ -32,10 +35,11 @@
     <div class="one">111</div>
     <div class="two">222</div>
     <div class="three">333</div>
-    <input id="name" type="text">
+    <input id="A" type="text">
     <input id="B" type="checkbox">
     <input id="C" type="radio">
     <div id="divA"></div>
+    <a href="#abc" onclick="C.prevent(sayHello, event, 123)">haha</a>
   </div>
 </body>
 </html>

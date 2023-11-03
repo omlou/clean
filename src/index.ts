@@ -239,7 +239,6 @@ const C: COption = function(que: string, range?: Document): Clean {
 
 /* mount 钩子函数相关 */
 function DOMLoaded(event: Event | null) {
-  variable.isShow = false
   for (const item of variable.mountArr as any) {
     item(event)
   }
@@ -259,29 +258,30 @@ function DOMLoaded(event: Event | null) {
       item(event)
     }
   })
-  window.addEventListener('pageshow', (event) => {
-    if (variable.isShow) {
-      for (const item of variable.showArr as any) {
-        item(event)
-      }
-    }
-  })
   window.addEventListener('beforeunload', (event) => {
     for (const item of variable.beforeunloadArr as any) {
       item(event)
     }
   })
+  document.addEventListener("visibilitychange", (event) => {
+    for (const item of variable.visibleArr as any) {
+      item({
+        event: event,
+        state: document.visibilityState
+      })
+    }
+  })
+  window.addEventListener('pageshow', (event) => {
+    for (const item of variable.showArr as any) {
+      item(event)
+    }
+  })
   window.addEventListener('pagehide', (event) => {
-    variable.isShow = true
     for (const item of variable.hideArr as any) {
       item(event)
     }
   })
-  window.addEventListener('unload', (event) => {
-    for (const item of variable.unloadArr as any) {
-      item(event)
-    }
-  })
+
 })()
 
 export {

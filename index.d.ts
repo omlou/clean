@@ -38,11 +38,14 @@ declare const tools: {
         };
     }): void;
     mounted: (callback: (event: Event | null) => any) => void;
-    loaded: (callback: (event: Event | null) => any) => void;
-    beforeUnload: (callback: (event: Event | null) => any) => void;
-    unload: (callback: (event: Event | null) => any) => void;
-    pageShow: (callback: (event: Event | null) => any) => void;
-    pageHide: (callback: (event: Event | null) => any) => void;
+    loaded: (callback: (event: Event) => any) => void;
+    beforeUnload: (callback: (event: Event) => any) => void;
+    visible: (callback: (event: {
+        event: Event;
+        state: string;
+    }) => any) => void;
+    pageShow: (callback: (event: PageTransitionEvent) => any) => void;
+    pageHide: (callback: (event: PageTransitionEvent) => any) => void;
     prevent: (callback: Function, ev: Event, ...arg: any) => void;
     stop: (callback: Function, ev: Event, ...arg: any) => void;
     self: (callback: Function, ev: Event, ...arg: any) => void;

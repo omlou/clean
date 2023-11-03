@@ -14,8 +14,6 @@ function getUrl(msg: any) { // 将url和参数字符串凭借在一起
   return msg.url + ourl
 }
 
-type CallbackType = (event: Event | null) => any
-
 export default {
   /* DOM 相关 */
   createDOM: function (str: string): Array<Element> { // 将html转换为dom数组
@@ -93,29 +91,28 @@ export default {
   },
 
   /* 独立钩子函数 */
-  mounted: function (callback: CallbackType): void {
+  mounted: function (callback: (event: Event | null) => any): void {
     (variable as any).mountArr.push(callback)
   },
-  loaded: function (callback: CallbackType): void {
+  loaded: function (callback: (event: Event) => any): void {
     (variable as any).loadArr.push(callback)
   },
-  beforeUnload: function (callback: CallbackType): void {
+  beforeUnload: function (callback: (event: Event) => any): void {
     (variable as any).beforeunloadArr.push(callback)
   },
-  unload: function (callback: CallbackType): void {
-    (variable as any).unloadArr.push(callback)
+  visible: function (callback: (event: { event: Event, state: string }) => any): void {
+    (variable as any).visibleArr.push(callback)
   },
-  pageShow: function (callback: CallbackType): void {
+  pageShow: function (callback: (event: PageTransitionEvent) => any): void {
     (variable as any).showArr.push(callback)
   },
-  pageHide: function (callback: CallbackType): void {
+  pageHide: function (callback: (event: PageTransitionEvent) => any): void {
     (variable as any).hideArr.push(callback)
   },
-
   /* 绑定事件的扩展，如：<div class="hello" onclick="C.self(sayHello,'123',this)"> */
   prevent: function (callback: Function, ev: Event, ...arg: any): void { // 阻止默认事件
     ev.preventDefault()
-    if (callback) callback(...arg)
+    if (callback) callback(ev, ...arg)
   },
   stop: function (callback: Function, ev: Event, ...arg: any): void { // 阻止事件冒泡
     ev.stopPropagation()

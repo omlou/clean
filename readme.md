@@ -652,7 +652,7 @@ C.mounted(function() {
 说明：
 
 ``` typescript
-mounted: (callback: Function) => void;
+mounted: (callback: (event: Event | null) => any) => void;
 ```
 
 #### loaded
@@ -662,27 +662,47 @@ mounted: (callback: Function) => void;
 说明：
 
 ``` typescript
-loaded: (callback: Function) => void;
+loaded: (callback: (event: Event) => any) => void;
 ```
 
 #### beforeUnload
 
 页面关闭之前的钩子函数
 
-说明：
-
-``` typescript
-beforeUnload: (callback: Function) => void;
+```javascript
+C.beforeUnload(function(event) {
+  try {
+    event.preventDefault()
+    event.returnValue = true
+  } catch () {}
+  /* 在页面要关闭时，如果页面表单有修改则会弹出对话框提示 */
+})
 ```
 
-#### unload
+说明：
 
-页面关闭时钩子函数
+``` typescript
+beforeUnload: (callback: (event: Event) => any) => void;
+```
+
+#### visible
+
+页面关闭、跳转、窗口切换、浏览器最小化都会触发这个钩子函数
+
+```javascript
+C.visible(function(msg) {
+  console.log("C.visible", msg.event, msg.state)
+  /* state 为 hidden 是隐藏， visible 是显示 */
+})
+```
 
 说明：
 
 ``` typescript
-unload: (callback: Function) => void;
+visible: (callback: (event: {
+  event: Event;
+  state: string;
+}) => any) => void;
 ```
 
 #### pageShow
@@ -692,7 +712,8 @@ unload: (callback: Function) => void;
 说明：
 
 ``` typescript
-pageShow: (callback: Function) => void;
+pageShow: (callback: (event: PageTransitionEvent) => any) => void;
+/* 可以使用 event.persisted 判断文档是否从缓存加载 */
 ```
 
 #### pageHide
@@ -702,7 +723,7 @@ pageShow: (callback: Function) => void;
 说明：
 
 ``` typescript
-pageHide: (callback: Function) => void;
+pageHide: (callback: (event: PageTransitionEvent) => any) => void;
 ```
 
 #### prevent
@@ -710,7 +731,7 @@ pageHide: (callback: Function) => void;
 阻止默认事件
 
 ```html
-<a class="hello" onclick="C.prevent(sayHello, event, 123)">
+<a class="hello" onclick="C.prevent(sayHello, event, 123)">点我</a>
 ```
 
 说明：

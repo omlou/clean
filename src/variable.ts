@@ -10,11 +10,10 @@ export enum TagMap {
 
 /* 钩子函数相关 */
 export default {
-  isShow: true,
   mountArr: [],
   loadArr: [],
   showArr: [],
   beforeunloadArr: [],
   hideArr: [],
-  unloadArr: []
+  visibleArr: []
 }

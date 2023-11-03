@@ -14,13 +14,12 @@ var TagMap;
 })(TagMap || (TagMap = {}));
 /* 钩子函数相关 */
 var variable = {
-    isShow: true,
     mountArr: [],
     loadArr: [],
     showArr: [],
     beforeunloadArr: [],
     hideArr: [],
-    unloadArr: []
+    visibleArr: []
 };
 
 /* Clean 对象的操作相关 */
@@ -247,8 +246,8 @@ var tool = {
     beforeUnload: function (callback) {
         variable.beforeunloadArr.push(callback);
     },
-    unload: function (callback) {
-        variable.unloadArr.push(callback);
+    visible: function (callback) {
+        variable.visibleArr.push(callback);
     },
     pageShow: function (callback) {
         variable.showArr.push(callback);
@@ -548,7 +547,6 @@ const C = function (que, range) {
 };
 /* mount 钩子函数相关 */
 function DOMLoaded(event) {
-    variable.isShow = false;
     for (const item of variable.mountArr) {
         item(event);
     }
@@ -568,26 +566,26 @@ function DOMLoaded(event) {
             item(event);
         }
     });
-    window.addEventListener('pageshow', (event) => {
-        if (variable.isShow) {
-            for (const item of variable.showArr) {
-                item(event);
-            }
-        }
-    });
     window.addEventListener('beforeunload', (event) => {
         for (const item of variable.beforeunloadArr) {
             item(event);
         }
     });
-    window.addEventListener('pagehide', (event) => {
-        variable.isShow = true;
-        for (const item of variable.hideArr) {
+    document.addEventListener("visibilitychange", (event) => {
+        for (const item of variable.visibleArr) {
+            item({
+                event: event,
+                state: document.visibilityState
+            });
+        }
+    });
+    window.addEventListener('pageshow', (event) => {
+        for (const item of variable.showArr) {
             item(event);
         }
     });
-    window.addEventListener('unload', (event) => {
-        for (const item of variable.unloadArr) {
+    window.addEventListener('pagehide', (event) => {
+        for (const item of variable.hideArr) {
             item(event);
         }
     });
