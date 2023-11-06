@@ -28,11 +28,13 @@ const config = [
         format: 'umd',
         name: globalName,
         sourcemap: true,
-        plugins: [terser({
-          mangle: {
-            reserved: ['Clean', 'CleanCore']
-          }
-        })]
+        plugins: [terser()]
+      },
+      {
+        file: `docs/js/${name}.min.js`,
+        format: 'umd',
+        name: globalName,
+        plugins: [terser()]
       }
     ],
     plugins: commonPlugins
@@ -50,7 +52,7 @@ const config = [
         sourcemap: true,
         plugins: [terser({
           mangle: {
-            reserved: ['Clean', 'CleanCore']
+            reserved: ['Clean']
           }
         })]
       }
