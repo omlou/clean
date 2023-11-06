@@ -4,56 +4,953 @@
   <meta charset="UTF-8">
   <title>clean</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./css/readme.css">
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./index.css">
   <script src="../dist/umd/clean.min.js"></script>
-  <script>
-    C.mounted(function(event) {
-      console.log("mounted", event)
-    })
-    C.loaded(function(event) {
-      console.log("loaded", event)
-    })
-    C.beforeUnload(function(event) {
-      console.log("beforeUnload", event)
-    })
-    C.visible(function(msg) {
-      A.value="visible"
-      console.log("C.visible", msg.event, msg.state)
-    })
-    C.pageShow(function(event) {
-      console.log("pageShow", event, event.persisted)
-    })
-    C.pageHide(function(event) {
-      console.log("pageHide", event, event.persisted)
-    })
-    function sayHello(ev, arg) {
-      console.log(ev, arg)
-    }
-  </script>
-  <style>
-    #divA{
-      width: 100px;
-      height: 100px;
-      background-color: #f00;
-    }
-    #divB{
-      width: 50px;
-      height: 50px;
-      background-color: #fff;
-    }
-  </style>
+  <script src="./js/main.js"></script>
 </head>
 <body>
   <div id="app">
-    <div class="one">111</div>
-    <div class="two">222</div>
-    <div class="three">333</div>
-    <input id="A" type="text">
-    <input id="B" type="checkbox">
-    <input id="C" type="radio">
-    <div id="divA" onclick="C.self(sayHello, event, 'divA')">
-      <div id="divB"></div>
+    <div class="headbar flex" id="headbar">
+			<div class="hblogo" onclick="goIndex()">ClearJS</div>
+			<a class="block hbdocs hbbtn hbbtnact" href="./index.html">文档</a>
+			<a class="block hbexam hbbtn" href="./example.html">示例</a>
+			<div class="hbdate flex">
+				<div class="bdaday">2020年9月7日</div>
+				<div class="bdatime">20:38:30</div>
+				<div class="bdaweek">星期一</div>
+			</div>
+		</div>
+    <div class="container">
+<div class="tree-content-holder" id="tree-content-holder">
+<div class="file_holder">
+<div class="file_catalog" style="max-width: 998px;">
+<div class="toggle abs-pos collapse" title="收起">
+<i class="icon angle left"></i>
+</div>
+<div class="scroll-container">
+<div class="container"><ul class="catalog-ul" level="1"><li class="catalog-li active"><a href="#%E8%AF%AD%E8%A8%80" class="anchor" title="语言">语言</a></li><li class="catalog-li"><a href="#%E7%AE%80%E4%BB%8B" class="anchor" title="简介">简介</a></li><li class="catalog-li"><a href="#%E7%94%A8%E6%B3%95" class="anchor" title="用法">用法</a></li><li><ul class="catalog-ul" level="2"><li class="catalog-li"><a href="#script-%E6%A0%87%E7%AD%BE%E5%BC%95%E5%85%A5" class="anchor" title="Script 标签引入">Script 标签引入</a></li><li class="catalog-li"><a href="#%E5%9C%A8-node-%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%BC%95%E5%85%A5" class="anchor" title="在 Node 项目中引入">在 Node 项目中引入</a></li></ul></li><li class="catalog-li"><a href="#api" class="anchor" title="API">API</a></li><li><ul class="catalog-ul" level="2"><li class="catalog-li"><a href="#%E6%96%B9%E6%B3%95-c" class="anchor" title="方法 C">方法 C</a></li><li class="catalog-li"><a href="#getter-%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E7%BB%84" class="anchor" title="Getter (获取元素、转换为数组)">Getter (获取元素、转换为数组)</a></li><li><ul class="catalog-ul" level="3"><li class="catalog-li"><a href="#parent" class="anchor" title="parent">parent</a></li><li class="catalog-li"><a href="#child" class="anchor" title="child">child</a></li><li class="catalog-li"><a href="#next" class="anchor" title="next">next</a></li><li class="catalog-li"><a href="#prev" class="anchor" title="prev">prev</a></li><li class="catalog-li"><a href="#first" class="anchor" title="first">first</a></li><li class="catalog-li"><a href="#last" class="anchor" title="last">last</a></li><li class="catalog-li"><a href="#array" class="anchor" title="array">array</a></li></ul></li><li class="catalog-li"><a href="#getter--setter-%E8%8E%B7%E5%8F%96%E5%B1%9E%E6%80%A7%E4%BF%AE%E6%94%B9%E5%B1%9E%E6%80%A7" class="anchor" title="Getter &amp; Setter (获取属性、修改属性)">Getter &amp; Setter (获取属性、修改属性)</a></li><li><ul class="catalog-ul" level="3"><li class="catalog-li"><a href="#style" class="anchor" title="style">style</a></li><li class="catalog-li"><a href="#value" class="anchor" title="value">value</a></li><li class="catalog-li"><a href="#checked" class="anchor" title="checked">checked</a></li><li class="catalog-li"><a href="#text" class="anchor" title="text">text</a></li></ul></li><li class="catalog-li"><a href="#clean-%E5%AE%9E%E4%BE%8B%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95" class="anchor" title="Clean 实例对象方法">Clean 实例对象方法</a></li><li><ul class="catalog-ul" level="3"><li class="catalog-li"><a href="#nth" class="anchor" title="nth">nth</a></li><li class="catalog-li"><a href="#map" class="anchor" title="map">map</a></li><li class="catalog-li"><a href="#push" class="anchor" title="push">push</a></li><li class="catalog-li"><a href="#concat" class="anchor" title="concat">concat</a></li><li class="catalog-li"><a href="#render" class="anchor" title="render">render</a></li><li class="catalog-li"><a href="#append" class="anchor" title="append">append</a></li><li class="catalog-li"><a href="#prepend" class="anchor" title="prepend">prepend</a></li><li class="catalog-li"><a href="#before" class="anchor" title="before">before</a></li><li class="catalog-li"><a href="#after" class="anchor" title="after">after</a></li><li class="catalog-li"><a href="#remove" class="anchor" title="remove">remove</a></li><li class="catalog-li"><a href="#show" class="anchor" title="show">show</a></li><li class="catalog-li"><a href="#hide" class="anchor" title="hide">hide</a></li><li class="catalog-li"><a href="#getattr" class="anchor" title="getAttr">getAttr</a></li><li class="catalog-li"><a href="#setattr" class="anchor" title="setAttr">setAttr</a></li><li class="catalog-li"><a href="#addclass" class="anchor" title="addClass">addClass</a></li><li class="catalog-li"><a href="#removeclass" class="anchor" title="removeClass">removeClass</a></li><li class="catalog-li"><a href="#hasclass" class="anchor" title="hasClass">hasClass</a></li><li class="catalog-li"><a href="#bind" class="anchor" title="bind">bind</a></li><li class="catalog-li"><a href="#unbind" class="anchor" title="unbind">unbind</a></li></ul></li><li class="catalog-li"><a href="#c-%E5%AF%B9%E8%B1%A1%E4%B8%8B%E7%9A%84%E6%96%B9%E6%B3%95" class="anchor" title="C 对象下的方法">C 对象下的方法</a></li><li><ul class="catalog-ul" level="3"><li class="catalog-li"><a href="#create" class="anchor" title="create">create</a></li><li class="catalog-li"><a href="#createdom" class="anchor" title="createDOM">createDOM</a></li><li class="catalog-li"><a href="#htmlcir" class="anchor" title="htmlCir">htmlCir</a></li><li class="catalog-li"><a href="#str" class="anchor" title="str">str</a></li><li class="catalog-li"><a href="#one" class="anchor" title="one">one</a></li><li class="catalog-li"><a href="#all" class="anchor" title="all">all</a></li><li class="catalog-li"><a href="#setstate" class="anchor" title="setState">setState</a></li><li class="catalog-li"><a href="#proxy" class="anchor" title="proxy">proxy</a></li><li class="catalog-li"><a href="#mounted" class="anchor" title="mounted">mounted</a></li><li class="catalog-li"><a href="#loaded" class="anchor" title="loaded">loaded</a></li><li class="catalog-li"><a href="#beforeunload" class="anchor" title="beforeUnload">beforeUnload</a></li><li class="catalog-li"><a href="#visible" class="anchor" title="visible">visible</a></li><li class="catalog-li"><a href="#pageshow" class="anchor" title="pageShow">pageShow</a></li><li class="catalog-li"><a href="#pagehide" class="anchor" title="pageHide">pageHide</a></li><li class="catalog-li"><a href="#prevent" class="anchor" title="prevent">prevent</a></li><li class="catalog-li"><a href="#stop" class="anchor" title="stop">stop</a></li><li class="catalog-li"><a href="#self" class="anchor" title="self">self</a></li><li class="catalog-li"><a href="#push-1" class="anchor" title="push">push</a></li><li class="catalog-li"><a href="#replace" class="anchor" title="replace">replace</a></li><li class="catalog-li"><a href="#reload" class="anchor" title="reload">reload</a></li><li class="catalog-li"><a href="#back" class="anchor" title="back">back</a></li><li class="catalog-li"><a href="#forward" class="anchor" title="forward">forward</a></li><li class="catalog-li"><a href="#go" class="anchor" title="go">go</a></li><li class="catalog-li"><a href="#route" class="anchor" title="route">route</a></li><li class="catalog-li"><a href="#formatinput" class="anchor" title="formatInput">formatInput</a></li><li class="catalog-li"><a href="#ajax" class="anchor" title="ajax">ajax</a></li><li class="catalog-li"><a href="#webtools" class="anchor" title="webtools">webtools</a></li></ul></li><li class="catalog-li"><a href="#%E7%B1%BB%E5%9E%8B%E8%AF%B4%E6%98%8E" class="anchor" title="类型说明">类型说明</a></li></ul></li></ul></div>
+</div>
+</div>
+<div class="file_content markdown-body">
+<h2>
+<a id="user-content-语言" class="anchor" href="#%E8%AF%AD%E8%A8%80"></a>语言</h2>
+<ul>
+<li><a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fomlou%2Fclean%23readme">English</a></li>
+<li><a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fomlou%2Fclean%2Fblob%2Fmaster%2Fpublic%2Fmd%2Freadme-zh.md">简体中文</a></li>
+<li><a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fomlou%2Fclean%2Fblob%2Fmaster%2Fpublic%2Fmd%2Freadme-ja.md">日本語</a></li>
+<li><a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fomlou%2Fclean%2Fblob%2Fmaster%2Fpublic%2Fmd%2Freadme-ko.md">한국어</a></li>
+<li><a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fomlou%2Fclean%2Fblob%2Fmaster%2Fpublic%2Fmd%2Freadme-fr.md">Français</a></li>
+</ul>
+<h2>
+<a id="user-content-简介" class="anchor" href="#%E7%AE%80%E4%BB%8B"></a>简介</h2>
+<ul>
+<li>Clean 是一个可以让开发更方便前端工具包</li>
+</ul>
+<h2>
+<a id="user-content-用法" class="anchor" href="#%E7%94%A8%E6%B3%95"></a>用法</h2>
+<h3>
+<a id="user-content-script-标签引入" class="anchor" href="#script-%E6%A0%87%E7%AD%BE%E5%BC%95%E5%85%A5"></a>Script 标签引入</h3>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/@xlou/clean@1.0.0/dist/umd/clean.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span></span>
+<span id="LC2" class="line"><span class="c">&lt;!-- 建议下载并在本地使用 --&gt;</span></span>
+<span id="LC3" class="line"><span class="nt">&lt;script&gt;</span></span>
+<span id="LC4" class="line">  <span class="cm">/* 包含此JS文件后，C 对象将在全局可用 */</span></span>
+<span id="LC5" class="line">  <span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="s2">`&lt;div&gt;Hello, World!&lt;/div&gt;`</span><span class="p">)</span></span>
+<span id="LC6" class="line"><span class="nt">&lt;/script&gt;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h3>
+<a id="user-content-在-node-项目中引入" class="anchor" href="#%E5%9C%A8-node-%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%BC%95%E5%85%A5"></a>在 Node 项目中引入</h3>
+<p>安装</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line">npm i @xlou/clean</span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>使用</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="k">import</span> <span class="nx">C</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@xlou/clean</span><span class="dl">'</span></span>
+<span id="LC2" class="line"></span>
+<span id="LC3" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="s2">`&lt;div&gt;Hello, World!&lt;/div&gt;`</span><span class="p">)</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h2>
+<a id="user-content-api" class="anchor" href="#api"></a>API</h2>
+<h3>
+<a id="user-content-方法-c" class="anchor" href="#%E6%96%B9%E6%B3%95-c"></a>方法 C</h3>
+<p>将匹配 CSS 选择器的 DOM 转换成 Clean 实例对象</p>
+<p>使用：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="s2">`&lt;div&gt;Hello, World!&lt;/div&gt;`</span><span class="p">)</span></span>
+<span id="LC2" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">,</span> <span class="nx">C</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="dl">"</span><span class="s2">.mydiv</span><span class="dl">"</span><span class="p">))</span> <span class="c1">// 在 .mydiv 中查找</span></span>
+<span id="LC3" class="line"></span>
+<span id="LC4" class="line"><span class="cm">/* 返回的 Clean 对象类似于数组，如要转换为 DOM 对象根据索引获取即可 */</span></span>
+<span id="LC5" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></span>
+<span id="LC6" class="line"></span>
+<span id="LC7" class="line"><span class="cm">/* 使用 C 下的方法 */</span></span>
+<span id="LC8" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">mounted</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span></span>
+<span id="LC9" class="line">  <span class="cm">/* ... */</span></span>
+<span id="LC10" class="line"><span class="p">})</span></span>
+<span id="LC11" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">)</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h3>
+<a id="user-content-getter-获取元素转换为数组" class="anchor" href="#getter-%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E7%BB%84"></a>Getter (获取元素、转换为数组)</h3>
+<p>返回结果为 Clean 对象</p>
+<p>使用方法以获取父元素为例：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">parent</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-parent" class="anchor" href="#parent"></a>parent</h4>
+<p>获取目标的父元素</p>
+<p>该属性如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">get</span> <span class="nx">parent</span><span class="p">():</span> <span class="nx">Clean</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-child" class="anchor" href="#child"></a>child</h4>
+<p>获取目标的全部子元素</p>
+<p>该属性如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">get</span> <span class="nx">child</span><span class="p">():</span> <span class="nx">Clean</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-next" class="anchor" href="#next"></a>next</h4>
+<p>获取目标的下一个元素</p>
+<p>目标 Clean 对象可以为多个 DOM 元素</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">get</span> <span class="nx">next</span><span class="p">():</span> <span class="nx">Clean</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-prev" class="anchor" href="#prev"></a>prev</h4>
+<p>获取上一个元素</p>
+<p>目标 Clean 对象可以为多个 DOM 元素</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">get</span> <span class="nx">prev</span><span class="p">():</span> <span class="nx">Clean</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-first" class="anchor" href="#first"></a>first</h4>
+<p>获取子元素里的第一个元素</p>
+<p>目标 Clean 对象可以为多个 DOM 元素</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">get</span> <span class="nx">first</span><span class="p">():</span> <span class="nx">Clean</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-last" class="anchor" href="#last"></a>last</h4>
+<p>获取子元素里的最后一个元素</p>
+<p>目标 Clean 对象可以为多个 DOM 元素</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">get</span> <span class="nx">last</span><span class="p">():</span> <span class="nx">Clean</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-array" class="anchor" href="#array"></a>array</h4>
+<p>返回已转换为数组的 Clean 对象</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">get</span> <span class="nx">array</span><span class="p">():</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nx">Element</span><span class="o">&gt;</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h3>
+<a id="user-content-getter--setter-获取属性修改属性" class="anchor" href="#getter--setter-%E8%8E%B7%E5%8F%96%E5%B1%9E%E6%80%A7%E4%BF%AE%E6%94%B9%E5%B1%9E%E6%80%A7"></a>Getter &amp; Setter (获取属性、修改属性)</h3>
+<p>使用方法以获取行内样式和设置行内样式为例</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="cm">/* 获取 */</span></span>
+<span id="LC2" class="line"><span class="kd">let</span> <span class="nx">style</span> <span class="o">=</span> <span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">style</span></span>
+<span id="LC3" class="line"></span>
+<span id="LC4" class="line"><span class="cm">/* 设置 */</span></span>
+<span id="LC5" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">style</span><span class="o">=</span><span class="dl">"</span><span class="s2">font-size: 14px;</span><span class="dl">"</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-style" class="anchor" href="#style"></a>style</h4>
+<p>获取和设置元素的样式</p>
+<p>获取时如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准</p>
+<p>值可以为 CSS 字符串，如 "display:none;" 也可以是对象 { display: none, fontSize: "20px" }</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">get</span> <span class="nx">style</span><span class="p">():</span> <span class="kr">string</span><span class="p">;</span></span>
+<span id="LC2" class="line"><span class="kd">set</span> <span class="nx">style</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">any</span><span class="p">);</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-value" class="anchor" href="#value"></a>value</h4>
+<p>获取和设置表单元素的值</p>
+<p>获取时如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">get</span> <span class="nx">value</span><span class="p">():</span> <span class="kr">any</span><span class="p">;</span></span>
+<span id="LC2" class="line"><span class="kd">set</span> <span class="nx">value</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">any</span><span class="p">);</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-checked" class="anchor" href="#checked"></a>checked</h4>
+<p>获取和设置单选框或复选框的选中状态</p>
+<p>获取时如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">get</span> <span class="nx">checked</span><span class="p">():</span> <span class="nx">boolean</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">;</span></span>
+<span id="LC2" class="line"><span class="kd">set</span> <span class="nx">checked</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">);</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-text" class="anchor" href="#text"></a>text</h4>
+<p>获取和修改元素的 innerText</p>
+<p>获取时如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">get</span> <span class="nx">text</span><span class="p">():</span> <span class="kr">string</span><span class="p">;</span></span>
+<span id="LC2" class="line"><span class="kd">set</span> <span class="nx">text</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">any</span><span class="p">);</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h3>
+<a id="user-content-clean-实例对象方法" class="anchor" href="#clean-%E5%AE%9E%E4%BE%8B%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95"></a>Clean 实例对象方法</h3>
+<h4>
+<a id="user-content-nth" class="anchor" href="#nth"></a>nth</h4>
+<p>根据索引获取 Clean 对象中的元素，返回值仍为 Clean 对象</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">nth</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">nth</span><span class="p">:</span> <span class="p">(</span><span class="nx">index</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Clean</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-map" class="anchor" href="#map"></a>map</h4>
+<p>遍历 Clean 对象，并返回一个相同长度的数组对象</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">map</span><span class="p">((</span><span class="nx">item</span><span class="p">,</span><span class="nx">i</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span></span>
+<span id="LC2" class="line">  <span class="cm">/* ... */</span></span>
+<span id="LC3" class="line">  <span class="k">return</span> <span class="nx">i</span></span>
+<span id="LC4" class="line"><span class="p">})</span> <span class="c1">// [0]</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">map</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">item</span><span class="p">:</span> <span class="nx">Clean</span><span class="p">,</span> <span class="nx">i</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-push" class="anchor" href="#push"></a>push</h4>
+<p>向 Clean 对象中添加 DOM 元素</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">let</span> <span class="nx">divs</span> <span class="o">=</span> <span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">.app</span><span class="dl">"</span><span class="p">)</span></span>
+<span id="LC2" class="line"><span class="nx">divs</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">C</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="dl">"</span><span class="s2">.myapp</span><span class="dl">"</span><span class="p">))</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">push</span><span class="p">:</span> <span class="p">(</span><span class="nx">dom</span><span class="p">:</span> <span class="nx">Element</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-concat" class="anchor" href="#concat"></a>concat</h4>
+<p>拼接 Clean 对象或 NodeList 对象等</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">.mydiv</span><span class="dl">"</span><span class="p">),</span> <span class="nx">C</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="dl">"</span><span class="s2">.hello</span><span class="dl">"</span><span class="p">))</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">concat</span><span class="p">:</span> <span class="p">(...</span><span class="nx">arg</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-render" class="anchor" href="#render"></a>render</h4>
+<p>向容器里渲染 HTML</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">render</span><span class="p">:</span> <span class="p">(</span><span class="nx">str</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="s2">`&lt;div&gt;Hello, World!&lt;/div&gt;`</span><span class="p">)</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>目标支持多个 DOM 元素的 Clean 对象</p>
+<p>参数为 HTML 字符串</p>
+<p>其他操作 DOM 元素的方法用法同 render</p>
+<h4>
+<a id="user-content-append" class="anchor" href="#append"></a>append</h4>
+<p>向容器的最后面追加 HTML</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">append</span><span class="p">:</span> <span class="p">(</span><span class="nx">str</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-prepend" class="anchor" href="#prepend"></a>prepend</h4>
+<p>向容器的最前面添加 HTML</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">prepend</span><span class="p">:</span> <span class="p">(</span><span class="nx">str</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-before" class="anchor" href="#before"></a>before</h4>
+<p>向元素前面添加 HTML</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">before</span><span class="p">:</span> <span class="p">(</span><span class="nx">str</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-after" class="anchor" href="#after"></a>after</h4>
+<p>向元素后面添加 HTML</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">after</span><span class="p">:</span> <span class="p">(</span><span class="nx">str</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-remove" class="anchor" href="#remove"></a>remove</h4>
+<p>移除目标元素</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">remove</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-show" class="anchor" href="#show"></a>show</h4>
+<p>显示目标元素</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">show</span><span class="p">()</span></span>
+<span id="LC2" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">show</span><span class="p">(</span><span class="dl">"</span><span class="s2">block</span><span class="dl">"</span><span class="p">)</span> <span class="c1">// type 可选，为 display 的类型，默认为 ""</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">show</span><span class="p">:</span> <span class="p">(</span><span class="kd">type</span><span class="p">?:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-hide" class="anchor" href="#hide"></a>hide</h4>
+<p>隐藏元素，设置样式 display:none;</p>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">hide</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-getattr" class="anchor" href="#getattr"></a>getAttr</h4>
+<p>获取元素的属性值</p>
+<p>该方法如果目标 Clean 对象包含多个 DOM 元素，以第一个元素为准</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">getAttr</span><span class="p">(</span><span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">)</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">getAttr</span><span class="p">:</span> <span class="p">(</span><span class="nx">attr</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">string</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span> <span class="c1">// attr 为属性名</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-setattr" class="anchor" href="#setattr"></a>setAttr</h4>
+<p>设置元素的属性值</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">setAttr</span><span class="p">(</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">setAttr</span><span class="p">:</span> <span class="p">(</span><span class="nx">attr</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">value</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span> <span class="c1">// attr 为属性名, value 为属性值</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-addclass" class="anchor" href="#addclass"></a>addClass</h4>
+<p>给元素添加 class</p>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">addClass</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span> <span class="c1">// name 为需要添加的 class 名</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-removeclass" class="anchor" href="#removeclass"></a>removeClass</h4>
+<p>移除指定的 class</p>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">removeClass</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-hasclass" class="anchor" href="#hasclass"></a>hasClass</h4>
+<p>判断元素是否有指定的 class ，返回布尔类型</p>
+<p>该方法如果目标 Clean 对象包含多个 DOM 元素，以第一个元素为准</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">hasClass</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">)</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">hasClass</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">boolean</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-bind" class="anchor" href="#bind"></a>bind</h4>
+<p>绑定事件监听</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span></span>
+<span id="LC2" class="line">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">)</span></span>
+<span id="LC3" class="line"><span class="p">},</span> <span class="kc">false</span><span class="p">)</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">bind</span><span class="p">:</span> <span class="p">(</span><span class="kd">type</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">callback</span><span class="p">:</span> <span class="nb">Function</span><span class="p">,</span> <span class="nx">option</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC2" class="line"><span class="cm">/* </span></span>
+<span id="LC3" class="line"><span class="cm">  type 事件类型</span></span>
+<span id="LC4" class="line"><span class="cm">  callback 绑定的事件方法</span></span>
+<span id="LC5" class="line"><span class="cm">  option 可选 绑定事件的参数</span></span>
+<span id="LC6" class="line"><span class="cm">*/</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-unbind" class="anchor" href="#unbind"></a>unbind</h4>
+<p>移除事件监听</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">unbind</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="nx">sayHello</span><span class="p">)</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">unbind</span><span class="p">:</span> <span class="p">(</span><span class="kd">type</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">callback</span><span class="p">:</span> <span class="nb">Function</span><span class="p">,</span> <span class="nx">option</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC2" class="line"><span class="cm">/* </span></span>
+<span id="LC3" class="line"><span class="cm">  type 事件类型</span></span>
+<span id="LC4" class="line"><span class="cm">  callback 要移除事件方法，必须是一个变量，不能是匿名函数</span></span>
+<span id="LC5" class="line"><span class="cm">*/</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h3>
+<a id="user-content-c-对象下的方法" class="anchor" href="#c-%E5%AF%B9%E8%B1%A1%E4%B8%8B%E7%9A%84%E6%96%B9%E6%B3%95"></a>C 对象下的方法</h3>
+<h4>
+<a id="user-content-create" class="anchor" href="#create"></a>create</h4>
+<p>将 DOM 转换为 Clean 对象</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">C</span><span class="p">.</span><span class="nx">createDOM</span><span class="p">(</span><span class="s2">`&lt;div&gt;Hello, World!&lt;/div&gt;`</span><span class="p">))</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">create</span><span class="p">:</span> <span class="p">(</span><span class="nx">node</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Clean</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">;</span></span>
+<span id="LC2" class="line"><span class="cm">/* node 可以为单个 DOM 元素，也可以时 NodeList 对象或者 DOM 对象的数组 */</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-createdom" class="anchor" href="#createdom"></a>createDOM</h4>
+<p>将 HTML 字符串转换为包含 DOM 对象的数组</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">createDOM</span><span class="p">(</span><span class="s2">`&lt;div&gt;Hello, World!&lt;/div&gt;`</span><span class="p">)</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">createDOM</span><span class="p">:</span> <span class="p">(</span><span class="nx">str</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Element</span><span class="p">[];</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-htmlcir" class="anchor" href="#htmlcir"></a>htmlCir</h4>
+<p>循环数组或对象生成 HTML 字符串</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span></span>
+<span id="LC2" class="line">  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">tom</span><span class="dl">"</span><span class="p">,</span> <span class="na">content</span><span class="p">:</span> <span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span> <span class="p">},</span></span>
+<span id="LC3" class="line">  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">lili</span><span class="dl">"</span><span class="p">,</span> <span class="na">content</span><span class="p">:</span> <span class="dl">"</span><span class="s2">are you ok</span><span class="dl">"</span> <span class="p">}</span></span>
+<span id="LC4" class="line"><span class="p">]</span></span>
+<span id="LC5" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="nx">C</span><span class="p">.</span><span class="nx">htmlCir</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span></span>
+<span id="LC6" class="line">  <span class="k">return</span> <span class="s2">`</span></span>
+<span id="LC7" class="line"><span class="s2">    &lt;div&gt;</span></span>
+<span id="LC8" class="line"><span class="s2">      &lt;div class="name"&gt;</span><span class="p">${</span><span class="nx">item</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">&lt;/div&gt;</span></span>
+<span id="LC9" class="line"><span class="s2">      &lt;div class="content"&gt;</span><span class="p">${</span><span class="nx">item</span><span class="p">.</span><span class="nx">content</span><span class="p">}</span><span class="s2">&lt;/div&gt;</span></span>
+<span id="LC10" class="line"><span class="s2">    &lt;/div&gt;</span></span>
+<span id="LC11" class="line"><span class="s2">  `</span></span>
+<span id="LC12" class="line"><span class="p">}))</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">htmlCir</span><span class="p">:</span> <span class="p">(</span><span class="nx">obj</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">item</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">i</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">string</span><span class="p">;</span></span>
+<span id="LC2" class="line"><span class="cm">/* </span></span>
+<span id="LC3" class="line"><span class="cm">  obj 为要循环的数组或对象，item 为键值，i 为索引</span></span>
+<span id="LC4" class="line"><span class="cm">  返回 html 字符串</span></span>
+<span id="LC5" class="line"><span class="cm">*/</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-str" class="anchor" href="#str"></a>str</h4>
+<p>在模板字符串中绑定属性和传递参数时处理变量</p>
+<p>只有参数为对象和字符串时需要使用 str() 处理，其他类型可以直接传递</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span></span>
+<span id="LC2" class="line">  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">tom</span><span class="dl">"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">18</span> <span class="p">},</span></span>
+<span id="LC3" class="line">  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">lili</span><span class="dl">"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">25</span> <span class="p">}</span></span>
+<span id="LC4" class="line"><span class="p">]</span></span>
+<span id="LC5" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="nx">C</span><span class="p">.</span><span class="nx">htmlCir</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span></span>
+<span id="LC6" class="line">  <span class="k">return</span> <span class="s2">`</span></span>
+<span id="LC7" class="line"><span class="s2">    &lt;div onclick="sayHello(</span><span class="p">${</span><span class="nx">C</span><span class="p">.</span><span class="nx">str</span><span class="p">(</span><span class="nx">item</span><span class="p">)}</span><span class="s2">)"&gt;</span></span>
+<span id="LC8" class="line"><span class="s2">      &lt;div class="name" onclick="sayName(</span><span class="p">${</span><span class="nx">C</span><span class="p">.</span><span class="nx">str</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">name</span><span class="p">)}</span><span class="s2">)"&gt;</span><span class="p">${</span><span class="nx">item</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">&lt;/div&gt;</span></span>
+<span id="LC9" class="line"><span class="s2">      &lt;div class="age" onclick="sayAge(</span><span class="p">${</span><span class="nx">item</span><span class="p">.</span><span class="nx">age</span><span class="p">}</span><span class="s2">)"&gt;</span><span class="p">${</span><span class="nx">item</span><span class="p">.</span><span class="nx">age</span><span class="p">}</span><span class="s2">&lt;/div&gt;</span></span>
+<span id="LC10" class="line"><span class="s2">    &lt;/div&gt;</span></span>
+<span id="LC11" class="line"><span class="s2">  `</span></span>
+<span id="LC12" class="line"><span class="p">}))</span></span>
+<span id="LC13" class="line"></span>
+<span id="LC14" class="line"><span class="cm">/*</span></span>
+<span id="LC15" class="line"><span class="cm">  当参数为对象时，对象中类型为 Function Symbol RegExp 的键值不能传递</span></span>
+<span id="LC16" class="line"><span class="cm">  此时可以使用键来传参</span></span>
+<span id="LC17" class="line"><span class="cm">*/</span></span>
+<span id="LC18" class="line"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span></span>
+<span id="LC19" class="line">  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">tom</span><span class="dl">"</span><span class="p">,</span></span>
+<span id="LC20" class="line">  <span class="na">say</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span></span>
+<span id="LC21" class="line">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">str</span><span class="p">)</span></span>
+<span id="LC22" class="line">  <span class="p">},</span></span>
+<span id="LC23" class="line">  <span class="p">[</span><span class="nb">Symbol</span><span class="p">(</span><span class="dl">"</span><span class="s2">hobby</span><span class="dl">"</span><span class="p">)]:</span> <span class="dl">"</span><span class="s2">swim</span><span class="dl">"</span></span>
+<span id="LC24" class="line"><span class="p">}</span></span>
+<span id="LC25" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="nx">C</span><span class="p">.</span><span class="nx">htmlCir</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span></span>
+<span id="LC26" class="line">  <span class="k">return</span> <span class="s2">`</span></span>
+<span id="LC27" class="line"><span class="s2">    &lt;div onclick="</span><span class="p">${</span><span class="nx">C</span><span class="p">.</span><span class="nx">str</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">say</span><span class="p">)}</span><span class="s2">('tom')"&gt;</span><span class="p">${</span><span class="nx">C</span><span class="p">.</span><span class="nx">str</span><span class="p">(</span><span class="nx">i</span><span class="p">)}</span><span class="s2">-</span><span class="p">${</span><span class="nx">C</span><span class="p">.</span><span class="nx">str</span><span class="p">(</span><span class="nx">item</span><span class="p">)}</span><span class="s2">&lt;/div&gt;</span></span>
+<span id="LC28" class="line"><span class="s2">  `</span></span>
+<span id="LC29" class="line"><span class="p">}))</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">str</span><span class="p">:</span> <span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">string</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-one" class="anchor" href="#one"></a>one</h4>
+<p>按 CSS 选择器选取一个 DOM ，返回 DOM 对象</p>
+<p>同 querySelector()</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="dl">"</span><span class="s2">.mydiv</span><span class="dl">"</span><span class="p">)</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">one</span><span class="p">:</span> <span class="p">(</span><span class="nx">target</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">range</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Element</span><span class="p">;</span></span>
+<span id="LC2" class="line"><span class="cm">/* target ：CSS 选择器，range ：查询范围 */</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-all" class="anchor" href="#all"></a>all</h4>
+<p>按 CSS 选择器选取多个 DOM ，返回数组</p>
+<p>和 querySelectorAll() 不同的是，该方法返回的是数组</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="dl">"</span><span class="s2">.mydiv,.hello</span><span class="dl">"</span><span class="p">)</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">all</span><span class="p">:</span> <span class="p">(</span><span class="nx">target</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">range</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Element</span><span class="p">[];</span></span>
+<span id="LC2" class="line"><span class="cm">/* target ：CSS 选择器，range ：查询范围 */</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-setstate" class="anchor" href="#setstate"></a>setState</h4>
+<p>添加全局变量</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span></span>
+<span id="LC2" class="line">  <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span></span>
+<span id="LC3" class="line">  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Tom</span><span class="dl">"</span><span class="p">,</span></span>
+<span id="LC4" class="line">  <span class="na">age</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span></span>
+<span id="LC5" class="line">  <span class="na">hobby</span><span class="p">:</span> <span class="dl">"</span><span class="s2">swim</span><span class="dl">"</span></span>
+<span id="LC6" class="line"><span class="p">}</span></span>
+<span id="LC7" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">setState</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="c1">// data 的全部属性都会变为全局变量</span></span>
+<span id="LC8" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">setState</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="dl">"</span><span class="s2">name,age</span><span class="dl">"</span><span class="p">)</span> <span class="c1">// 只将 name 和 age 属性提升至全局</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">setState</span><span class="p">:</span> <span class="p">(</span><span class="nx">obj</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">str</span><span class="p">?:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-proxy" class="anchor" href="#proxy"></a>proxy</h4>
+<p>监听某个对象某个属性值的变化</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span></span>
+<span id="LC2" class="line">  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Tom</span><span class="dl">"</span><span class="p">,</span></span>
+<span id="LC3" class="line">  <span class="na">age</span><span class="p">:</span> <span class="mi">18</span></span>
+<span id="LC4" class="line"><span class="p">}</span></span>
+<span id="LC5" class="line"><span class="kd">let</span> <span class="nx">dataProxy</span> <span class="o">=</span> <span class="nx">C</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="p">{</span></span>
+<span id="LC6" class="line">  <span class="na">name</span><span class="p">:</span> <span class="p">{</span></span>
+<span id="LC7" class="line">    <span class="nx">handler</span><span class="p">(</span><span class="nx">nv</span><span class="p">,</span> <span class="nx">ov</span><span class="p">)</span> <span class="p">{</span></span>
+<span id="LC8" class="line">      <span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">.name</span><span class="dl">"</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">nv</span></span>
+<span id="LC9" class="line">    <span class="p">},</span></span>
+<span id="LC10" class="line">    <span class="na">immediate</span><span class="p">:</span> <span class="kc">true</span></span>
+<span id="LC11" class="line">  <span class="p">}</span></span>
+<span id="LC12" class="line"><span class="p">})</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">proxy</span><span class="p">(</span><span class="nx">conta</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">arg</span><span class="p">:</span> <span class="p">{</span></span>
+<span id="LC2" class="line">  <span class="p">[</span><span class="nx">prop</span><span class="p">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span> <span class="o">|</span> <span class="nx">symbol</span><span class="p">]:</span> <span class="p">{</span></span>
+<span id="LC3" class="line">    <span class="nl">handler</span><span class="p">:</span> <span class="p">(</span><span class="nx">nv</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">ov</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">;</span></span>
+<span id="LC4" class="line">    <span class="nl">immediate</span><span class="p">?:</span> <span class="nx">boolean</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">;</span></span>
+<span id="LC5" class="line">  <span class="p">};</span></span>
+<span id="LC6" class="line"><span class="p">}):</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC7" class="line"><span class="cm">/* 如果指定了 immediate: true ，则添加监听时就会执行一次 handler 方法 */</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-mounted" class="anchor" href="#mounted"></a>mounted</h4>
+<p>页面构建完成的钩子函数，不包括图片等网络资源的加载完成</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">mounted</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span></span>
+<span id="LC2" class="line">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">mounted</span><span class="dl">"</span><span class="p">)</span></span>
+<span id="LC3" class="line"><span class="p">})</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">mounted</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="nx">Event</span> <span class="o">|</span> <span class="kc">null</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-loaded" class="anchor" href="#loaded"></a>loaded</h4>
+<p>页面加载完成的钩子函数</p>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">loaded</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="nx">Event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-beforeunload" class="anchor" href="#beforeunload"></a>beforeUnload</h4>
+<p>页面关闭之前的钩子函数</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">beforeUnload</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span></span>
+<span id="LC2" class="line">  <span class="k">try</span> <span class="p">{</span></span>
+<span id="LC3" class="line">    <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span></span>
+<span id="LC4" class="line">    <span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="kc">true</span></span>
+<span id="LC5" class="line">  <span class="p">}</span> <span class="k">catch</span> <span class="p">()</span> <span class="p">{}</span></span>
+<span id="LC6" class="line">  <span class="cm">/* 在页面要关闭时，如果页面表单有修改则会弹出对话框提示 */</span></span>
+<span id="LC7" class="line"><span class="p">})</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">beforeUnload</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="nx">Event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-visible" class="anchor" href="#visible"></a>visible</h4>
+<p>页面关闭、跳转、窗口切换、浏览器最小化都会触发这个钩子函数</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">visible</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="p">{</span></span>
+<span id="LC2" class="line">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">C.visible</span><span class="dl">"</span><span class="p">,</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">event</span><span class="p">,</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span></span>
+<span id="LC3" class="line">  <span class="cm">/* state 为 hidden 是隐藏， visible 是显示 */</span></span>
+<span id="LC4" class="line"><span class="p">})</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">visible</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="p">{</span></span>
+<span id="LC2" class="line">  <span class="nl">event</span><span class="p">:</span> <span class="nx">Event</span><span class="p">;</span></span>
+<span id="LC3" class="line">  <span class="nl">state</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span></span>
+<span id="LC4" class="line"><span class="p">})</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-pageshow" class="anchor" href="#pageshow"></a>pageShow</h4>
+<p>页面展示时的钩子函数</p>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">pageShow</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="nx">PageTransitionEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC2" class="line"><span class="cm">/* 可以使用 event.persisted 判断文档是否从缓存加载 */</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-pagehide" class="anchor" href="#pagehide"></a>pageHide</h4>
+<p>页面隐藏时的钩子函数</p>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">pageHide</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="nx">PageTransitionEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-prevent" class="anchor" href="#prevent"></a>prevent</h4>
+<p>阻止默认事件</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"hello"</span> <span class="na">onclick=</span><span class="s">"C.prevent(sayHello, event, 123)"</span><span class="nt">&gt;</span>点我<span class="nt">&lt;/a&gt;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">prevent</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="nb">Function</span><span class="p">,</span> <span class="nx">ev</span><span class="p">:</span> <span class="nx">Event</span><span class="p">,</span> <span class="p">...</span><span class="nx">arg</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC2" class="line"><span class="cm">/* callback 为需要绑定的方法， ev 为事件对象， arg 为需要向方法中传递的参数 */</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-stop" class="anchor" href="#stop"></a>stop</h4>
+<p>阻止事件冒泡</p>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">stop</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="nb">Function</span><span class="p">,</span> <span class="nx">ev</span><span class="p">:</span> <span class="nx">Event</span><span class="p">,</span> <span class="p">...</span><span class="nx">arg</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-self" class="anchor" href="#self"></a>self</h4>
+<p>只有目标是自身才触发</p>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nb">self</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="nb">Function</span><span class="p">,</span> <span class="nx">ev</span><span class="p">:</span> <span class="nx">Event</span><span class="p">,</span> <span class="p">...</span><span class="nx">arg</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-push-1" class="anchor" href="#push-1"></a>push</h4>
+<p>保留历史记录并跳转页面</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">"</span><span class="s2">./page/home.html?id=1</span><span class="dl">"</span><span class="p">)</span></span>
+<span id="LC2" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span></span>
+<span id="LC3" class="line">  <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">./page/home.html</span><span class="dl">"</span><span class="p">,</span></span>
+<span id="LC4" class="line">  <span class="na">query</span><span class="p">:</span> <span class="p">{</span></span>
+<span id="LC5" class="line">    <span class="na">id</span><span class="p">:</span> <span class="mi">1</span></span>
+<span id="LC6" class="line">  <span class="p">},</span></span>
+<span id="LC7" class="line">  <span class="na">params</span><span class="p">:</span> <span class="p">{</span></span>
+<span id="LC8" class="line">    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">tom</span><span class="dl">"</span><span class="p">,</span></span>
+<span id="LC9" class="line">    <span class="na">age</span><span class="p">:</span> <span class="mi">18</span></span>
+<span id="LC10" class="line">  <span class="p">}</span></span>
+<span id="LC11" class="line"><span class="p">})</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">push</span><span class="p">:</span> <span class="p">(</span><span class="nx">msg</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-replace" class="anchor" href="#replace"></a>replace</h4>
+<p>替换当前页面，不保留历史记录</p>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">replace</span><span class="p">:</span> <span class="p">(</span><span class="nx">msg</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-reload" class="anchor" href="#reload"></a>reload</h4>
+<p>重新加载当前页面</p>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">reload</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-back" class="anchor" href="#back"></a>back</h4>
+<p>返回上一个历史页面</p>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">back</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-forward" class="anchor" href="#forward"></a>forward</h4>
+<p>前进到下一个历史页面</p>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">forward</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-go" class="anchor" href="#go"></a>go</h4>
+<p>跳转历史记录页面</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">go</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// 向前跳一个页面，即返回上个页面</span></span>
+<span id="LC2" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">go</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// 向后跳1个页面</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">go</span><span class="p">:</span> <span class="p">(</span><span class="nx">index</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC2" class="line"><span class="cm">/* index 表示跳转的页面数，负数表示之前的页面，正数表示之后的页面 */</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-route" class="anchor" href="#route"></a>route</h4>
+<p>获取路由参数</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">const</span> <span class="nx">route</span> <span class="o">=</span> <span class="nx">C</span><span class="p">.</span><span class="nx">route</span><span class="p">()</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">route</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span></span>
+<span id="LC2" class="line">  <span class="na">params</span><span class="p">:</span> <span class="kr">any</span><span class="p">;</span></span>
+<span id="LC3" class="line">  <span class="nl">query</span><span class="p">:</span> <span class="kr">any</span><span class="p">;</span></span>
+<span id="LC4" class="line"><span class="p">};</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-formatinput" class="anchor" href="#formatinput"></a>formatInput</h4>
+<p>正则限制 input 输入</p>
+<p>支持多个规则的限制</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="cm">/* 单个规则 */</span></span>
+<span id="LC2" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">formatInput</span><span class="p">({</span></span>
+<span id="LC3" class="line">  <span class="na">el</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span> <span class="c1">// css 选择器，支持一类元素</span></span>
+<span id="LC4" class="line">  <span class="na">reg</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span> <span class="c1">// 需要满足的正则</span></span>
+<span id="LC5" class="line">  <span class="na">nopass</span><span class="p">:</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{},</span> <span class="c1">// 不通过的回调</span></span>
+<span id="LC6" class="line">  <span class="na">pass</span><span class="p">:</span> <span class="p">(</span><span class="nx">nv</span><span class="p">,</span> <span class="nx">ov</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{}</span> <span class="c1">// 满足正则的回调，nv 为新值，ov 为旧值</span></span>
+<span id="LC7" class="line"><span class="p">})</span></span>
+<span id="LC8" class="line"></span>
+<span id="LC9" class="line"><span class="cm">/* 多个规则 */</span></span>
+<span id="LC10" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">formatInput</span><span class="p">({</span></span>
+<span id="LC11" class="line">  <span class="na">el</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span></span>
+<span id="LC12" class="line">  <span class="na">rules</span><span class="p">:</span> <span class="p">[</span></span>
+<span id="LC13" class="line">    <span class="p">{</span></span>
+<span id="LC14" class="line">      <span class="na">reg</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span></span>
+<span id="LC15" class="line">      <span class="na">nopass</span><span class="p">:</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{}</span></span>
+<span id="LC16" class="line">    <span class="p">},</span></span>
+<span id="LC17" class="line">    <span class="p">{</span></span>
+<span id="LC18" class="line">      <span class="na">reg</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span></span>
+<span id="LC19" class="line">      <span class="na">nopass</span><span class="p">:</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{}</span></span>
+<span id="LC20" class="line">    <span class="p">}</span></span>
+<span id="LC21" class="line">  <span class="p">],</span></span>
+<span id="LC22" class="line">  <span class="na">pass</span><span class="p">:</span> <span class="p">(</span><span class="nx">nv</span><span class="p">,</span> <span class="nx">ov</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{}</span></span>
+<span id="LC23" class="line"><span class="p">})</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>说明：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">formatInput</span><span class="p">:</span> <span class="p">(</span><span class="nx">msg</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h4>
+<a id="user-content-ajax" class="anchor" href="#ajax"></a>ajax</h4>
+<p>发送 ajax 请求</p>
+<p>详细用法请查看 <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fomlou%2Fajax">https://github.com/omlou/ajax</a></p>
+<h4>
+<a id="user-content-webtools" class="anchor" href="#webtools"></a>webtools</h4>
+<p>集成了 webtools 的所有方法</p>
+<p>用法请查看 <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fomlou%2Fwebtools">https://github.com/omlou/webtools</a></p>
+<p>举例：</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">clipboardWrite</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello, World!</span><span class="dl">"</span><span class="p">)</span></span>
+<span id="LC2" class="line"><span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span></span>
+<span id="LC3" class="line">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Copy successful</span><span class="dl">"</span><span class="p">)</span></span>
+<span id="LC4" class="line"><span class="p">})</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h3>
+<a id="user-content-类型说明" class="anchor" href="#%E7%B1%BB%E5%9E%8B%E8%AF%B4%E6%98%8E"></a>类型说明</h3>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">_xlou_ajax</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@xlou/ajax</span><span class="dl">'</span><span class="p">;</span></span>
+<span id="LC2" class="line"><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">_xlou_webtools</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@xlou/webtools</span><span class="dl">'</span><span class="p">;</span></span>
+<span id="LC3" class="line"></span>
+<span id="LC4" class="line"><span class="kr">declare</span> <span class="kd">const</span> <span class="nx">tools</span><span class="p">:</span> <span class="p">{</span></span>
+<span id="LC5" class="line">    <span class="nl">Base64</span><span class="p">:</span> <span class="k">typeof</span> <span class="nx">_xlou_webtools</span><span class="p">.</span><span class="nx">Base64</span><span class="p">;</span></span>
+<span id="LC6" class="line">    <span class="nl">deepCopy</span><span class="p">:</span> <span class="k">typeof</span> <span class="nx">_xlou_webtools</span><span class="p">.</span><span class="nx">deepCopy</span><span class="p">;</span></span>
+<span id="LC7" class="line">    <span class="nl">filterObject</span><span class="p">:</span> <span class="k">typeof</span> <span class="nx">_xlou_webtools</span><span class="p">.</span><span class="nx">filterObject</span><span class="p">;</span></span>
+<span id="LC8" class="line">    <span class="nl">getQuery</span><span class="p">:</span> <span class="k">typeof</span> <span class="nx">_xlou_webtools</span><span class="p">.</span><span class="nx">getQuery</span><span class="p">;</span></span>
+<span id="LC9" class="line">    <span class="nl">queryString</span><span class="p">:</span> <span class="k">typeof</span> <span class="nx">_xlou_webtools</span><span class="p">.</span><span class="nx">queryString</span><span class="p">;</span></span>
+<span id="LC10" class="line">    <span class="nl">toFixed</span><span class="p">:</span> <span class="k">typeof</span> <span class="nx">_xlou_webtools</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">;</span></span>
+<span id="LC11" class="line">    <span class="nl">formSubmit</span><span class="p">:</span> <span class="k">typeof</span> <span class="nx">_xlou_webtools</span><span class="p">.</span><span class="nx">formSubmit</span><span class="p">;</span></span>
+<span id="LC12" class="line">    <span class="nl">readText</span><span class="p">:</span> <span class="k">typeof</span> <span class="nx">_xlou_webtools</span><span class="p">.</span><span class="nx">readText</span><span class="p">;</span></span>
+<span id="LC13" class="line">    <span class="nl">readJSON</span><span class="p">:</span> <span class="k">typeof</span> <span class="nx">_xlou_webtools</span><span class="p">.</span><span class="nx">readJSON</span><span class="p">;</span></span>
+<span id="LC14" class="line">    <span class="nl">getStore</span><span class="p">:</span> <span class="k">typeof</span> <span class="nx">_xlou_webtools</span><span class="p">.</span><span class="nx">getStore</span><span class="p">;</span></span>
+<span id="LC15" class="line">    <span class="nl">setStore</span><span class="p">:</span> <span class="k">typeof</span> <span class="nx">_xlou_webtools</span><span class="p">.</span><span class="nx">setStore</span><span class="p">;</span></span>
+<span id="LC16" class="line">    <span class="nl">unid</span><span class="p">:</span> <span class="k">typeof</span> <span class="nx">_xlou_webtools</span><span class="p">.</span><span class="nx">unid</span><span class="p">;</span></span>
+<span id="LC17" class="line">    <span class="nl">colorRGB</span><span class="p">:</span> <span class="k">typeof</span> <span class="nx">_xlou_webtools</span><span class="p">.</span><span class="nx">colorRGB</span><span class="p">;</span></span>
+<span id="LC18" class="line">    <span class="nl">clipboardWrite</span><span class="p">:</span> <span class="k">typeof</span> <span class="nx">_xlou_webtools</span><span class="p">.</span><span class="nx">clipboardWrite</span><span class="p">;</span></span>
+<span id="LC19" class="line">    <span class="nl">ajax</span><span class="p">:</span> <span class="nx">_xlou_ajax</span><span class="p">.</span><span class="nx">AjaxOptions</span><span class="p">;</span></span>
+<span id="LC20" class="line">    <span class="nl">createDOM</span><span class="p">:</span> <span class="p">(</span><span class="nx">str</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Element</span><span class="p">[];</span></span>
+<span id="LC21" class="line">    <span class="nl">htmlCir</span><span class="p">:</span> <span class="p">(</span><span class="nx">obj</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">item</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">i</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">string</span><span class="p">;</span></span>
+<span id="LC22" class="line">    <span class="nl">str</span><span class="p">:</span> <span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">string</span><span class="p">;</span></span>
+<span id="LC23" class="line">    <span class="nl">one</span><span class="p">:</span> <span class="p">(</span><span class="nx">target</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">range</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Element</span><span class="p">;</span></span>
+<span id="LC24" class="line">    <span class="nl">all</span><span class="p">:</span> <span class="p">(</span><span class="nx">target</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">range</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Element</span><span class="p">[];</span></span>
+<span id="LC25" class="line">    <span class="nl">setState</span><span class="p">:</span> <span class="p">(</span><span class="nx">obj</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">str</span><span class="p">?:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC26" class="line">    <span class="nx">proxy</span><span class="p">(</span><span class="nx">conta</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">arg</span><span class="p">:</span> <span class="p">{</span></span>
+<span id="LC27" class="line">        <span class="p">[</span><span class="nx">prop</span><span class="p">:</span> <span class="kr">string</span><span class="p">]:</span> <span class="p">{</span></span>
+<span id="LC28" class="line">            <span class="nl">handler</span><span class="p">:</span> <span class="p">(</span><span class="nx">nv</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">ov</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">;</span></span>
+<span id="LC29" class="line">            <span class="nl">immediate</span><span class="p">?:</span> <span class="nx">boolean</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">;</span></span>
+<span id="LC30" class="line">        <span class="p">};</span></span>
+<span id="LC31" class="line">        <span class="p">[</span><span class="nx">prop</span><span class="p">:</span> <span class="kr">number</span><span class="p">]:</span> <span class="p">{</span></span>
+<span id="LC32" class="line">            <span class="nl">handler</span><span class="p">:</span> <span class="p">(</span><span class="nx">nv</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">ov</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">;</span></span>
+<span id="LC33" class="line">            <span class="nl">immediate</span><span class="p">?:</span> <span class="nx">boolean</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">;</span></span>
+<span id="LC34" class="line">        <span class="p">};</span></span>
+<span id="LC35" class="line">        <span class="p">[</span><span class="nx">prop</span><span class="p">:</span> <span class="nx">symbol</span><span class="p">]:</span> <span class="p">{</span></span>
+<span id="LC36" class="line">            <span class="nl">handler</span><span class="p">:</span> <span class="p">(</span><span class="nx">nv</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">ov</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">;</span></span>
+<span id="LC37" class="line">            <span class="nl">immediate</span><span class="p">?:</span> <span class="nx">boolean</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">;</span></span>
+<span id="LC38" class="line">        <span class="p">};</span></span>
+<span id="LC39" class="line">    <span class="p">}):</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC40" class="line">    <span class="nl">mounted</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="nx">Event</span> <span class="o">|</span> <span class="kc">null</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC41" class="line">    <span class="nl">loaded</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="nx">Event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC42" class="line">    <span class="nl">beforeUnload</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="nx">Event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC43" class="line">    <span class="nl">visible</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="p">{</span></span>
+<span id="LC44" class="line">        <span class="nl">event</span><span class="p">:</span> <span class="nx">Event</span><span class="p">;</span></span>
+<span id="LC45" class="line">        <span class="nl">state</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span></span>
+<span id="LC46" class="line">    <span class="p">})</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC47" class="line">    <span class="nl">pageShow</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="nx">PageTransitionEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC48" class="line">    <span class="nl">pageHide</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="nx">PageTransitionEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC49" class="line">    <span class="nl">prevent</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="nb">Function</span><span class="p">,</span> <span class="nx">ev</span><span class="p">:</span> <span class="nx">Event</span><span class="p">,</span> <span class="p">...</span><span class="nx">arg</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC50" class="line">    <span class="nl">stop</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="nb">Function</span><span class="p">,</span> <span class="nx">ev</span><span class="p">:</span> <span class="nx">Event</span><span class="p">,</span> <span class="p">...</span><span class="nx">arg</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC51" class="line">    <span class="nl">self</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="nb">Function</span><span class="p">,</span> <span class="nx">ev</span><span class="p">:</span> <span class="nx">Event</span><span class="p">,</span> <span class="p">...</span><span class="nx">arg</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC52" class="line">    <span class="nl">push</span><span class="p">:</span> <span class="p">(</span><span class="nx">msg</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC53" class="line">    <span class="nl">replace</span><span class="p">:</span> <span class="p">(</span><span class="nx">msg</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC54" class="line">    <span class="nl">reload</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC55" class="line">    <span class="nl">back</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC56" class="line">    <span class="nl">forward</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC57" class="line">    <span class="nl">go</span><span class="p">:</span> <span class="p">(</span><span class="nx">index</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC58" class="line">    <span class="nl">route</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span></span>
+<span id="LC59" class="line">        <span class="na">params</span><span class="p">:</span> <span class="kr">any</span><span class="p">;</span></span>
+<span id="LC60" class="line">        <span class="nl">query</span><span class="p">:</span> <span class="kr">any</span><span class="p">;</span></span>
+<span id="LC61" class="line">    <span class="p">};</span></span>
+<span id="LC62" class="line">    <span class="nl">formatInput</span><span class="p">:</span> <span class="p">(</span><span class="nx">msg</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC63" class="line">    <span class="nl">create</span><span class="p">:</span> <span class="p">(</span><span class="nx">node</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Clean</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">;</span></span>
+<span id="LC64" class="line"><span class="p">};</span></span>
+<span id="LC65" class="line"><span class="kr">declare</span> <span class="kd">const</span> <span class="nx">instance</span><span class="p">:</span> <span class="p">{</span></span>
+<span id="LC66" class="line">    <span class="nl">remove</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC67" class="line">    <span class="nl">show</span><span class="p">:</span> <span class="p">(</span><span class="kd">type</span><span class="p">?:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC68" class="line">    <span class="nl">hide</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC69" class="line">    <span class="nl">getAttr</span><span class="p">:</span> <span class="p">(</span><span class="nx">attr</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">string</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span></span>
+<span id="LC70" class="line">    <span class="nl">setAttr</span><span class="p">:</span> <span class="p">(</span><span class="nx">attr</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">value</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC71" class="line">    <span class="nl">addClass</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC72" class="line">    <span class="nl">removeClass</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC73" class="line">    <span class="nl">hasClass</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">boolean</span><span class="p">;</span></span>
+<span id="LC74" class="line">    <span class="nl">bind</span><span class="p">:</span> <span class="p">(</span><span class="kd">type</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">callback</span><span class="p">:</span> <span class="nb">Function</span><span class="p">,</span> <span class="nx">option</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC75" class="line">    <span class="nl">unbind</span><span class="p">:</span> <span class="p">(</span><span class="kd">type</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">callback</span><span class="p">:</span> <span class="nb">Function</span><span class="p">,</span> <span class="nx">option</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC76" class="line">    <span class="nl">nth</span><span class="p">:</span> <span class="p">(</span><span class="nx">index</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Clean</span><span class="p">;</span></span>
+<span id="LC77" class="line">    <span class="nl">map</span><span class="p">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">item</span><span class="p">:</span> <span class="nx">Clean</span><span class="p">,</span> <span class="nx">i</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span><span class="p">;</span></span>
+<span id="LC78" class="line">    <span class="nl">push</span><span class="p">:</span> <span class="p">(</span><span class="nx">dom</span><span class="p">:</span> <span class="nx">Element</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC79" class="line">    <span class="nl">concat</span><span class="p">:</span> <span class="p">(...</span><span class="nx">arg</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC80" class="line">    <span class="nl">render</span><span class="p">:</span> <span class="p">(</span><span class="nx">str</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC81" class="line">    <span class="nl">append</span><span class="p">:</span> <span class="p">(</span><span class="nx">str</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC82" class="line">    <span class="nl">prepend</span><span class="p">:</span> <span class="p">(</span><span class="nx">str</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC83" class="line">    <span class="nl">before</span><span class="p">:</span> <span class="p">(</span><span class="nx">str</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC84" class="line">    <span class="nl">after</span><span class="p">:</span> <span class="p">(</span><span class="nx">str</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span></span>
+<span id="LC85" class="line"><span class="p">};</span></span>
+<span id="LC86" class="line"><span class="kd">type</span> <span class="nx">Instance</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">instance</span><span class="p">;</span></span>
+<span id="LC87" class="line"><span class="kr">interface</span> <span class="nx">Clean</span> <span class="kd">extends</span> <span class="nx">Instance</span> <span class="p">{</span></span>
+<span id="LC88" class="line">    <span class="k">readonly</span> <span class="nx">length</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span></span>
+<span id="LC89" class="line">    <span class="kd">get</span> <span class="nx">parent</span><span class="p">():</span> <span class="nx">Clean</span><span class="p">;</span></span>
+<span id="LC90" class="line">    <span class="kd">get</span> <span class="nx">child</span><span class="p">():</span> <span class="nx">Clean</span><span class="p">;</span></span>
+<span id="LC91" class="line">    <span class="kd">get</span> <span class="nx">next</span><span class="p">():</span> <span class="nx">Clean</span><span class="p">;</span></span>
+<span id="LC92" class="line">    <span class="kd">get</span> <span class="nx">prev</span><span class="p">():</span> <span class="nx">Clean</span><span class="p">;</span></span>
+<span id="LC93" class="line">    <span class="kd">get</span> <span class="nx">first</span><span class="p">():</span> <span class="nx">Clean</span><span class="p">;</span></span>
+<span id="LC94" class="line">    <span class="kd">get</span> <span class="nx">last</span><span class="p">():</span> <span class="nx">Clean</span><span class="p">;</span></span>
+<span id="LC95" class="line">    <span class="kd">get</span> <span class="nx">array</span><span class="p">():</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nx">Element</span><span class="o">&gt;</span><span class="p">;</span></span>
+<span id="LC96" class="line">    <span class="kd">get</span> <span class="nx">style</span><span class="p">():</span> <span class="kr">string</span><span class="p">;</span></span>
+<span id="LC97" class="line">    <span class="kd">set</span> <span class="nx">style</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">any</span><span class="p">);</span></span>
+<span id="LC98" class="line">    <span class="kd">get</span> <span class="nx">value</span><span class="p">():</span> <span class="kr">any</span><span class="p">;</span></span>
+<span id="LC99" class="line">    <span class="kd">set</span> <span class="nx">value</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">any</span><span class="p">);</span></span>
+<span id="LC100" class="line">    <span class="kd">get</span> <span class="nx">checked</span><span class="p">():</span> <span class="nx">boolean</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">;</span></span>
+<span id="LC101" class="line">    <span class="kd">set</span> <span class="nx">checked</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">);</span></span>
+<span id="LC102" class="line">    <span class="kd">get</span> <span class="nx">text</span><span class="p">():</span> <span class="kr">string</span><span class="p">;</span></span>
+<span id="LC103" class="line">    <span class="kd">set</span> <span class="nx">text</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">any</span><span class="p">);</span></span>
+<span id="LC104" class="line"><span class="p">}</span></span>
+<span id="LC105" class="line"><span class="kr">declare</span> <span class="kd">class</span> <span class="nx">Clean</span> <span class="p">{</span></span>
+<span id="LC106" class="line">    <span class="kd">constructor</span><span class="p">();</span></span>
+<span id="LC107" class="line"><span class="p">}</span></span>
+<span id="LC108" class="line"><span class="kd">type</span> <span class="nx">ToolOption</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">tools</span><span class="p">;</span></span>
+<span id="LC109" class="line"><span class="kd">type</span> <span class="nx">CFuncion</span> <span class="o">=</span> <span class="p">(</span><span class="nx">que</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">range</span><span class="p">?:</span> <span class="nx">Document</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Clean</span><span class="p">;</span></span>
+<span id="LC110" class="line"><span class="kd">type</span> <span class="nx">COption</span> <span class="o">=</span> <span class="nx">CFuncion</span> <span class="o">|</span> <span class="nx">ToolOption</span><span class="p">;</span></span>
+<span id="LC111" class="line"><span class="kr">declare</span> <span class="kd">const</span> <span class="nx">C</span><span class="p">:</span> <span class="nx">COption</span><span class="p">;</span></span>
+<span id="LC112" class="line"></span>
+<span id="LC113" class="line"><span class="k">export</span> <span class="p">{</span> <span class="nx">COption</span><span class="p">,</span> <span class="nx">Clean</span><span class="p">,</span> <span class="nx">C</span> <span class="k">as</span> <span class="k">default</span> <span class="p">};</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div></div>
+<div class="file_line" style="top: 81px; height: calc(100% - 81px);"></div>
+</div>
+</div>
     </div>
-    <a href="#abc" onclick="C.prevent(sayHello, event, 123)">haha</a>
   </div>
 </body>
 </html>

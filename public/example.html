@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../dist/umd/clean.min.js"></script>
+</head>
+<body>
+  <div class="index"></div>
+</body>
+<script>
+let pageList = [
+  { name: "HTML" },
+  { name: "JavaScript", showBtn: true },
+  { name: "CSS" }
+]
+
+function showName(name) {
+  console.log(name)
+}
+
+C(".index").render(`
+  <div>
+    <div class="title">前端</div>
+    <div class="content">${
+      C.htmlCir(pageList, (item, i) => {
+        return `
+          <div class="item">
+            <span class="name">${item.name}</span>
+            ${item.showBtn ? `
+              <button class="btn" onclick="showName(${C.str(item.name)})">click</button>
+            ` : ""}
+          </div>
+        `
+      })
+    }</div>
+  </div>
+`)
+</script>
+</html>

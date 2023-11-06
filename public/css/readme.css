@@ -1,0 +1,137 @@
+.markdown-body{
+  font-size: 15px;
+  line-height: 1.5;
+}
+.markdown-body a{
+  color: #14d1b5;
+}
+.markdown-body a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+}
+.markdown-body li+li {
+  margin-top: 0.25em;
+}
+blockquote>p{
+  margin: 10px 0;
+}
+.file_catalog .container .catalog-li {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.markdown-body h2:hover:before,
+.markdown-body h3:hover:before,
+.markdown-body h4:hover:before,
+.markdown-body h5:hover:before,
+.markdown-body h6:hover:before{
+  content: "#";
+  position: absolute;
+  right: 100%;
+  color: #14d1b5;
+  padding-right: 4px;
+}
+.markdown-body h2{
+  font-size: 24px;
+  font-weight: bold;
+  margin: 25px 0;
+  position: relative;
+}
+.markdown-body h3{
+  font-size: 22px;
+  font-weight: bold;
+  margin: 24px 0;
+  position: relative;
+}
+.markdown-body h4{
+  font-weight: bold;
+  font-size: 18px;
+  margin: 23px 0;
+  position: relative;
+}
+.markdown-body h5{
+  font-weight: bold;
+  font-size: 16px;
+  margin: 22px 0;
+  position: relative;
+}
+.markdown-body h6{
+  font-weight: bold;
+  font-size: 15px;
+  margin: 20px 0;
+  position: relative;
+}
+.markdown-body h6 code{
+  font-family: "Consolas";
+  background-color: #f7f7f7;
+  padding: 0 3px 1px;
+  border-radius: 2px;
+}
+.markdown-body h5 code{
+  font-family: "Consolas";
+  background-color: #f7f7f7;
+  padding: 1px 4px 2px;
+  border-radius: 2px;
+}
+.markdown-body blockquote {
+  padding: 0 1em;
+  color: #6a737d;
+  border-left: 0.25em solid #dfe2e5;
+  margin: 16px 0;
+}
+.markdown-body pre {
+  font-family: "Consolas";
+  display: block;
+  padding: 16px;
+  line-height: 24px;
+  font-size: 15px;
+  background-color: #f8f8f8;
+  border-radius: 2px;
+  tab-size: 0;
+  color: #333;
+  white-space: pre;
+  overflow-x: auto;
+}
+pre .kd {
+  color: #d63200;
+}
+pre .nt {
+  color: #000080;
+}
+pre .na {
+  color: #555555;
+}
+pre .nb {
+  color: #006ee0;
+}
+pre .mi {
+  color: #a32eff;
+}
+pre .s {
+  color: #42b983;
+}
+pre .c {
+  color: #888888;
+}
+pre .c1 {
+  color: #888888;
+}
+pre .cm {
+  color: #888888;
+}
+pre .cp {
+  color: #d63200;
+}
+pre .k {
+  color: #d63200;
+}
+pre .s2 {
+  color: #42b983;
+}
