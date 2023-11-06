@@ -2,40 +2,203 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>clean</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./css/readme.css">
+  <link rel="stylesheet" href="./css/main.css">
   <script src="../dist/umd/clean.min.js"></script>
+  <script src="./js/main.js"></script>
 </head>
 <body>
-  <div class="index"></div>
-</body>
-<script>
-let pageList = [
-  { name: "HTML" },
-  { name: "JavaScript", showBtn: true },
-  { name: "CSS" }
-]
-
-function showName(name) {
-  console.log(name)
-}
-
-C(".index").render(`
-  <div>
-    <div class="title">前端</div>
-    <div class="content">${
-      C.htmlCir(pageList, (item, i) => {
-        return `
-          <div class="item">
-            <span class="name">${item.name}</span>
-            ${item.showBtn ? `
-              <button class="btn" onclick="showName(${C.str(item.name)})">click</button>
-            ` : ""}
-          </div>
-        `
-      })
-    }</div>
+  <div id="app">
+    <div class="headbar flex" id="headbar">
+			<div class="hblogo" onclick="goIndex()">CleanJS</div>
+			<a class="block hbdocs hbbtn" href="./index.html">文档</a>
+			<a class="block hbexam hbbtn hbbtnact" href="./example.html">示例</a>
+			<div class="hbdate flex">
+				<div class="bdaday">2020年9月7日</div>
+				<div class="bdatime">20:38:30</div>
+				<div class="bdaweek">星期一</div>
+			</div>
+		</div>
+    <div class="container">
+<div class="file_holder">
+<div class="file_catalog" style="max-width: 998px;">
+<div class="toggle abs-pos collapse" title="收起">
+<i class="icon angle left"></i>
+</div>
+<div class="scroll-container">
+<div class="container"><ul class="catalog-ul" level="1"><li class="catalog-li active"><a href="#%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93" class="anchor" title="列表渲染">列表渲染</a></li><li class="catalog-li"><a href="#%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93" class="anchor" title="条件渲染">条件渲染</a></li><li class="catalog-li"><a href="#%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A" class="anchor" title="数据绑定">数据绑定</a></li><li class="catalog-li"><a href="#%E8%BE%93%E5%85%A5%E9%99%90%E5%88%B6" class="anchor" title="输入限制">输入限制</a></li><li class="catalog-li"><a href="#%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82" class="anchor" title="路由传参">路由传参</a></li><li class="catalog-li"><a href="#%E5%8F%91%E9%80%81-ajax" class="anchor" title="发送 AJAX">发送 AJAX</a></li></ul></div>
+</div>
+</div>
+<div class="file_content markdown-body">
+<h2>
+<a id="user-content-列表渲染" class="anchor" href="#%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93"></a>列表渲染</h2>
+<p>HTML</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"index"</span><span class="nt">&gt;&lt;/div&gt;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>JS</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">let</span> <span class="nx">pageList</span> <span class="o">=</span> <span class="p">[</span></span>
+<span id="LC2" class="line">  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">HTML</span><span class="dl">"</span><span class="p">,</span> <span class="na">bgcolor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#e54d26</span><span class="dl">"</span> <span class="p">},</span></span>
+<span id="LC3" class="line">  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">JavaScript</span><span class="dl">"</span><span class="p">,</span> <span class="na">bgcolor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#ecb12c</span><span class="dl">"</span> <span class="p">},</span></span>
+<span id="LC4" class="line">  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">CSS</span><span class="dl">"</span><span class="p">,</span> <span class="na">bgcolor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#1774b7</span><span class="dl">"</span> <span class="p">}</span></span>
+<span id="LC5" class="line"><span class="p">]</span></span>
+<span id="LC6" class="line"></span>
+<span id="LC7" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">.index</span><span class="dl">"</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="s2">`</span></span>
+<span id="LC8" class="line"><span class="s2">  &lt;div&gt;</span></span>
+<span id="LC9" class="line"><span class="s2">    &lt;div class="title"&gt;前端&lt;/div&gt;</span></span>
+<span id="LC10" class="line"><span class="s2">    &lt;div class="content"&gt;</span><span class="p">${</span></span>
+<span id="LC11" class="line">      <span class="nx">C</span><span class="p">.</span><span class="nx">htmlCir</span><span class="p">(</span><span class="nx">pageList</span><span class="p">,</span> <span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span></span>
+<span id="LC12" class="line">        <span class="k">return</span> <span class="s2">`</span></span>
+<span id="LC13" class="line"><span class="s2">          &lt;div class="item" style="background-color:</span><span class="p">${</span><span class="nx">item</span><span class="p">.</span><span class="nx">bgcolor</span><span class="p">}</span><span class="s2">;"&gt;</span></span>
+<span id="LC14" class="line"><span class="s2">            &lt;div class="name"&gt;</span><span class="p">${</span><span class="nx">item</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">&lt;/div&gt;</span></span>
+<span id="LC15" class="line"><span class="s2">          &lt;/div&gt;</span></span>
+<span id="LC16" class="line"><span class="s2">        `</span></span>
+<span id="LC17" class="line">      <span class="p">})</span></span>
+<span id="LC18" class="line">    <span class="p">}</span><span class="s2">&lt;/div&gt;</span></span>
+<span id="LC19" class="line"><span class="s2">  &lt;/div&gt;</span></span>
+<span id="LC20" class="line"><span class="s2">`</span><span class="p">)</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h2>
+<a id="user-content-条件渲染" class="anchor" href="#%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93"></a>条件渲染</h2>
+<p>HTML</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"index"</span><span class="nt">&gt;&lt;/div&gt;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>JS</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">let</span> <span class="nx">pageList</span> <span class="o">=</span> <span class="p">[</span></span>
+<span id="LC2" class="line">  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">HTML</span><span class="dl">"</span> <span class="p">},</span></span>
+<span id="LC3" class="line">  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">JavaScript</span><span class="dl">"</span><span class="p">,</span> <span class="na">showBtn</span><span class="p">:</span> <span class="kc">true</span> <span class="p">},</span></span>
+<span id="LC4" class="line">  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">CSS</span><span class="dl">"</span> <span class="p">}</span></span>
+<span id="LC5" class="line"><span class="p">]</span></span>
+<span id="LC6" class="line"></span>
+<span id="LC7" class="line"><span class="kd">function</span> <span class="nx">showName</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span></span>
+<span id="LC8" class="line">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span></span>
+<span id="LC9" class="line"><span class="p">}</span></span>
+<span id="LC10" class="line"></span>
+<span id="LC11" class="line"><span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">.index</span><span class="dl">"</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="s2">`</span></span>
+<span id="LC12" class="line"><span class="s2">  &lt;div&gt;</span></span>
+<span id="LC13" class="line"><span class="s2">    &lt;div class="title"&gt;前端&lt;/div&gt;</span></span>
+<span id="LC14" class="line"><span class="s2">    &lt;div class="content"&gt;</span><span class="p">${</span></span>
+<span id="LC15" class="line">      <span class="nx">C</span><span class="p">.</span><span class="nx">htmlCir</span><span class="p">(</span><span class="nx">pageList</span><span class="p">,</span> <span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span></span>
+<span id="LC16" class="line">        <span class="k">return</span> <span class="s2">`</span></span>
+<span id="LC17" class="line"><span class="s2">          &lt;div class="item"&gt;</span></span>
+<span id="LC18" class="line"><span class="s2">            &lt;span class="name"&gt;</span><span class="p">${</span><span class="nx">item</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">&lt;/span&gt;</span></span>
+<span id="LC19" class="line"><span class="s2">            </span><span class="p">${</span><span class="nx">item</span><span class="p">.</span><span class="nx">showBtn</span> <span class="p">?</span> <span class="s2">`</span></span>
+<span id="LC20" class="line"><span class="s2">              &lt;button class="btn" onclick="showName(</span><span class="p">${</span><span class="nx">C</span><span class="p">.</span><span class="nx">str</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">name</span><span class="p">)}</span><span class="s2">)"&gt;click&lt;/button&gt;</span></span>
+<span id="LC21" class="line"><span class="s2">            `</span> <span class="p">:</span> <span class="dl">""</span><span class="p">}</span></span>
+<span id="LC22" class="line"><span class="s2">          &lt;/div&gt;</span></span>
+<span id="LC23" class="line"><span class="s2">        `</span></span>
+<span id="LC24" class="line">      <span class="p">})</span></span>
+<span id="LC25" class="line">    <span class="p">}</span><span class="s2">&lt;/div&gt;</span></span>
+<span id="LC26" class="line"><span class="s2">  &lt;/div&gt;</span></span>
+<span id="LC27" class="line"><span class="s2">`</span><span class="p">)</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h2>
+<a id="user-content-数据绑定" class="anchor" href="#%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"></a>数据绑定</h2>
+<p>HTML</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"top"</span><span class="nt">&gt;</span></span>
+<span id="LC2" class="line">  <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"numinput"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">oninput=</span><span class="s">"proxy.num = this.value"</span><span class="nt">&gt;</span></span>
+<span id="LC3" class="line">  <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"numcont"</span><span class="nt">&gt;</span>value: <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"num"</span><span class="nt">&gt;&lt;/span&gt;&lt;/span&gt;</span></span>
+<span id="LC4" class="line"><span class="nt">&lt;/div&gt;</span></span>
+<span id="LC5" class="line"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btncont"</span><span class="nt">&gt;</span></span>
+<span id="LC6" class="line">  <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"minus"</span> <span class="na">onclick=</span><span class="s">"proxy.num --"</span><span class="nt">&gt;</span>-<span class="nt">&lt;/button&gt;</span></span>
+<span id="LC7" class="line">  <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"add"</span> <span class="na">onclick=</span><span class="s">"proxy.num ++"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/button&gt;</span></span>
+<span id="LC8" class="line"><span class="nt">&lt;/div&gt;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>JS</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">const</span> <span class="nx">proxy</span> <span class="o">=</span> <span class="nx">C</span><span class="p">.</span><span class="nx">proxy</span><span class="p">({</span> <span class="na">num</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span> <span class="p">},</span> <span class="p">{</span></span>
+<span id="LC2" class="line">  <span class="na">num</span><span class="p">:</span> <span class="p">{</span></span>
+<span id="LC3" class="line">    <span class="nx">handler</span><span class="p">(</span><span class="nx">nv</span><span class="p">,</span> <span class="nx">ov</span><span class="p">)</span> <span class="p">{</span></span>
+<span id="LC4" class="line">      <span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">.numinput</span><span class="dl">"</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">nv</span></span>
+<span id="LC5" class="line">      <span class="nx">C</span><span class="p">(</span><span class="dl">"</span><span class="s2">.num</span><span class="dl">"</span><span class="p">).</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">nv</span></span>
+<span id="LC6" class="line">    <span class="p">},</span></span>
+<span id="LC7" class="line">    <span class="na">immediate</span><span class="p">:</span> <span class="kc">true</span></span>
+<span id="LC8" class="line">  <span class="p">}</span></span>
+<span id="LC9" class="line"><span class="p">})</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h2>
+<a id="user-content-输入限制" class="anchor" href="#%E8%BE%93%E5%85%A5%E9%99%90%E5%88%B6"></a>输入限制</h2>
+<p>HTML</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"numinput"</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>JS</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nx">C</span><span class="p">.</span><span class="nx">formatInput</span><span class="p">({</span></span>
+<span id="LC2" class="line">  <span class="na">el</span><span class="p">:</span> <span class="dl">"</span><span class="s2">.numinput</span><span class="dl">"</span><span class="p">,</span></span>
+<span id="LC3" class="line">  <span class="na">reg</span><span class="p">:</span> <span class="sr">/^-</span><span class="se">?((([</span><span class="sr">1-9</span><span class="se">]\d</span><span class="sr">*</span><span class="se">)</span><span class="sr">|0</span><span class="se">)(\.\d{0,2})?)?</span><span class="sr">$/</span><span class="p">,</span></span>
+<span id="LC4" class="line">  <span class="na">nopass</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span></span>
+<span id="LC5" class="line">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">格式不符合要求</span><span class="dl">"</span><span class="p">)</span></span>
+<span id="LC6" class="line">  <span class="p">},</span></span>
+<span id="LC7" class="line">  <span class="na">pass</span><span class="p">:</span> <span class="p">(</span><span class="nx">nv</span><span class="p">,</span> <span class="nx">ov</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{}</span></span>
+<span id="LC8" class="line"><span class="p">})</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h2>
+<a id="user-content-路由传参" class="anchor" href="#%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82"></a>路由传参</h2>
+<p>HTML</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"go()"</span><span class="nt">&gt;</span>go<span class="nt">&lt;/button&gt;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>JS</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">function</span> <span class="nx">go</span><span class="p">()</span> <span class="p">{</span></span>
+<span id="LC2" class="line">  <span class="nx">C</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span></span>
+<span id="LC3" class="line">    <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">./example.html#go</span><span class="dl">"</span><span class="p">,</span></span>
+<span id="LC4" class="line">    <span class="na">query</span><span class="p">:</span> <span class="p">{</span></span>
+<span id="LC5" class="line">      <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">example</span><span class="dl">"</span></span>
+<span id="LC6" class="line">    <span class="p">},</span></span>
+<span id="LC7" class="line">    <span class="na">params</span><span class="p">:</span> <span class="p">{</span></span>
+<span id="LC8" class="line">      <span class="na">arr</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span></span>
+<span id="LC9" class="line">      <span class="na">obj</span><span class="p">:</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">go</span><span class="dl">"</span> <span class="p">}</span></span>
+<span id="LC10" class="line">    <span class="p">}</span></span>
+<span id="LC11" class="line">  <span class="p">})</span></span>
+<span id="LC12" class="line">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">C</span><span class="p">.</span><span class="nx">route</span><span class="p">())</span></span>
+<span id="LC13" class="line"><span class="p">}</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<h2>
+<a id="user-content-发送-ajax" class="anchor" href="#%E5%8F%91%E9%80%81-ajax"></a>发送 AJAX</h2>
+<p>HTML</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"send()"</span><span class="nt">&gt;</span>send<span class="nt">&lt;/button&gt;</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div>
+<p>JS</p>
+<div class="white"><div class="highlight markdown-code-block">
+<pre><span id="LC1" class="line"><span class="kd">function</span> <span class="nx">send</span><span class="p">()</span> <span class="p">{</span></span>
+<span id="LC2" class="line">  <span class="nx">C</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span></span>
+<span id="LC3" class="line">    <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">http://127.0.0.1:3000/post</span><span class="dl">"</span><span class="p">,</span></span>
+<span id="LC4" class="line">    <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">post</span><span class="dl">"</span><span class="p">,</span></span>
+<span id="LC5" class="line">    <span class="na">params</span><span class="p">:</span> <span class="p">{</span></span>
+<span id="LC6" class="line">      <span class="na">id</span><span class="p">:</span> <span class="mi">1</span></span>
+<span id="LC7" class="line">    <span class="p">},</span></span>
+<span id="LC8" class="line">    <span class="na">data</span><span class="p">:</span> <span class="p">{</span></span>
+<span id="LC9" class="line">      <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Tom</span><span class="dl">"</span></span>
+<span id="LC10" class="line">    <span class="p">}</span></span>
+<span id="LC11" class="line">  <span class="p">})</span></span>
+<span id="LC12" class="line">  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span></span>
+<span id="LC13" class="line">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">response</span><span class="dl">"</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">response</span><span class="p">)</span></span>
+<span id="LC14" class="line">  <span class="p">})</span></span>
+<span id="LC15" class="line"><span class="p">}</span></span></pre>
+<div class="markdown-code-block-copy-btn"></div>
+</div></div></div>
+</div>
+    </div>
   </div>
-`)
-</script>
+</body>
 </html>
