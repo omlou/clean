@@ -4,7 +4,7 @@ C.mounted(function () {
 })
 C.loaded(function () {
   if (location.hash) {
-    scrollTarget = C(location.hash.replace("#", "#user-content-"))
+    scrollTarget = C(decodeURIComponent(location.hash.replace("#", "#user-content-")))
     scrollWindow()
   }
 })
