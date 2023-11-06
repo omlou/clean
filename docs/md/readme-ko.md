@@ -1,37 +1,37 @@
-## 言語
+## 언어
 
 * [English](https://github.com/omlou/clean#readme)
-* [简体中文](https://github.com/omlou/clean/blob/master/public/md/readme-zh.md)
-* [日本語](https://github.com/omlou/clean/blob/master/public/md/readme-ja.md)
-* [한국어](https://github.com/omlou/clean/blob/master/public/md/readme-ko.md)
-* [Français](https://github.com/omlou/clean/blob/master/public/md/readme-fr.md)
+* [简体中文](https://github.com/omlou/clean/blob/master/docs/md/readme-zh.md)
+* [日本語](https://github.com/omlou/clean/blob/master/docs/md/readme-ja.md)
+* [한국어](https://github.com/omlou/clean/blob/master/docs/md/readme-ko.md)
+* [Français](https://github.com/omlou/clean/blob/master/docs/md/readme-fr.md)
 
-## 概要
+## 개요
 
-* Cleanは、開発を容易にするフロントエンドツールキットです。
+* Clean은 개발을 더 편리하게하는 프론트 엔드 도구 킷입니다.
 
-## 使用法
+## 사용법
 
-### スクリプトタグでの導入
+### 스크립트 태그로 추가
 
 ```html
 <script src="https://unpkg.com/@xlou/clean@1.0.0/dist/umd/clean.min.js"></script>
-<!-- ダウンロードしてローカルで使用をお勧めします -->
+<!-- 로컬에서 다운로드하고 사용하는 것을 권장합니다. -->
 <script>
-  /* このJSファイルを含めると、Cオブジェクトがグローバルで使用できるようになります */
+  /* 이 JS 파일을 포함하면 C 객체가 전역에서 사용 가능합니다. */
   C("#app").render(`<div>Hello, World!</div>`)
 </script>
 ```
 
-### Nodeプロジェクトでの導入
+### 노드 프로젝트에서 추가
 
-インストール
+설치
 
 ``` bash
 npm i @xlou/clean
 ```
 
-使用
+사용
 
 ```javascript
 import C from '@xlou/clean'
@@ -41,31 +41,31 @@ C("#app").render(`<div>Hello, World!</div>`)
 
 ## API
 
-### メソッド C
+### 메소드 C
 
-CSSセレクタに一致するDOMをCleanインスタンスオブジェクトに変換します。
+일치하는 CSS 선택기의 DOM을 Clean 인스턴스 객체로 변환합니다.
 
-使用例：
+사용 방법:
 
 ```javascript
 C("#app").render(`<div>Hello, World!</div>`)
-C("#app", C.one(".mydiv")) // .mydivで検索
+C("#app", C.one(".mydiv")) // .mydiv에서 찾기
 
-/* Cleanオブジェクトが返され、インデックスを使用してDOMオブジェクトに変換できます */
+/* 반환되는 Clean 객체는 배열과 유사하며 색인을 통해 DOM 객체로 변환할 수 있습니다. */
 C("#app")[0]
 
-/* Cの下にあるメソッドを使用 */
+/* C 하위 메소드 사용 */
 C.mounted(function () {
   /* ... */
 })
 C.ajax(/* ... */)
 ```
 
-### Getter (要素の取得、配列への変換)
+### Getter (요소 가져오기, 배열로 변환)
 
-結果はCleanオブジェクトです。
+결과는 Clean 객체입니다.
 
-親要素の取得の例：
+부모 요소 가져오기를 예로 들어 보겠습니다.
 
 ```javascript
 C("#app").parent
@@ -73,9 +73,9 @@ C("#app").parent
 
 #### parent
 
-対象の親要素を取得します。
+대상의 부모 요소를 가져옵니다.
 
-対象のCleanオブジェクトが複数のDOM要素を含む場合、最初の要素が対象となります。
+대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
 
 ```typescript
 get parent(): Clean;
@@ -83,9 +83,9 @@ get parent(): Clean;
 
 #### child
 
-対象のすべての子要素を取得します。
+대상의 모든 하위 요소를 가져옵니다.
 
-対象のCleanオブジェクトが複数のDOM要素を含む場合、最初の要素が対象となります。
+대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
 
 ```typescript
 get child(): Clean;
@@ -93,9 +93,9 @@ get child(): Clean;
 
 #### next
 
-対象の次の要素を取得します。
+대상의 다음 요소를 가져옵니다.
 
-対象のCleanオブジェクトは複数のDOM要素であることができます。
+대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
 
 ```typescript
 get next(): Clean;
@@ -103,9 +103,9 @@ get next(): Clean;
 
 #### prev
 
-前の要素を取得します。
+이전 요소를 가져옵니다.
 
-対象のCleanオブジェクトは複数のDOM要素であることができます。
+대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
 
 ```typescript
 get prev(): Clean;
@@ -113,9 +113,9 @@ get prev(): Clean;
 
 #### first
 
-子要素の最初の要素を取得します。
+하위 요소 중 첫 번째 요소를 가져옵니다.
 
-対象のCleanオブジェクトは複数のDOM要素であることができます。
+대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
 
 ```typescript
 get first(): Clean;
@@ -123,9 +123,9 @@ get first(): Clean;
 
 #### last
 
-子要素の最後の要素を取得します。
+하위 요소 중 마지막 요소를 가져옵니다.
 
-対象のCleanオブジェクトは複数のDOM要素であることができます。
+대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
 
 ```typescript
 get last(): Clean;
@@ -133,31 +133,31 @@ get last(): Clean;
 
 #### array
 
-Cleanオブジェクトが変換された配列を返します。
+변환된 Clean 객체의 배열을 반환합니다.
 
 ```typescript
 get array(): Array<Element>;
 ```
 
-### Getter & Setter (属性の取得、属性の変更)
+### Getter 및 Setter (속성 가져오기, 속성 설정)
 
-属性の取得と行内スタイルの設定の例：
+속성 가져오기와 인라인 스타일 설정을 예로 들어 보겠습니다.
 
 ```javascript
-/* 取得 */
+/* 가져오기 */
 let style = C("#app").style
 
-/* 設定 */
-C("#app").style = "font-size: 14px;"
+/* 설정 */
+C("#app").style="font-size: 14px;"
 ```
 
 #### style
 
-要素のスタイルを取得および設定します。
+요소의 스타일을 가져오고 설정합니다.
 
-複数のDOM要素を含む場合、最初の要素が対象となります。
+대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
 
-値はCSS文字列またはオブジェクトである必要があります（例: { display: "none", fontSize: "20px" }）。
+값은 CSS 문자열 또는 객체여야 하며 다음과 같이 사용할 수 있습니다({ display: "none", fontSize: "20px" 등}).
 
 ```typescript
 get style(): string;
@@ -166,9 +166,9 @@ set style(value: any);
 
 #### value
 
-フォーム要素の値を取得および設定します。
+양식 요소의 값 가져오기 및 설정하기
 
-複数のDOM要素を含む場合、最初の要素が対象となります。
+대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
 
 ```typescript
 get value(): any;
@@ -177,9 +177,9 @@ set value(value: any);
 
 #### checked
 
-ラジオボタンまたはチェックボックスの選択状態を取得および設定します。
+라디오 버튼이나 체크 박스의 선택 상태 가져오기 및 설정하기
 
-複数のDOM要素を含む場合、最初の要素が対象となります。
+대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
 
 ```typescript
 get checked(): boolean | undefined;
@@ -188,26 +188,26 @@ set checked(value: boolean);
 
 #### text
 
-要素のinnerTextを取得および変更します。
+요소의 innerText 가져오기 및 수정하기
 
-複数のDOM要素を含む場合、最初の要素が対象となります。
+대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
 
 ```typescript
 get text(): string;
 set text(value: any);
 ```
 
-### Cleanインスタンスメソッド
+### Clean 인스턴스 메소드
 
 #### nth
 
-Cleanオブジェクト内の要素をインデックスで取得し、Cleanオブジェクトを返します。
+Clean 객체 내에서 인덱스를 기반으로 요소를 가져와 Clean 객체를 반환합니다.
 
 ```javascript
 C("#app").nth(0)
 ```
 
-説明：
+설명:
 
 ```typescript
 nth: (index: number) => Clean;
@@ -215,7 +215,7 @@ nth: (index: number) => Clean;
 
 #### map
 
-Cleanオブジェクトを反復処理し、同じ長さの配列オブジェクトを返します。
+Clean 객체를 반복하고 동일한 길이의 배열 객체를 반환합니다.
 
 ```javascript
 C("#app").map((item,i)=>{
@@ -224,24 +224,22 @@ C("#app").map((item,i)=>{
 }) // [0]
 ```
 
-説明：
+설명:
 
 ```typescript
-map: (
-
-callback: (item: Clean, i: string) => any) => Array<any>;
+map: (callback: (item: Clean, i: string) => any) => Array<any>;
 ```
 
 #### push
 
-CleanオブジェクトにDOM要素を追加します。
+Clean 객체에 DOM 요소를 추가합니다.
 
 ```javascript
 let divs = C(".app")
 divs.push(C.one(".myapp"))
 ```
 
-説明：
+설명:
 
 ```typescript
 push: (dom: Element) => void;
@@ -249,41 +247,43 @@ push: (dom: Element) => void;
 
 #### concat
 
-CleanオブジェクトまたはNodeListオブジェクトなどを連結します。
+Clean 객체 또는 NodeList 객체 등을 연결합니다.
 
 ```javascript
 C("#app").concat(C(".mydiv"), C.all(".hello"))
 ```
 
-説明：
+설명:
 
 ```typescript
-concat: (...arg: any) => void;
+concat: (...
+
+arg: any) => void;
 ```
 
 #### render
 
-コンテナにHTMLをレンダリングします。
+컨테이너에 HTML을 렌더링합니다.
 
 ```typescript
 render: (str: string) => void;
 ```
 
-説明：
+설명:
 
 ```javascript
 C("#app").render(`<div>Hello, World!</div>`)
 ```
 
-対象はCleanオブジェクトで複数のDOM要素をサポートします。
+대상은 여러 개의 DOM 요소를 지원하는 Clean 객체입니다.
 
-パラメータはHTML文字列です。
+매개변수는 HTML 문자열입니다.
 
-DOM要素を操作する他のメソッドも同様に使用できます。
+다른 DOM 요소 조작 메소드도 render와 동일한 방식으로 사용할 수 있습니다.
 
 #### append
 
-コンテナの最後にHTMLを追加します。
+컨테이너의 끝에 HTML을 추가합니다.
 
 ```typescript
 append: (str: string) => void;
@@ -291,7 +291,7 @@ append: (str: string) => void;
 
 #### prepend
 
-コンテナの最初にHTMLを追加します。
+컨테이너의 처음에 HTML을 추가합니다.
 
 ```typescript
 prepend: (str: string) => void;
@@ -299,7 +299,7 @@ prepend: (str: string) => void;
 
 #### before
 
-要素の前にHTMLを追加します。
+요소의 앞에 HTML을 추가합니다.
 
 ```typescript
 before: (str: string) => void;
@@ -307,7 +307,7 @@ before: (str: string) => void;
 
 #### after
 
-要素の後にHTMLを追加します。
+요소의 뒤에 HTML을 추가합니다.
 
 ```typescript
 after: (str: string) => void;
@@ -315,7 +315,7 @@ after: (str: string) => void;
 
 #### remove
 
-対象要素を削除します。
+대상 요소를 제거합니다.
 
 ```typescript
 remove: () => void;
@@ -323,14 +323,14 @@ remove: () => void;
 
 #### show
 
-要素を表示します。
+요소를 표시합니다.
 
 ```javascript
 C("#app").show()
-C("#app").show("block") // タイプ（デフォルトは "" のdisplayタイプ）はオプションです。
+C("#app").show("block") // 타입은 선택 사항이며 표시 유형의 기본값은 ""입니다.
 ```
 
-説明：
+설명:
 
 ```typescript
 show: (type?: string | undefined) => void;
@@ -338,9 +338,9 @@ show: (type?: string | undefined) => void;
 
 #### hide
 
-要素を非表示にし、スタイルをdisplay:none;に設定します。
+요소를 숨깁니다. 스타일을 display:none;로 설정합니다.
 
-説明：
+설명:
 
 ```typescript
 hide: () => void;
@@ -348,49 +348,49 @@ hide: () => void;
 
 #### getAttr
 
-要素の属性値を取得します。
+요소의 속성 값을 가져옵니다.
 
-このメソッドは、対象のCleanオブジェクトが複数のDOM要素を含む場合、最初の要素を対象とします。
+이 메소드는 대상 Clean 객체가 여러 개의 DOM 요소를 포함하는 경우 첫 번째 요소를 대상으로 합니다.
 
 ```javascript
 C("#app").getAttr("id")
 ```
 
-説明：
+설명:
 
 ```typescript
-getAttr: (attr: string) => string | null; // attrは属性名です。
+getAttr: (attr: string) => string | null; // attr은 속성 이름입니다.
 ```
 
 #### setAttr
 
-要素の属性値を設定します。
+요소의 속성 값을 설정합니다.
 
 ```javascript
 C("#app").setAttr("data", 1)
 ```
 
-説明：
+설명:
 
 ```typescript
-setAttr: (attr: string, value: any) => void; // attrは属性名、valueは属性値です。
+setAttr: (attr: string, value: any) => void; // attr는 속성 이름이고, value는 속성 값입니다.
 ```
 
 #### addClass
 
-要素にクラスを追加します。
+요소에 클래스를 추가합니다.
 
-説明：
+설명:
 
 ```typescript
-addClass: (name: string) => void; // nameは追加するクラス名です。
+addClass: (name: string) => void; // name은 추가할 클래스 이름입니다.
 ```
 
 #### removeClass
 
-指定のクラスを要素から削除します。
+지정한 클래스를 요소에서 제거합니다.
 
-説明：
+설명:
 
 ```typescript
 removeClass: (name: string) => void;
@@ -398,15 +398,15 @@ removeClass: (name: string) => void;
 
 #### hasClass
 
-要素が指定のクラスを持っているかどうかを判断し、ブール値を返します。
+요소가 지정한 클래스를 가지고 있는지 여부를 판단하여 부울 값을 반환합니다.
 
-このメソッドは、対象のCleanオブジェクトが複数のDOM要素を含む場合、最初の要素を対象とします。
+이 메소드는 대상 Clean 객체가 여러 개의 DOM 요소를 포함하는 경우 첫 번째 요소를 대상으로 합니다.
 
 ```javascript
 C("#app").hasClass("hello")
 ```
 
-説明：
+설명:
 
 ```typescript
 hasClass: (name: string) => boolean;
@@ -414,7 +414,7 @@ hasClass: (name: string) => boolean;
 
 #### bind
 
-イベントリスナーをバインドします。
+이벤트 리스너를 바인딩합니다.
 
 ```javascript
 C("#app").bind("click", function(){
@@ -422,61 +422,61 @@ C("#app").bind("click", function(){
 }, false)
 ```
 
-説明：
+설명:
 
 ```typescript
 bind: (type: string, callback: Function, option: any) => void;
 /* 
-  type イベントタイプ
-  callback バインドするイベントメソッド
-  option オプションでバインドするイベントのパラメータです
+  type 이벤트 유형
+  callback 바인딩할 이벤트 메소드
+  option 이벤트 바인딩의 옵션입니다.
 */
 ```
 
 #### unbind
 
-イベントリスナーを削除します。
+이벤트 리스너를 제거합니다.
 
 ```javascript
 C("#app").unbind("click", sayHello)
 ```
 
-説明：
+설명:
 
 ```typescript
 unbind: (type: string, callback: Function, option: any) => void;
 /* 
-  type イベントタイプ
-  callback 削除するイベントメソッド（変数である必要があり、無名関数ではない）
+  type 이벤트 유형
+  callback 제거할 이벤트 메소드 (변수여야 하며 익명 함수가 아니어야 함)
 */
 ```
 
-### C オブジェクトのメソッド
+### C 객체의 메서드
 
 #### create
 
-DOM を Clean オブジェクトに変換します
+DOM을 Clean 객체로 변환합니다
 
 ```javascript
-C.create(C.createDOM(`<div>Hello, World!</div>`)
+C.create(C.createDOM(`<div>Hello, World!</div>`))
 ```
 
-説明：
+설명:
 
 ```typescript
 create: (node: any) => Clean | undefined;
-/* node は単一の DOM 要素、NodeList オブジェクト、または DOM オブジェクトの配列になります */
+/* node는 개별 DOM 요소, NodeList 객체 또는 DOM 객체의 배열이 될 수 있습니다 */
 ```
 
 #### createDOM
 
-HTML 文字列を含む DOM オブジェクトの配列に変換します
+HTML 문자열을 포함하는 DOM 객체의 배열로 변환합니다
 
 ```javascript
 C.createDOM(`<div>Hello, World!</div>`)
 ```
 
-説明：
+설명:
 
 ```typescript
 createDOM: (str: string) => Element[];
@@ -484,7 +484,7 @@ createDOM: (str: string) => Element[];
 
 #### htmlCir
 
-配列またはオブジェクトをループして HTML 文字列を生成します
+배열 또는 객체를 순환하여 HTML 문자열을 생성합니다
 
 ```javascript
 let arr = [
@@ -501,21 +501,21 @@ C("#app").render(C.htmlCir(arr, (item, i) => {
 }))
 ```
 
-説明：
+설명:
 
 ```typescript
 htmlCir: (obj: any, callback: (item: any, i: any) => string) => string;
 /* 
-  obj はループする配列またはオブジェクトで、item はキー、i はインデックスです
-  HTML 文字列を返します
+  obj는 순환할 배열 또는 객체이며, item은 키이고 i는 인덱스입니다.
+  HTML 문자열을 반환합니다.
 */
 ```
 
 #### str
 
-テンプレート文字列で変数を処理する際に属性をバインドおよびパラメーターを渡すための処理
+템플릿 문자열에서 변수를 처리할 때 속성을 바인딩하고 매개변수를 전달하는 데 사용
 
-パラメーターがオブジェクトまたは文字列の場合のみ、str() を使用する必要があります。その他の型は直接渡すことができます。
+매개변수가 객체 또는 문자열인 경우에만 str()을 사용해야합니다. 다른 유형은 직접 전달할 수 있습니다.
 
 ```javascript
 let arr = [
@@ -526,14 +526,14 @@ C("#app").render(C.htmlCir(arr, (item, i) => {
   return `
     <div onclick="sayHello(${C.str(item)})">
       <div class="name" onclick="sayName(${C.str(item.name)})">${item.name}</div>
-      <div class="age" onclick="sayAge(${item.age})">${item.age}</div>
+      <div class "age" onclick="sayAge(${item.age})">${item.age}</div>
     </div>
   `
 }))
 
 /*
-  パラメーターがオブジェクトの場合、オブジェクト内の型 Function Symbol RegExp のキー値は渡すことができません
-  この場合、キーを使用してパラメーターを渡すことができます
+  매개변수가 객체인 경우, 객체 내의 형식 Function Symbol RegExp의 키 값은 전달할 수 없습니다.
+  이 경우 키를 사용하여 매개변수를 전달할 수 있습니다.
 */
 let obj = {
   name: "tom",
@@ -549,7 +549,7 @@ C("#app").render(C.htmlCir(obj, (item, i) => {
 }))
 ```
 
-説明：
+설명:
 
 ```typescript
 str: (arg: any) => string;
@@ -557,41 +557,41 @@ str: (arg: any) => string;
 
 #### one
 
-CSS セレクターで 1 つの DOM 要素を選択し、DOM オブジェクトを返します
+CSS 선택기로 1개의 DOM 요소를 선택하고 DOM 객체를 반환합니다
 
-querySelector() と同じです
+querySelector()와 동일합니다
 
 ```javascript
 C.one(".mydiv")
 ```
 
-説明：
+설명:
 
 ```typescript
 one: (target: any, range: any) => Element;
-/* target：CSS セレクター、range：検索範囲 */
+/* target: CSS 선택기, range: 검색 범위 */
 ```
 
 #### all
 
-CSS セレクターで複数の DOM 要素を選択し、配列を返します
+CSS 선택기로 여러 개의 DOM 요소를 선택하고 배열을 반환합니다
 
-querySelectorAll() とは異なり、このメソッドは配列を返します
+querySelectorAll()과 다르게 이 메서드는 배열을 반환합니다
 
 ```javascript
 C.all(".mydiv,.hello")
 ```
 
-説明：
+설명:
 
 ```typescript
 all: (target: any, range: any) => Element[];
-/* target：CSS セレクター、range：検索範囲 */
+/* target: CSS 선택기, range: 검색 범위 */
 ```
 
 #### setState
 
-グローバル変数を追加します
+전역 변수를 추가합니다
 
 ```javascript
 const data = {
@@ -600,11 +600,11 @@ const data = {
   age: 18,
   hobby: "swim"
 }
-C.setState(data) // data のすべてのプロパティがグローバル変数になります
-C.setState(data, "name,age") // name および age プロパティのみをグローバルに昇格します
+C.setState(data) // data의 모든 속성이 전역 변수가 됩니다
+C.setState(data, "name,age") // name 및 age 속성만 전역 변수로 승격합니다
 ```
 
-説明：
+설명:
 
 ```typescript
 setState: (obj: any, str?: string | undefined) => void;
@@ -612,7 +612,7 @@ setState: (obj: any, str?: string | undefined) => void;
 
 #### proxy
 
-特定のオブジェクトの特定のプロパティ値の変更を監視します
+특정 객체의 특정 속성 값 변경을 감시합니다
 
 ```javascript
 const data = {
@@ -629,7 +629,7 @@ let dataProxy = C.proxy(data, {
 })
 ```
 
-説明：
+설명:
 
 ```typescript
 proxy(conta: any, arg: {
@@ -638,12 +638,12 @@ proxy(conta: any, arg: {
     immediate?: boolean | undefined;
   };
 }): void;
-/* immediate: true を指定した場合、ハンドラー関数はリスナーの追加時に1回実行されます */
+/* immediate: true를 지정하면 핸들러 함수가 리스너를 추가할 때 한 번 실행됩니다. */
 ```
 
 #### mounted
 
-ページ構築が完了した際のフック関数です。画像などのネットワークリソースの読み込みは含まれません
+페이지 구축이 완료된 후의 후크 함수입니다. 이미지 등 네트워크 리소스의 로드는 포함되지 않습니다
 
 ```javascript
 C.mounted(function() {
@@ -651,7 +651,7 @@ C.mounted(function() {
 })
 ```
 
-説明：
+설명:
 
 ```typescript
 mounted: (callback: (event: Event | null) => any) => void;
@@ -659,9 +659,9 @@ mounted: (callback: (event: Event | null) => any) => void;
 
 #### loaded
 
-ページの読み込みが完了した際のフック関数です
+페이지 로드가 완료된 후의 후크 함수입니다
 
-説明：
+설명:
 
 ```typescript
 loaded: (callback: (event: Event) => any) => void;
@@ -669,9 +669,7 @@ loaded: (callback: (event: Event) => any) => void;
 
 #### beforeUnload
 
-ページを閉じる前のフック関
-
-数です
+페이지를 닫기 전의 후크 함수입니다
 
 ```javascript
 C.beforeUnload(function(event) {
@@ -679,11 +677,11 @@ C.beforeUnload(function(event) {
     event.preventDefault()
     event.returnValue = true
   } catch () {}
-  /* ページが閉じる際、ページフォームに変更がある場合、確認ダイアログが表示されます */
+  /* 페이지가 닫힐 때 페이지 폼에 변경 사항이 있는 경우 확인 대화 상자가 표시됩니다 */
 })
 ```
 
-説明：
+설명:
 
 ```typescript
 beforeUnload: (callback: (event: Event) => any) => void;
@@ -691,16 +689,18 @@ beforeUnload: (callback: (event: Event) => any) => void;
 
 #### visible
 
-ページを閉じる、遷移、ウィンドウ切り替え、ブラウザの最小化などでトリガーされるフック関数です
+페이지를 닫고, 이동하고, 창을 전환하고, 브라우저를 최소화하면 모두 이 후크 함수가 트리거됩니다.
 
 ```javascript
 C.visible(function(msg) {
   console.log("C.visible", msg.event, msg.state)
-  /* state が hidden の場合は非表示、visible の場合は表示です */
+  /* state가 hidden이면 숨김, visible이면 표시입니다 */
 })
-```
+``
 
-説明：
+`
+
+설명:
 
 ```typescript
 visible: (callback: (event: {
@@ -711,20 +711,20 @@ visible: (callback: (event: {
 
 #### pageShow
 
-ページが表示された際のフック関数です
+페이지가 표시되었을 때의 후크 함수입니다
 
-説明：
+설명:
 
 ```typescript
 pageShow: (callback: (event: PageTransitionEvent) => any) => void;
-/* event.persisted を使用してドキュメントがキャッシュから読み込まれたかどうかを確認できます */
+/* event.persisted를 사용하여 문서가 캐시에서 로드되었는지 여부를 확인할 수 있습니다 */
 ```
 
 #### pageHide
 
-ページが非表示になった際のフック関数です
+페이지가 숨겼을 때의 후크 함수입니다
 
-説明：
+설명:
 
 ```typescript
 pageHide: (callback: (event: PageTransitionEvent) => any) => void;
@@ -732,24 +732,24 @@ pageHide: (callback: (event: PageTransitionEvent) => any) => void;
 
 #### prevent
 
-デフォルトのイベントを阻止します
+기본 이벤트를 중지합니다
 
 ```html
-<a class="hello" onclick="C.prevent(sayHello, event, 123)">クリック</a>
+<a class="hello" onclick="C.prevent(sayHello, event, 123)">클릭</a>
 ```
 
-説明：
+설명:
 
 ```typescript
 prevent: (callback: Function, ev: Event, ...arg: any) => void;
-/* callback はバインドするメソッド、ev はイベントオブジェクト、arg はメソッドに渡す必要があるパラメーターです */
+/* callback은 바인딩할 메서드, ev는 이벤트 객체, arg는 메서드에 전달해야하는 매개 변수입니다 */
 ```
 
 #### stop
 
-イベントバブリングを停止します
+이벤트 버블링을 중지합니다
 
-説明：
+설명:
 
 ```typescript
 stop: (callback: Function, ev: Event, ...arg: any) => void;
@@ -757,9 +757,9 @@ stop: (callback: Function, ev: Event, ...arg: any) => void;
 
 #### self
 
-ターゲットが自身の場合にのみトリガーされます
+대상이 자체인 경우에만 트리거됩니다
 
-説明：
+설명:
 
 ```typescript
 self: (callback: Function, ev: Event, ...arg: any) => void;
@@ -767,7 +767,7 @@ self: (callback: Function, ev: Event, ...arg: any) => void;
 
 #### push
 
-履歴を保持してページに移動します
+히스토리를 유지하고 페이지로 이동합니다
 
 ```javascript
 C.push("./page/home.html?id=1")
@@ -783,7 +783,7 @@ C.push({
 })
 ```
 
-説明：
+설명:
 
 ```typescript
 push: (msg: any) => void;
@@ -791,9 +791,9 @@ push: (msg: any) => void;
 
 #### replace
 
-現在のページを置き換えて、履歴を保持しません
+현재 페이지를 교체하고 히스토리를 유지하지 않습니다
 
-説明：
+설명:
 
 ```typescript
 replace: (msg: any) => void;
@@ -801,9 +801,9 @@ replace: (msg: any) => void;
 
 #### reload
 
-現在のページを再読み込みします
+현재 페이지를 다시로드합니다
 
-説明：
+설명:
 
 ```typescript
 reload: () => void;
@@ -811,9 +811,9 @@ reload: () => void;
 
 #### back
 
-前の履歴ページに戻ります
+이전 히스토리 페이지로 돌아갑니다
 
-説明：
+설명:
 
 ```typescript
 back: () => void;
@@ -821,9 +821,9 @@ back: () => void;
 
 #### forward
 
-次の履歴ページに進みます
+다음 히스토리 페이지로 이동합니다
 
-説明：
+설명:
 
 ```typescript
 forward: () => void;
@@ -831,29 +831,29 @@ forward: () => void;
 
 #### go
 
-履歴ページに移動します
+히스토리 페이지로 이동합니다
 
 ```javascript
-C.go(-1) // 1 ページ戻る、つまり前のページに戻る
-C.go(1) // 1 ページ進む
+C.go(-1) // 1 페이지 뒤로 이동, 즉 이전 페이지로 돌아갑니다
+C.go(1) // 1 페이지 앞으로 이동합니다
 ```
 
-説明：
+설명:
 
 ```typescript
 go: (index: number) => void;
-/* index は移動するページ数を表し、負数は以前のページ、正数は以降のページを表します */
+/* index는 이동할 페이지 수를 나타내며 음수는 이전 페이지, 양수는 이후 페이지를 나타냅니다 */
 ```
 
 #### route
 
-ルートのパラメータを取得します
+루트 매개변수를 가져옵니다
 
 ```javascript
 const route = C.route()
 ```
 
-説明：
+설명:
 
 ```typescript
 route: () => {
@@ -864,20 +864,20 @@ route: () => {
 
 #### formatInput
 
-入力を制限する正規表現をサポートする
+입력을 제한하는 정규식을 지원합니다
 
-複数の規則をサポートします
+여러 규칙을 지원합니다
 
 ```javascript
-/* 1 つの規則 */
+/* 단일 규칙 */
 C.formatInput({
-  el: "", // CSS セレクター、一つの要素をサポートします
-  reg: "", // 満たす必要のある正規表現
-  nopass: e => {}, // 満たさない場合のコールバック
-  pass: (nv, ov) => {} // 正規表現を満たす場合のコールバック、nv は新しい値、ov は古い値です
+  el: "", // CSS 선택기, 하나의 요소를 지원합니다
+  reg: "", // 충족해야하는 정규식
+  nopass: e => {}, // 충족하지 않는 경우의 콜백
+  pass: (nv, ov) => {} // 정규식을 충족하는 경우의 콜백, nv는 새 값, ov는 이전 값입니다
 })
 
-/* 複数の規則 */
+/* 여러 규칙 */
 C.formatInput({
   el: "",
   rules: [
@@ -894,7 +894,7 @@ C.formatInput({
 })
 ```
 
-説明：
+설명:
 
 ```typescript
 formatInput: (msg: any) => void;
@@ -902,26 +902,26 @@ formatInput: (msg: any) => void;
 
 #### ajax
 
-Ajax リクエストを送信します
+Ajax 요청을 보냅니다
 
-詳細な使い方は https://github.com/omlou/ajax をご覧ください
+자세한 사용법은 https://github.com/omlou/ajax를 참조하십시오
 
 #### webtools
 
-webtools のすべてのメソッドが統合されています
+webtools의 모든 메서드가 통합되어 있습니다
 
-使用方法については https://github.com/omlou/webtools をご覧ください
+사용법은 https://github.com/omlou/webtools를 참조하십시오
 
-例：
+예시:
 
 ```javascript
 C.clipboardWrite("Hello, World!")
 .then(() => {
-  console.log("コピーが成功しました")
+  console.log("복사 성공")
 })
 ```
 
-####  型の説明
+### 유형 설명
 
 ```typescript
 import * as _xlou_ajax from '@xlou/ajax';

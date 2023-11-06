@@ -19,7 +19,7 @@ const serve = function() {
     host: '127.0.0.1',
     port: '5000',
     livereload: true,
-    open: 'public/index.html'
+    open: 'docs/index.html'
   }))
 }
 
@@ -36,7 +36,7 @@ async function upgrade() {
   await fs.writeJSON('package.json', npm, { spaces: 2 })
   upgradeFile("readme.md")
   languages.forEach(item => {
-    upgradeFile(`public/md/readme-${item}.md`)
+    upgradeFile(`docs/md/readme-${item}.md`)
   })
 
   async function upgradeFile(url) {

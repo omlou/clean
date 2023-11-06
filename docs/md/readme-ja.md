@@ -1,31 +1,31 @@
-## 语言
+## 言語
 
 * [English](https://github.com/omlou/clean#readme)
-* [简体中文](https://github.com/omlou/clean/blob/master/public/md/readme-zh.md)
-* [日本語](https://github.com/omlou/clean/blob/master/public/md/readme-ja.md)
-* [한국어](https://github.com/omlou/clean/blob/master/public/md/readme-ko.md)
-* [Français](https://github.com/omlou/clean/blob/master/public/md/readme-fr.md)
+* [简体中文](https://github.com/omlou/clean/blob/master/docs/md/readme-zh.md)
+* [日本語](https://github.com/omlou/clean/blob/master/docs/md/readme-ja.md)
+* [한국어](https://github.com/omlou/clean/blob/master/docs/md/readme-ko.md)
+* [Français](https://github.com/omlou/clean/blob/master/docs/md/readme-fr.md)
 
-## 简介
+## 概要
 
-* Clean 是一个可以让开发更方便前端工具包
+* Cleanは、開発を容易にするフロントエンドツールキットです。
 
-## 用法
+## 使用法
 
-### Script 标签引入
+### スクリプトタグでの導入
 
 ```html
 <script src="https://unpkg.com/@xlou/clean@1.0.0/dist/umd/clean.min.js"></script>
-<!-- 建议下载并在本地使用 -->
+<!-- ダウンロードしてローカルで使用をお勧めします -->
 <script>
-  /* 包含此JS文件后，C 对象将在全局可用 */
+  /* このJSファイルを含めると、Cオブジェクトがグローバルで使用できるようになります */
   C("#app").render(`<div>Hello, World!</div>`)
 </script>
 ```
 
-### 在 Node 项目中引入
+### Nodeプロジェクトでの導入
 
-安装
+インストール
 
 ``` bash
 npm i @xlou/clean
@@ -41,31 +41,31 @@ C("#app").render(`<div>Hello, World!</div>`)
 
 ## API
 
-### 方法 C
+### メソッド C
 
-将匹配 CSS 选择器的 DOM 转换成 Clean 实例对象
+CSSセレクタに一致するDOMをCleanインスタンスオブジェクトに変換します。
 
-使用：
+使用例：
 
 ```javascript
 C("#app").render(`<div>Hello, World!</div>`)
-C("#app", C.one(".mydiv")) // 在 .mydiv 中查找
+C("#app", C.one(".mydiv")) // .mydivで検索
 
-/* 返回的 Clean 对象类似于数组，如要转换为 DOM 对象根据索引获取即可 */
+/* Cleanオブジェクトが返され、インデックスを使用してDOMオブジェクトに変換できます */
 C("#app")[0]
 
-/* 使用 C 下的方法 */
+/* Cの下にあるメソッドを使用 */
 C.mounted(function () {
   /* ... */
 })
 C.ajax(/* ... */)
 ```
 
-### Getter (获取元素、转换为数组)
+### Getter (要素の取得、配列への変換)
 
-返回结果为 Clean 对象
+結果はCleanオブジェクトです。
 
-使用方法以获取父元素为例：
+親要素の取得の例：
 
 ```javascript
 C("#app").parent
@@ -73,9 +73,9 @@ C("#app").parent
 
 #### parent
 
-获取目标的父元素
+対象の親要素を取得します。
 
-该属性如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准
+対象のCleanオブジェクトが複数のDOM要素を含む場合、最初の要素が対象となります。
 
 ```typescript
 get parent(): Clean;
@@ -83,9 +83,9 @@ get parent(): Clean;
 
 #### child
 
-获取目标的全部子元素
+対象のすべての子要素を取得します。
 
-该属性如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准
+対象のCleanオブジェクトが複数のDOM要素を含む場合、最初の要素が対象となります。
 
 ```typescript
 get child(): Clean;
@@ -93,9 +93,9 @@ get child(): Clean;
 
 #### next
 
-获取目标的下一个元素
+対象の次の要素を取得します。
 
-目标 Clean 对象可以为多个 DOM 元素
+対象のCleanオブジェクトは複数のDOM要素であることができます。
 
 ```typescript
 get next(): Clean;
@@ -103,9 +103,9 @@ get next(): Clean;
 
 #### prev
 
-获取上一个元素
+前の要素を取得します。
 
-目标 Clean 对象可以为多个 DOM 元素
+対象のCleanオブジェクトは複数のDOM要素であることができます。
 
 ```typescript
 get prev(): Clean;
@@ -113,9 +113,9 @@ get prev(): Clean;
 
 #### first
 
-获取子元素里的第一个元素
+子要素の最初の要素を取得します。
 
-目标 Clean 对象可以为多个 DOM 元素
+対象のCleanオブジェクトは複数のDOM要素であることができます。
 
 ```typescript
 get first(): Clean;
@@ -123,9 +123,9 @@ get first(): Clean;
 
 #### last
 
-获取子元素里的最后一个元素
+子要素の最後の要素を取得します。
 
-目标 Clean 对象可以为多个 DOM 元素
+対象のCleanオブジェクトは複数のDOM要素であることができます。
 
 ```typescript
 get last(): Clean;
@@ -133,31 +133,31 @@ get last(): Clean;
 
 #### array
 
-返回已转换为数组的 Clean 对象
+Cleanオブジェクトが変換された配列を返します。
 
 ```typescript
 get array(): Array<Element>;
 ```
 
-### Getter & Setter (获取属性、修改属性)
+### Getter & Setter (属性の取得、属性の変更)
 
-使用方法以获取行内样式和设置行内样式为例
+属性の取得と行内スタイルの設定の例：
 
 ```javascript
-/* 获取 */
+/* 取得 */
 let style = C("#app").style
 
-/* 设置 */
-C("#app").style="font-size: 14px;"
+/* 設定 */
+C("#app").style = "font-size: 14px;"
 ```
 
 #### style
 
-获取和设置元素的样式
+要素のスタイルを取得および設定します。
 
-获取时如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准
+複数のDOM要素を含む場合、最初の要素が対象となります。
 
-值可以为 CSS 字符串，如 "display:none;" 也可以是对象 { display: none, fontSize: "20px" }
+値はCSS文字列またはオブジェクトである必要があります（例: { display: "none", fontSize: "20px" }）。
 
 ```typescript
 get style(): string;
@@ -166,9 +166,9 @@ set style(value: any);
 
 #### value
 
-获取和设置表单元素的值
+フォーム要素の値を取得および設定します。
 
-获取时如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准
+複数のDOM要素を含む場合、最初の要素が対象となります。
 
 ```typescript
 get value(): any;
@@ -177,9 +177,9 @@ set value(value: any);
 
 #### checked
 
-获取和设置单选框或复选框的选中状态
+ラジオボタンまたはチェックボックスの選択状態を取得および設定します。
 
-获取时如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准
+複数のDOM要素を含む場合、最初の要素が対象となります。
 
 ```typescript
 get checked(): boolean | undefined;
@@ -188,26 +188,26 @@ set checked(value: boolean);
 
 #### text
 
-获取和修改元素的 innerText
+要素のinnerTextを取得および変更します。
 
-获取时如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准
+複数のDOM要素を含む場合、最初の要素が対象となります。
 
 ```typescript
 get text(): string;
 set text(value: any);
 ```
 
-### Clean 实例对象方法
+### Cleanインスタンスメソッド
 
 #### nth
 
-根据索引获取 Clean 对象中的元素，返回值仍为 Clean 对象
+Cleanオブジェクト内の要素をインデックスで取得し、Cleanオブジェクトを返します。
 
 ```javascript
 C("#app").nth(0)
 ```
 
-说明：
+説明：
 
 ```typescript
 nth: (index: number) => Clean;
@@ -215,7 +215,7 @@ nth: (index: number) => Clean;
 
 #### map
 
-遍历 Clean 对象，并返回一个相同长度的数组对象
+Cleanオブジェクトを反復処理し、同じ長さの配列オブジェクトを返します。
 
 ```javascript
 C("#app").map((item,i)=>{
@@ -224,22 +224,24 @@ C("#app").map((item,i)=>{
 }) // [0]
 ```
 
-说明：
+説明：
 
 ```typescript
-map: (callback: (item: Clean, i: string) => any) => Array<any>;
+map: (
+
+callback: (item: Clean, i: string) => any) => Array<any>;
 ```
 
 #### push
 
-向 Clean 对象中添加 DOM 元素
+CleanオブジェクトにDOM要素を追加します。
 
 ```javascript
 let divs = C(".app")
 divs.push(C.one(".myapp"))
 ```
 
-说明：
+説明：
 
 ```typescript
 push: (dom: Element) => void;
@@ -247,13 +249,13 @@ push: (dom: Element) => void;
 
 #### concat
 
-拼接 Clean 对象或 NodeList 对象等
+CleanオブジェクトまたはNodeListオブジェクトなどを連結します。
 
 ```javascript
 C("#app").concat(C(".mydiv"), C.all(".hello"))
 ```
 
-说明：
+説明：
 
 ```typescript
 concat: (...arg: any) => void;
@@ -261,27 +263,27 @@ concat: (...arg: any) => void;
 
 #### render
 
-向容器里渲染 HTML
+コンテナにHTMLをレンダリングします。
 
 ```typescript
 render: (str: string) => void;
 ```
 
-说明：
+説明：
 
 ```javascript
 C("#app").render(`<div>Hello, World!</div>`)
 ```
 
-目标支持多个 DOM 元素的 Clean 对象
+対象はCleanオブジェクトで複数のDOM要素をサポートします。
 
-参数为 HTML 字符串
+パラメータはHTML文字列です。
 
-其他操作 DOM 元素的方法用法同 render
+DOM要素を操作する他のメソッドも同様に使用できます。
 
 #### append
 
-向容器的最后面追加 HTML
+コンテナの最後にHTMLを追加します。
 
 ```typescript
 append: (str: string) => void;
@@ -289,7 +291,7 @@ append: (str: string) => void;
 
 #### prepend
 
-向容器的最前面添加 HTML
+コンテナの最初にHTMLを追加します。
 
 ```typescript
 prepend: (str: string) => void;
@@ -297,7 +299,7 @@ prepend: (str: string) => void;
 
 #### before
 
-向元素前面添加 HTML
+要素の前にHTMLを追加します。
 
 ```typescript
 before: (str: string) => void;
@@ -305,7 +307,7 @@ before: (str: string) => void;
 
 #### after
 
-向元素后面添加 HTML
+要素の後にHTMLを追加します。
 
 ```typescript
 after: (str: string) => void;
@@ -313,7 +315,7 @@ after: (str: string) => void;
 
 #### remove
 
-移除目标元素
+対象要素を削除します。
 
 ```typescript
 remove: () => void;
@@ -321,14 +323,14 @@ remove: () => void;
 
 #### show
 
-显示目标元素
+要素を表示します。
 
 ```javascript
 C("#app").show()
-C("#app").show("block") // type 可选，为 display 的类型，默认为 ""
+C("#app").show("block") // タイプ（デフォルトは "" のdisplayタイプ）はオプションです。
 ```
 
-说明：
+説明：
 
 ```typescript
 show: (type?: string | undefined) => void;
@@ -336,9 +338,9 @@ show: (type?: string | undefined) => void;
 
 #### hide
 
-隐藏元素，设置样式 display:none;
+要素を非表示にし、スタイルをdisplay:none;に設定します。
 
-说明：
+説明：
 
 ```typescript
 hide: () => void;
@@ -346,49 +348,49 @@ hide: () => void;
 
 #### getAttr
 
-获取元素的属性值
+要素の属性値を取得します。
 
-该方法如果目标 Clean 对象包含多个 DOM 元素，以第一个元素为准
+このメソッドは、対象のCleanオブジェクトが複数のDOM要素を含む場合、最初の要素を対象とします。
 
 ```javascript
 C("#app").getAttr("id")
 ```
 
-说明：
+説明：
 
 ```typescript
-getAttr: (attr: string) => string | null; // attr 为属性名
+getAttr: (attr: string) => string | null; // attrは属性名です。
 ```
 
 #### setAttr
 
-设置元素的属性值
+要素の属性値を設定します。
 
 ```javascript
 C("#app").setAttr("data", 1)
 ```
 
-说明：
+説明：
 
 ```typescript
-setAttr: (attr: string, value: any) => void; // attr 为属性名, value 为属性值
+setAttr: (attr: string, value: any) => void; // attrは属性名、valueは属性値です。
 ```
 
 #### addClass
 
-给元素添加 class
+要素にクラスを追加します。
 
-说明：
+説明：
 
 ```typescript
-addClass: (name: string) => void; // name 为需要添加的 class 名
+addClass: (name: string) => void; // nameは追加するクラス名です。
 ```
 
 #### removeClass
 
-移除指定的 class
+指定のクラスを要素から削除します。
 
-说明：
+説明：
 
 ```typescript
 removeClass: (name: string) => void;
@@ -396,15 +398,15 @@ removeClass: (name: string) => void;
 
 #### hasClass
 
-判断元素是否有指定的 class ，返回布尔类型
+要素が指定のクラスを持っているかどうかを判断し、ブール値を返します。
 
-该方法如果目标 Clean 对象包含多个 DOM 元素，以第一个元素为准
+このメソッドは、対象のCleanオブジェクトが複数のDOM要素を含む場合、最初の要素を対象とします。
 
 ```javascript
 C("#app").hasClass("hello")
 ```
 
-说明：
+説明：
 
 ```typescript
 hasClass: (name: string) => boolean;
@@ -412,7 +414,7 @@ hasClass: (name: string) => boolean;
 
 #### bind
 
-绑定事件监听
+イベントリスナーをバインドします。
 
 ```javascript
 C("#app").bind("click", function(){
@@ -420,61 +422,61 @@ C("#app").bind("click", function(){
 }, false)
 ```
 
-说明：
+説明：
 
 ```typescript
 bind: (type: string, callback: Function, option: any) => void;
 /* 
-  type 事件类型
-  callback 绑定的事件方法
-  option 可选 绑定事件的参数
+  type イベントタイプ
+  callback バインドするイベントメソッド
+  option オプションでバインドするイベントのパラメータです
 */
 ```
 
 #### unbind
 
-移除事件监听
+イベントリスナーを削除します。
 
 ```javascript
 C("#app").unbind("click", sayHello)
 ```
 
-说明：
+説明：
 
 ```typescript
 unbind: (type: string, callback: Function, option: any) => void;
 /* 
-  type 事件类型
-  callback 要移除事件方法，必须是一个变量，不能是匿名函数
+  type イベントタイプ
+  callback 削除するイベントメソッド（変数である必要があり、無名関数ではない）
 */
 ```
 
-### C 对象下的方法
+### C オブジェクトのメソッド
 
 #### create
 
-将 DOM 转换为 Clean 对象
+DOM を Clean オブジェクトに変換します
 
 ```javascript
-C.create(C.createDOM(`<div>Hello, World!</div>`))
+C.create(C.createDOM(`<div>Hello, World!</div>`)
 ```
 
-说明：
+説明：
 
 ```typescript
 create: (node: any) => Clean | undefined;
-/* node 可以为单个 DOM 元素，也可以时 NodeList 对象或者 DOM 对象的数组 */
+/* node は単一の DOM 要素、NodeList オブジェクト、または DOM オブジェクトの配列になります */
 ```
 
 #### createDOM
 
-将 HTML 字符串转换为包含 DOM 对象的数组
+HTML 文字列を含む DOM オブジェクトの配列に変換します
 
 ```javascript
 C.createDOM(`<div>Hello, World!</div>`)
 ```
 
-说明：
+説明：
 
 ```typescript
 createDOM: (str: string) => Element[];
@@ -482,7 +484,7 @@ createDOM: (str: string) => Element[];
 
 #### htmlCir
 
-循环数组或对象生成 HTML 字符串
+配列またはオブジェクトをループして HTML 文字列を生成します
 
 ```javascript
 let arr = [
@@ -499,21 +501,21 @@ C("#app").render(C.htmlCir(arr, (item, i) => {
 }))
 ```
 
-说明：
+説明：
 
 ```typescript
 htmlCir: (obj: any, callback: (item: any, i: any) => string) => string;
 /* 
-  obj 为要循环的数组或对象，item 为键值，i 为索引
-  返回 html 字符串
+  obj はループする配列またはオブジェクトで、item はキー、i はインデックスです
+  HTML 文字列を返します
 */
 ```
 
 #### str
 
-在模板字符串中绑定属性和传递参数时处理变量
+テンプレート文字列で変数を処理する際に属性をバインドおよびパラメーターを渡すための処理
 
-只有参数为对象和字符串时需要使用 str() 处理，其他类型可以直接传递
+パラメーターがオブジェクトまたは文字列の場合のみ、str() を使用する必要があります。その他の型は直接渡すことができます。
 
 ```javascript
 let arr = [
@@ -530,8 +532,8 @@ C("#app").render(C.htmlCir(arr, (item, i) => {
 }))
 
 /*
-  当参数为对象时，对象中类型为 Function Symbol RegExp 的键值不能传递
-  此时可以使用键来传参
+  パラメーターがオブジェクトの場合、オブジェクト内の型 Function Symbol RegExp のキー値は渡すことができません
+  この場合、キーを使用してパラメーターを渡すことができます
 */
 let obj = {
   name: "tom",
@@ -547,7 +549,7 @@ C("#app").render(C.htmlCir(obj, (item, i) => {
 }))
 ```
 
-说明：
+説明：
 
 ```typescript
 str: (arg: any) => string;
@@ -555,41 +557,41 @@ str: (arg: any) => string;
 
 #### one
 
-按 CSS 选择器选取一个 DOM ，返回 DOM 对象
+CSS セレクターで 1 つの DOM 要素を選択し、DOM オブジェクトを返します
 
-同 querySelector()
+querySelector() と同じです
 
 ```javascript
 C.one(".mydiv")
 ```
 
-说明：
+説明：
 
 ```typescript
 one: (target: any, range: any) => Element;
-/* target ：CSS 选择器，range ：查询范围 */
+/* target：CSS セレクター、range：検索範囲 */
 ```
 
 #### all
 
-按 CSS 选择器选取多个 DOM ，返回数组
+CSS セレクターで複数の DOM 要素を選択し、配列を返します
 
-和 querySelectorAll() 不同的是，该方法返回的是数组
+querySelectorAll() とは異なり、このメソッドは配列を返します
 
 ```javascript
 C.all(".mydiv,.hello")
 ```
 
-说明：
+説明：
 
 ```typescript
 all: (target: any, range: any) => Element[];
-/* target ：CSS 选择器，range ：查询范围 */
+/* target：CSS セレクター、range：検索範囲 */
 ```
 
 #### setState
 
-添加全局变量
+グローバル変数を追加します
 
 ```javascript
 const data = {
@@ -598,19 +600,19 @@ const data = {
   age: 18,
   hobby: "swim"
 }
-C.setState(data) // data 的全部属性都会变为全局变量
-C.setState(data, "name,age") // 只将 name 和 age 属性提升至全局
+C.setState(data) // data のすべてのプロパティがグローバル変数になります
+C.setState(data, "name,age") // name および age プロパティのみをグローバルに昇格します
 ```
 
-说明：
+説明：
 
-``` typescript
+```typescript
 setState: (obj: any, str?: string | undefined) => void;
 ```
 
 #### proxy
 
-监听某个对象某个属性值的变化
+特定のオブジェクトの特定のプロパティ値の変更を監視します
 
 ```javascript
 const data = {
@@ -627,21 +629,21 @@ let dataProxy = C.proxy(data, {
 })
 ```
 
-说明：
+説明：
 
-``` typescript
+```typescript
 proxy(conta: any, arg: {
   [prop: string | number | symbol]: {
     handler: (nv: any, ov: any) => any;
     immediate?: boolean | undefined;
   };
 }): void;
-/* 如果指定了 immediate: true ，则添加监听时就会执行一次 handler 方法 */
+/* immediate: true を指定した場合、ハンドラー関数はリスナーの追加時に1回実行されます */
 ```
 
 #### mounted
 
-页面构建完成的钩子函数，不包括图片等网络资源的加载完成
+ページ構築が完了した際のフック関数です。画像などのネットワークリソースの読み込みは含まれません
 
 ```javascript
 C.mounted(function() {
@@ -649,25 +651,27 @@ C.mounted(function() {
 })
 ```
 
-说明：
+説明：
 
-``` typescript
+```typescript
 mounted: (callback: (event: Event | null) => any) => void;
 ```
 
 #### loaded
 
-页面加载完成的钩子函数
+ページの読み込みが完了した際のフック関数です
 
-说明：
+説明：
 
-``` typescript
+```typescript
 loaded: (callback: (event: Event) => any) => void;
 ```
 
 #### beforeUnload
 
-页面关闭之前的钩子函数
+ページを閉じる前のフック関
+
+数です
 
 ```javascript
 C.beforeUnload(function(event) {
@@ -675,30 +679,30 @@ C.beforeUnload(function(event) {
     event.preventDefault()
     event.returnValue = true
   } catch () {}
-  /* 在页面要关闭时，如果页面表单有修改则会弹出对话框提示 */
+  /* ページが閉じる際、ページフォームに変更がある場合、確認ダイアログが表示されます */
 })
 ```
 
-说明：
+説明：
 
-``` typescript
+```typescript
 beforeUnload: (callback: (event: Event) => any) => void;
 ```
 
 #### visible
 
-页面关闭、跳转、窗口切换、浏览器最小化都会触发这个钩子函数
+ページを閉じる、遷移、ウィンドウ切り替え、ブラウザの最小化などでトリガーされるフック関数です
 
 ```javascript
 C.visible(function(msg) {
   console.log("C.visible", msg.event, msg.state)
-  /* state 为 hidden 是隐藏， visible 是显示 */
+  /* state が hidden の場合は非表示、visible の場合は表示です */
 })
 ```
 
-说明：
+説明：
 
-``` typescript
+```typescript
 visible: (callback: (event: {
   event: Event;
   state: string;
@@ -707,63 +711,63 @@ visible: (callback: (event: {
 
 #### pageShow
 
-页面展示时的钩子函数
+ページが表示された際のフック関数です
 
-说明：
+説明：
 
-``` typescript
+```typescript
 pageShow: (callback: (event: PageTransitionEvent) => any) => void;
-/* 可以使用 event.persisted 判断文档是否从缓存加载 */
+/* event.persisted を使用してドキュメントがキャッシュから読み込まれたかどうかを確認できます */
 ```
 
 #### pageHide
 
-页面隐藏时的钩子函数
+ページが非表示になった際のフック関数です
 
-说明：
+説明：
 
-``` typescript
+```typescript
 pageHide: (callback: (event: PageTransitionEvent) => any) => void;
 ```
 
 #### prevent
 
-阻止默认事件
+デフォルトのイベントを阻止します
 
 ```html
-<a class="hello" onclick="C.prevent(sayHello, event, 123)">点我</a>
+<a class="hello" onclick="C.prevent(sayHello, event, 123)">クリック</a>
 ```
 
-说明：
+説明：
 
-``` typescript
+```typescript
 prevent: (callback: Function, ev: Event, ...arg: any) => void;
-/* callback 为需要绑定的方法， ev 为事件对象， arg 为需要向方法中传递的参数 */
+/* callback はバインドするメソッド、ev はイベントオブジェクト、arg はメソッドに渡す必要があるパラメーターです */
 ```
 
 #### stop
 
-阻止事件冒泡
+イベントバブリングを停止します
 
-说明：
+説明：
 
-``` typescript
+```typescript
 stop: (callback: Function, ev: Event, ...arg: any) => void;
 ```
 
 #### self
 
-只有目标是自身才触发
+ターゲットが自身の場合にのみトリガーされます
 
-说明：
+説明：
 
-``` typescript
+```typescript
 self: (callback: Function, ev: Event, ...arg: any) => void;
 ```
 
 #### push
 
-保留历史记录并跳转页面
+履歴を保持してページに移動します
 
 ```javascript
 C.push("./page/home.html?id=1")
@@ -779,79 +783,79 @@ C.push({
 })
 ```
 
-说明：
+説明：
 
-``` typescript
+```typescript
 push: (msg: any) => void;
 ```
 
 #### replace
 
-替换当前页面，不保留历史记录
+現在のページを置き換えて、履歴を保持しません
 
-说明：
+説明：
 
-``` typescript
+```typescript
 replace: (msg: any) => void;
 ```
 
 #### reload
 
-重新加载当前页面
+現在のページを再読み込みします
 
-说明：
+説明：
 
-``` typescript
+```typescript
 reload: () => void;
 ```
 
 #### back
 
-返回上一个历史页面
+前の履歴ページに戻ります
 
-说明：
+説明：
 
-``` typescript
+```typescript
 back: () => void;
 ```
 
 #### forward
 
-前进到下一个历史页面
+次の履歴ページに進みます
 
-说明：
+説明：
 
-``` typescript
+```typescript
 forward: () => void;
 ```
 
 #### go
 
-跳转历史记录页面
+履歴ページに移動します
 
 ```javascript
-C.go(-1) // 向前跳一个页面，即返回上个页面
-C.go(1) // 向后跳1个页面
+C.go(-1) // 1 ページ戻る、つまり前のページに戻る
+C.go(1) // 1 ページ進む
 ```
 
-说明：
+説明：
 
-``` typescript
+```typescript
 go: (index: number) => void;
-/* index 表示跳转的页面数，负数表示之前的页面，正数表示之后的页面 */
+/* index は移動するページ数を表し、負数は以前のページ、正数は以降のページを表します */
 ```
 
 #### route
 
-获取路由参数
+ルートのパラメータを取得します
 
 ```javascript
 const route = C.route()
 ```
 
-说明：
+説明：
 
-``` typescript
+```typescript
 route: () => {
   params: any;
   query: any;
@@ -860,20 +864,20 @@ route: () => {
 
 #### formatInput
 
-正则限制 input 输入
+入力を制限する正規表現をサポートする
 
-支持多个规则的限制
+複数の規則をサポートします
 
 ```javascript
-/* 单个规则 */
+/* 1 つの規則 */
 C.formatInput({
-  el: "", // css 选择器，支持一类元素
-  reg: "", // 需要满足的正则
-  nopass: e => {}, // 不通过的回调
-  pass: (nv, ov) => {} // 满足正则的回调，nv 为新值，ov 为旧值
+  el: "", // CSS セレクター、一つの要素をサポートします
+  reg: "", // 満たす必要のある正規表現
+  nopass: e => {}, // 満たさない場合のコールバック
+  pass: (nv, ov) => {} // 正規表現を満たす場合のコールバック、nv は新しい値、ov は古い値です
 })
 
-/* 多个规则 */
+/* 複数の規則 */
 C.formatInput({
   el: "",
   rules: [
@@ -890,35 +894,34 @@ C.formatInput({
 })
 ```
 
-说明：
+説明：
 
-``` typescript
+```typescript
 formatInput: (msg: any) => void;
 ```
 
 #### ajax
 
-发送 ajax 请求
+Ajax リクエストを送信します
 
-详细用法请查看 https://github.com/omlou/ajax
-
+詳細な使い方は https://github.com/omlou/ajax をご覧ください
 
 #### webtools
 
-集成了 webtools 的所有方法
+webtools のすべてのメソッドが統合されています
 
-用法请查看 https://github.com/omlou/webtools
+使用方法については https://github.com/omlou/webtools をご覧ください
 
-举例：
+例：
 
 ```javascript
 C.clipboardWrite("Hello, World!")
 .then(() => {
-  console.log("Copy successful")
+  console.log("コピーが成功しました")
 })
 ```
 
-### 类型说明
+####  型の説明
 
 ```typescript
 import * as _xlou_ajax from '@xlou/ajax';

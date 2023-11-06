@@ -1,37 +1,37 @@
-## Langue
+## 语言
 
 * [English](https://github.com/omlou/clean#readme)
-* [简体中文](https://github.com/omlou/clean/blob/master/public/md/readme-zh.md)
-* [日本語](https://github.com/omlou/clean/blob/master/public/md/readme-ja.md)
-* [한국어](https://github.com/omlou/clean/blob/master/public/md/readme-ko.md)
-* [Français](https://github.com/omlou/clean/blob/master/public/md/readme-fr.md)
+* [简体中文](https://github.com/omlou/clean/blob/master/docs/md/readme-zh.md)
+* [日本語](https://github.com/omlou/clean/blob/master/docs/md/readme-ja.md)
+* [한국어](https://github.com/omlou/clean/blob/master/docs/md/readme-ko.md)
+* [Français](https://github.com/omlou/clean/blob/master/docs/md/readme-fr.md)
 
-## Introduction
+## 简介
 
-* Clean est une boîte à outils frontend pour faciliter le développement.
+* Clean 是一个可以让开发更方便前端工具包
 
-## Utilisation
+## 用法
 
-### Inclure via une balise de script
+### Script 标签引入
 
 ```html
 <script src="https://unpkg.com/@xlou/clean@1.0.0/dist/umd/clean.min.js"></script>
-<!-- Il est recommandé de télécharger localement et d'utiliser -->
+<!-- 建议下载并在本地使用 -->
 <script>
-  /* Après avoir inclus ce fichier JS, l'objet C sera disponible globalement */
+  /* 包含此JS文件后，C 对象将在全局可用 */
   C("#app").render(`<div>Hello, World!</div>`)
 </script>
 ```
 
-### Inclure dans un projet Node
+### 在 Node 项目中引入
 
-Installer
+安装
 
 ``` bash
 npm i @xlou/clean
 ```
 
-Utiliser
+使用
 
 ```javascript
 import C from '@xlou/clean'
@@ -41,31 +41,31 @@ C("#app").render(`<div>Hello, World!</div>`)
 
 ## API
 
-### Méthode C
+### 方法 C
 
-Transforme les DOM correspondants aux sélecteurs CSS en objets Clean.
+将匹配 CSS 选择器的 DOM 转换成 Clean 实例对象
 
-Utilisation :
+使用：
 
 ```javascript
 C("#app").render(`<div>Hello, World!</div>`)
-C("#app", C.one(".mydiv")) // Rechercher dans .mydiv
+C("#app", C.one(".mydiv")) // 在 .mydiv 中查找
 
-/* L'objet Clean renvoyé est semblable à un tableau, et vous pouvez le convertir en objet DOM en utilisant l'indice */
+/* 返回的 Clean 对象类似于数组，如要转换为 DOM 对象根据索引获取即可 */
 C("#app")[0]
 
-/* Utiliser les méthodes sous C */
+/* 使用 C 下的方法 */
 C.mounted(function () {
   /* ... */
 })
 C.ajax(/* ... */)
 ```
 
-### Getter (Obtenir un élément, convertir en tableau)
+### Getter (获取元素、转换为数组)
 
-Le résultat est un objet Clean.
+返回结果为 Clean 对象
 
-Prenons l'exemple de l'obtention de l'élément parent :
+使用方法以获取父元素为例：
 
 ```javascript
 C("#app").parent
@@ -73,9 +73,9 @@ C("#app").parent
 
 #### parent
 
-Obtient l'élément parent de la cible.
+获取目标的父元素
 
-Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
+该属性如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准
 
 ```typescript
 get parent(): Clean;
@@ -83,9 +83,9 @@ get parent(): Clean;
 
 #### child
 
-Obtient tous les éléments enfants de la cible.
+获取目标的全部子元素
 
-Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
+该属性如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准
 
 ```typescript
 get child(): Clean;
@@ -93,9 +93,9 @@ get child(): Clean;
 
 #### next
 
-Obtient l'élément suivant de la cible.
+获取目标的下一个元素
 
-La cible de l'objet Clean peut contenir plusieurs éléments DOM.
+目标 Clean 对象可以为多个 DOM 元素
 
 ```typescript
 get next(): Clean;
@@ -103,9 +103,9 @@ get next(): Clean;
 
 #### prev
 
-Obtient l'élément précédent.
+获取上一个元素
 
-La cible de l'objet Clean peut contenir plusieurs éléments DOM.
+目标 Clean 对象可以为多个 DOM 元素
 
 ```typescript
 get prev(): Clean;
@@ -113,9 +113,9 @@ get prev(): Clean;
 
 #### first
 
-Obtient le premier élément parmi les éléments enfants.
+获取子元素里的第一个元素
 
-La cible de l'objet Clean peut contenir plusieurs éléments DOM.
+目标 Clean 对象可以为多个 DOM 元素
 
 ```typescript
 get first(): Clean;
@@ -123,9 +123,9 @@ get first(): Clean;
 
 #### last
 
-Obtient le dernier élément parmi les éléments enfants.
+获取子元素里的最后一个元素
 
-La cible de l'objet Clean peut contenir plusieurs éléments DOM.
+目标 Clean 对象可以为多个 DOM 元素
 
 ```typescript
 get last(): Clean;
@@ -133,31 +133,31 @@ get last(): Clean;
 
 #### array
 
-Renvoie un objet Clean converti en tableau.
+返回已转换为数组的 Clean 对象
 
 ```typescript
 get array(): Array<Element>;
 ```
 
-### Getter et Setter (Obtenir une propriété, définir une propriété)
+### Getter & Setter (获取属性、修改属性)
 
-Prenons l'exemple de l'obtention de styles et de la définition de styles en ligne :
+使用方法以获取行内样式和设置行内样式为例
 
 ```javascript
-/* Obtenir */
+/* 获取 */
 let style = C("#app").style
 
-/* Définir */
-C("#app").style = "font-size: 14px;"
+/* 设置 */
+C("#app").style="font-size: 14px;"
 ```
 
 #### style
 
-Obtient et définit les styles de l'élément.
+获取和设置元素的样式
 
-Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
+获取时如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准
 
-La valeur peut être une chaîne CSS, par exemple "display:none;", ou un objet { display: none, fontSize: "20px" }.
+值可以为 CSS 字符串，如 "display:none;" 也可以是对象 { display: none, fontSize: "20px" }
 
 ```typescript
 get style(): string;
@@ -166,9 +166,9 @@ set style(value: any);
 
 #### value
 
-Obtient et définit la valeur des éléments de formulaire.
+获取和设置表单元素的值
 
-Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
+获取时如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准
 
 ```typescript
 get value(): any;
@@ -177,9 +177,9 @@ set value(value: any);
 
 #### checked
 
-Obtient et définit l'état coché des boutons radio ou des cases à cocher.
+获取和设置单选框或复选框的选中状态
 
-Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
+获取时如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准
 
 ```typescript
 get checked(): boolean | undefined;
@@ -188,26 +188,26 @@ set checked(value: boolean);
 
 #### text
 
-Obtient et modifie la propriété innerText de l'élément.
+获取和修改元素的 innerText
 
-Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
+获取时如果目标 Clean 对象是多个 DOM 元素，以第一个元素为准
 
 ```typescript
 get text(): string;
 set text(value: any);
 ```
 
-### Méthodes de l'objet Clean
+### Clean 实例对象方法
 
 #### nth
 
-Obtient un élément à partir de l'objet Clean en fonction de l'indice et renvoie toujours un objet Clean.
+根据索引获取 Clean 对象中的元素，返回值仍为 Clean 对象
 
 ```javascript
 C("#app").nth(0)
 ```
 
-Explication :
+说明：
 
 ```typescript
 nth: (index: number) => Clean;
@@ -215,16 +215,16 @@ nth: (index: number) => Clean;
 
 #### map
 
-Parcourt l'objet Clean et renvoie un tableau de même longueur.
+遍历 Clean 对象，并返回一个相同长度的数组对象
 
 ```javascript
-C("#app").map((item, i) => {
+C("#app").map((item,i)=>{
   /* ... */
   return i
 }) // [0]
 ```
 
-Explication :
+说明：
 
 ```typescript
 map: (callback: (item: Clean, i: string) => any) => Array<any>;
@@ -232,14 +232,14 @@ map: (callback: (item: Clean, i: string) => any) => Array<any>;
 
 #### push
 
-Ajoute des éléments DOM à l'objet Clean.
+向 Clean 对象中添加 DOM 元素
 
 ```javascript
 let divs = C(".app")
 divs.push(C.one(".myapp"))
 ```
 
-Explication :
+说明：
 
 ```typescript
 push: (dom: Element) => void;
@@ -247,13 +247,13 @@ push: (dom: Element) => void;
 
 #### concat
 
-Concatène des objets Clean ou des objets NodeList, etc.
+拼接 Clean 对象或 NodeList 对象等
 
 ```javascript
 C("#app").concat(C(".mydiv"), C.all(".hello"))
 ```
 
-Explication :
+说明：
 
 ```typescript
 concat: (...arg: any) => void;
@@ -261,37 +261,35 @@ concat: (...arg: any) => void;
 
 #### render
 
-Rend du HTML dans un conteneur.
+向容器里渲染 HTML
 
 ```typescript
 render: (str: string) => void;
 ```
 
-Explication :
+说明：
 
 ```javascript
 C("#app").render(`<div>Hello, World!</div>`)
 ```
 
-La cible prend en charge plusieurs éléments DOM dans l'objet Clean.
+目标支持多个 DOM 元素的 Clean 对象
 
-Le paramètre est une chaîne HTML.
+参数为 HTML 字符串
 
-Les autres méthodes de manipulation des éléments DOM peuvent être utilisées de la même manière que render.
+其他操作 DOM 元素的方法用法同 render
 
 #### append
 
-Ajoute du HTML à la fin d'un conteneur.
+向容器的最后面追加 HTML
 
 ```typescript
 append: (str: string) => void;
 ```
 
-
-
 #### prepend
 
-Ajoute du HTML au début d'un conteneur.
+向容器的最前面添加 HTML
 
 ```typescript
 prepend: (str: string) => void;
@@ -299,7 +297,7 @@ prepend: (str: string) => void;
 
 #### before
 
-Ajoute du HTML avant un élément.
+向元素前面添加 HTML
 
 ```typescript
 before: (str: string) => void;
@@ -307,7 +305,7 @@ before: (str: string) => void;
 
 #### after
 
-Ajoute du HTML après un élément.
+向元素后面添加 HTML
 
 ```typescript
 after: (str: string) => void;
@@ -315,7 +313,7 @@ after: (str: string) => void;
 
 #### remove
 
-Supprime un élément cible.
+移除目标元素
 
 ```typescript
 remove: () => void;
@@ -323,14 +321,14 @@ remove: () => void;
 
 #### show
 
-Affiche un élément.
+显示目标元素
 
 ```javascript
 C("#app").show()
-C("#app").show("block") // Le type est facultatif, par défaut, c'est ""
+C("#app").show("block") // type 可选，为 display 的类型，默认为 ""
 ```
 
-Explication :
+说明：
 
 ```typescript
 show: (type?: string | undefined) => void;
@@ -338,9 +336,9 @@ show: (type?: string | undefined) => void;
 
 #### hide
 
-Cache un élément en définissant le style sur display:none;.
+隐藏元素，设置样式 display:none;
 
-Explication :
+说明：
 
 ```typescript
 hide: () => void;
@@ -348,49 +346,49 @@ hide: () => void;
 
 #### getAttr
 
-Obtient la valeur d'un attribut de l'élément.
+获取元素的属性值
 
-Cette méthode prend le premier élément en compte si l'objet Clean cible contient plusieurs éléments DOM.
+该方法如果目标 Clean 对象包含多个 DOM 元素，以第一个元素为准
 
 ```javascript
 C("#app").getAttr("id")
 ```
 
-Explication :
+说明：
 
 ```typescript
-getAttr: (attr: string) => string | null; // attr est le nom de l'attribut
+getAttr: (attr: string) => string | null; // attr 为属性名
 ```
 
 #### setAttr
 
-Définit la valeur d'un attribut de l'élément.
+设置元素的属性值
 
 ```javascript
 C("#app").setAttr("data", 1)
 ```
 
-Explication :
+说明：
 
 ```typescript
-setAttr: (attr: string, value: any) => void; // attr est le nom de l'attribut et value est la valeur de l'attribut
+setAttr: (attr: string, value: any) => void; // attr 为属性名, value 为属性值
 ```
 
 #### addClass
 
-Ajoute une classe à un élément.
+给元素添加 class
 
-Explication :
+说明：
 
 ```typescript
-addClass: (name: string) => void; // name est le nom de la classe à ajouter
+addClass: (name: string) => void; // name 为需要添加的 class 名
 ```
 
 #### removeClass
 
-Supprime une classe spécifique d'un élément.
+移除指定的 class
 
-Explication :
+说明：
 
 ```typescript
 removeClass: (name: string) => void;
@@ -398,15 +396,15 @@ removeClass: (name: string) => void;
 
 #### hasClass
 
-Vérifie si un élément possède une classe spécifiée et renvoie un booléen.
+判断元素是否有指定的 class ，返回布尔类型
 
-Cette méthode prend le premier élément en compte si l'objet Clean cible contient plusieurs éléments DOM.
+该方法如果目标 Clean 对象包含多个 DOM 元素，以第一个元素为准
 
 ```javascript
 C("#app").hasClass("hello")
 ```
 
-Explication :
+说明：
 
 ```typescript
 hasClass: (name: string) => boolean;
@@ -414,7 +412,7 @@ hasClass: (name: string) => boolean;
 
 #### bind
 
-Lie un écouteur d'événements.
+绑定事件监听
 
 ```javascript
 C("#app").bind("click", function(){
@@ -422,61 +420,61 @@ C("#app").bind("click", function(){
 }, false)
 ```
 
-Explication :
+说明：
 
 ```typescript
 bind: (type: string, callback: Function, option: any) => void;
 /* 
-  type : type d'événement
-  callback : méthode d'événement à lier
-  option : option d'écoute d'événement (facultatif)
+  type 事件类型
+  callback 绑定的事件方法
+  option 可选 绑定事件的参数
 */
 ```
 
 #### unbind
 
-Supprime un écouteur d'événements.
+移除事件监听
 
 ```javascript
 C("#app").unbind("click", sayHello)
 ```
 
-Explication :
+说明：
 
 ```typescript
 unbind: (type: string, callback: Function, option: any) => void;
 /* 
-  type : type d'événement
-  callback : méthode d'événement à supprimer (doit être une variable, ne peut pas être une fonction anonyme)
+  type 事件类型
+  callback 要移除事件方法，必须是一个变量，不能是匿名函数
 */
 ```
 
-### Méthodes de l'objet C
+### C 对象下的方法
 
 #### create
 
-Transforme le DOM en un objet Clean
+将 DOM 转换为 Clean 对象
 
 ```javascript
 C.create(C.createDOM(`<div>Hello, World!</div>`))
 ```
 
-Description :
+说明：
 
 ```typescript
 create: (node: any) => Clean | undefined;
-/* node peut être un élément DOM unique, une liste de nœuds NodeList ou un tableau d'objets DOM */
+/* node 可以为单个 DOM 元素，也可以时 NodeList 对象或者 DOM 对象的数组 */
 ```
 
 #### createDOM
 
-Transforme une chaîne HTML en un tableau contenant des objets DOM
+将 HTML 字符串转换为包含 DOM 对象的数组
 
 ```javascript
 C.createDOM(`<div>Hello, World!</div>`)
 ```
 
-Description :
+说明：
 
 ```typescript
 createDOM: (str: string) => Element[];
@@ -484,7 +482,7 @@ createDOM: (str: string) => Element[];
 
 #### htmlCir
 
-Parcourt un tableau ou un objet pour générer une chaîne HTML
+循环数组或对象生成 HTML 字符串
 
 ```javascript
 let arr = [
@@ -501,21 +499,21 @@ C("#app").render(C.htmlCir(arr, (item, i) => {
 }))
 ```
 
-Description :
+说明：
 
 ```typescript
 htmlCir: (obj: any, callback: (item: any, i: any) => string) => string;
 /* 
-  obj est le tableau ou l'objet à parcourir, item est la clé et i est l'indice
-  Retourne une chaîne HTML
+  obj 为要循环的数组或对象，item 为键值，i 为索引
+  返回 html 字符串
 */
 ```
 
 #### str
 
-Utilisé pour lier des propriétés et passer des paramètres dans les chaînes de modèle
+在模板字符串中绑定属性和传递参数时处理变量
 
-Seuls les paramètres de type objet et chaîne doivent être traités avec str(). Les autres types peuvent être directement transmis.
+只有参数为对象和字符串时需要使用 str() 处理，其他类型可以直接传递
 
 ```javascript
 let arr = [
@@ -532,8 +530,8 @@ C("#app").render(C.htmlCir(arr, (item, i) => {
 }))
 
 /*
-  Lorsque le paramètre est un objet, les clés de type Function, Symbol et RegExp de l'objet ne peuvent pas être transmises
-  Dans ce cas, les clés peuvent être utilisées pour transmettre des paramètres
+  当参数为对象时，对象中类型为 Function Symbol RegExp 的键值不能传递
+  此时可以使用键来传参
 */
 let obj = {
   name: "tom",
@@ -549,7 +547,7 @@ C("#app").render(C.htmlCir(obj, (item, i) => {
 }))
 ```
 
-Description :
+说明：
 
 ```typescript
 str: (arg: any) => string;
@@ -557,41 +555,41 @@ str: (arg: any) => string;
 
 #### one
 
-Sélectionne un DOM en fonction d'un sélecteur CSS et renvoie un objet DOM
+按 CSS 选择器选取一个 DOM ，返回 DOM 对象
 
-Équivalent à querySelector()
+同 querySelector()
 
 ```javascript
 C.one(".mydiv")
 ```
 
-Description :
+说明：
 
 ```typescript
 one: (target: any, range: any) => Element;
-/* target: sélecteur CSS, range: plage de recherche */
+/* target ：CSS 选择器，range ：查询范围 */
 ```
 
 #### all
 
-Sélectionne plusieurs DOM en fonction d'un sélecteur CSS et renvoie un tableau
+按 CSS 选择器选取多个 DOM ，返回数组
 
-Contrairement à querySelectorAll(), cette méthode renvoie un tableau
+和 querySelectorAll() 不同的是，该方法返回的是数组
 
 ```javascript
 C.all(".mydiv,.hello")
 ```
 
-Description :
+说明：
 
 ```typescript
 all: (target: any, range: any) => Element[];
-/* target: sélecteur CSS, range: plage de recherche */
+/* target ：CSS 选择器，range ：查询范围 */
 ```
 
 #### setState
 
-Ajoute des variables globales
+添加全局变量
 
 ```javascript
 const data = {
@@ -600,19 +598,19 @@ const data = {
   age: 18,
   hobby: "swim"
 }
-C.setState(data) // Toutes les propriétés de data deviendront des variables globales
-C.setState(data, "name,age") // Seules les propriétés name et age sont élevées en tant que variables globales
+C.setState(data) // data 的全部属性都会变为全局变量
+C.setState(data, "name,age") // 只将 name 和 age 属性提升至全局
 ```
 
-Description :
+说明：
 
-```typescript
+``` typescript
 setState: (obj: any, str?: string | undefined) => void;
 ```
 
 #### proxy
 
-Écoute les modifications de la valeur d'une propriété d'un objet donné
+监听某个对象某个属性值的变化
 
 ```javascript
 const data = {
@@ -629,21 +627,21 @@ let dataProxy = C.proxy(data, {
 })
 ```
 
-Description :
+说明：
 
-```typescript
+``` typescript
 proxy(conta: any, arg: {
   [prop: string | number | symbol]: {
     handler: (nv: any, ov: any) => any;
     immediate?: boolean | undefined;
   };
 }): void;
-/* Si immediate: true est spécifié, le gestionnaire sera exécuté une fois lors de l'ajout de l'auditeur */
+/* 如果指定了 immediate: true ，则添加监听时就会执行一次 handler 方法 */
 ```
 
 #### mounted
 
-Crochet de fonction appelé lorsque la construction de la page est terminée, à l'exclusion du chargement d'images et d'autres ressources réseau
+页面构建完成的钩子函数，不包括图片等网络资源的加载完成
 
 ```javascript
 C.mounted(function() {
@@ -651,25 +649,25 @@ C.mounted(function() {
 })
 ```
 
-Description :
+说明：
 
-```typescript
+``` typescript
 mounted: (callback: (event: Event | null) => any) => void;
 ```
 
 #### loaded
 
-Crochet de fonction appelé lorsque la page est chargée
+页面加载完成的钩子函数
 
-Description :
+说明：
 
-```typescript
+``` typescript
 loaded: (callback: (event: Event) => any) => void;
 ```
 
 #### beforeUnload
 
-Crochet de fonction appelé avant la fermeture de la page
+页面关闭之前的钩子函数
 
 ```javascript
 C.beforeUnload(function(event) {
@@ -677,30 +675,30 @@ C.beforeUnload(function(event) {
     event.preventDefault()
     event.returnValue = true
   } catch () {}
-  /* Lorsque vous essayez de fermer la page et qu'il y a des modifications dans le formulaire de la page, une boîte de dialogue de confirmation s'affiche */
+  /* 在页面要关闭时，如果页面表单有修改则会弹出对话框提示 */
 })
 ```
 
-Description :
+说明：
 
-```typescript
+``` typescript
 beforeUnload: (callback: (event: Event) => any) => void;
 ```
 
 #### visible
 
-Crochet de fonction appelé lorsque la page se ferme, bascule, se réduit ou se minimise
+页面关闭、跳转、窗口切换、浏览器最小化都会触发这个钩子函数
 
 ```javascript
 C.visible(function(msg) {
   console.log("C.visible", msg.event, msg.state)
-  /* state est hidden s'il est caché, visible s'il est affiché */
+  /* state 为 hidden 是隐藏， visible 是显示 */
 })
 ```
 
-Description :
+说明：
 
-```typescript
+``` typescript
 visible: (callback: (event: {
   event: Event;
   state: string;
@@ -709,65 +707,63 @@ visible: (callback: (event: {
 
 #### pageShow
 
-Crochet de fonction appelé lorsque la page est affichée
+页面展示时的钩子函数
 
-Description :
+说明：
 
-```typescript
+``` typescript
 pageShow: (callback: (event: PageTransitionEvent) => any) => void;
-/* Utilisez event.persisted pour vérifier si le document est chargé à partir du cache */
+/* 可以使用 event.persisted 判断文档是否从缓存加载 */
 ```
 
 #### pageHide
 
-Cro
+页面隐藏时的钩子函数
 
-chet de fonction appelé lorsque la page est masquée
+说明：
 
-Description :
-
-```typescript
+``` typescript
 pageHide: (callback: (event: PageTransitionEvent) => any) => void;
 ```
 
 #### prevent
 
-Empêche l'événement par défaut
+阻止默认事件
 
 ```html
-<a class="hello" onclick="C.prevent(sayHello, event, 123)">Cliquez</a>
+<a class="hello" onclick="C.prevent(sayHello, event, 123)">点我</a>
 ```
 
-Description :
+说明：
 
-```typescript
+``` typescript
 prevent: (callback: Function, ev: Event, ...arg: any) => void;
-/* callback est la méthode à lier, ev est l'objet événement, arg est le paramètre à transmettre à la méthode */
+/* callback 为需要绑定的方法， ev 为事件对象， arg 为需要向方法中传递的参数 */
 ```
 
 #### stop
 
-Empêche la propagation de l'événement
+阻止事件冒泡
 
-Description :
+说明：
 
-```typescript
+``` typescript
 stop: (callback: Function, ev: Event, ...arg: any) => void;
 ```
 
 #### self
 
-Le déclencheur se produit uniquement si la cible est elle-même
+只有目标是自身才触发
 
-Description :
+说明：
 
-```typescript
+``` typescript
 self: (callback: Function, ev: Event, ...arg: any) => void;
 ```
 
 #### push
 
-Conserve l'historique et navigue vers une page
+保留历史记录并跳转页面
 
 ```javascript
 C.push("./page/home.html?id=1")
@@ -783,79 +779,79 @@ C.push({
 })
 ```
 
-Description :
+说明：
 
-```typescript
+``` typescript
 push: (msg: any) => void;
 ```
 
 #### replace
 
-Remplace la page actuelle sans conserver l'historique
+替换当前页面，不保留历史记录
 
-Description :
+说明：
 
-```typescript
+``` typescript
 replace: (msg: any) => void;
 ```
 
 #### reload
 
-Recharge la page actuelle
+重新加载当前页面
 
-Description :
+说明：
 
-```typescript
+``` typescript
 reload: () => void;
 ```
 
 #### back
 
-Revenir à la page d'historique précédente
+返回上一个历史页面
 
-Description :
+说明：
 
-```typescript
+``` typescript
 back: () => void;
 ```
 
 #### forward
 
-Avancer vers la page d'historique suivante
+前进到下一个历史页面
 
-Description :
+说明：
 
-```typescript
+``` typescript
 forward: () => void;
 ```
 
 #### go
 
-Accéder à une page de l'historique
+跳转历史记录页面
 
 ```javascript
-C.go(-1) // Revenir en arrière d'une page, c'est-à-dire revenir à la page précédente
-C.go(1) // Avancer d'une page
+C.go(-1) // 向前跳一个页面，即返回上个页面
+C.go(1) // 向后跳1个页面
 ```
 
-Description :
+说明：
 
-```typescript
+``` typescript
 go: (index: number) => void;
-/* index représente le nombre de pages à naviguer, un nombre négatif signifie les pages précédentes, un nombre positif signifie les pages suivantes */
+/* index 表示跳转的页面数，负数表示之前的页面，正数表示之后的页面 */
 ```
 
 #### route
 
-Obtient les paramètres de la route
+获取路由参数
 
 ```javascript
 const route = C.route()
 ```
 
-Description :
+说明：
 
-```typescript
+``` typescript
 route: () => {
   params: any;
   query: any;
@@ -864,20 +860,20 @@ route: () => {
 
 #### formatInput
 
-Limite l'entrée en utilisant des expressions régulières
+正则限制 input 输入
 
-Prend en charge plusieurs règles
+支持多个规则的限制
 
 ```javascript
-/* Règle unique */
+/* 单个规则 */
 C.formatInput({
-  el: "", // Sélecteur CSS, prenant en charge un type d'élément
-  reg: "", // L'expression régulière à satisfaire
-  nopass: e => {}, // Callback en cas d'échec
-  pass: (nv, ov) => {} // Callback en cas de réussite de l'expression régulière, nv est la nouvelle valeur, ov est l'ancienne valeur
+  el: "", // css 选择器，支持一类元素
+  reg: "", // 需要满足的正则
+  nopass: e => {}, // 不通过的回调
+  pass: (nv, ov) => {} // 满足正则的回调，nv 为新值，ov 为旧值
 })
 
-/* Plusieurs règles */
+/* 多个规则 */
 C.formatInput({
   el: "",
   rules: [
@@ -894,34 +890,35 @@ C.formatInput({
 })
 ```
 
-Description :
+说明：
 
-```typescript
+``` typescript
 formatInput: (msg: any) => void;
 ```
 
 #### ajax
 
-Envoie une requête Ajax
+发送 ajax 请求
 
-Pour des exemples détaillés, veuillez consulter https://github.com/omlou/ajax
+详细用法请查看 https://github.com/omlou/ajax
+
 
 #### webtools
 
-Intègre toutes les méthodes de webtools
+集成了 webtools 的所有方法
 
-Pour des exemples d'utilisation, veuillez consulter https://github.com/omlou/webtools
+用法请查看 https://github.com/omlou/webtools
 
-Exemple :
+举例：
 
 ```javascript
-C.clipboardWrite("Bonjour, le monde !")
+C.clipboardWrite("Hello, World!")
 .then(() => {
-  console.log("Copie réussie")
+  console.log("Copy successful")
 })
 ```
 
-### Description des types
+### 类型说明
 
 ```typescript
 import * as _xlou_ajax from '@xlou/ajax';

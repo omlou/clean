@@ -1,37 +1,37 @@
-## 언어
+## Langue
 
 * [English](https://github.com/omlou/clean#readme)
-* [简体中文](https://github.com/omlou/clean/blob/master/public/md/readme-zh.md)
-* [日本語](https://github.com/omlou/clean/blob/master/public/md/readme-ja.md)
-* [한국어](https://github.com/omlou/clean/blob/master/public/md/readme-ko.md)
-* [Français](https://github.com/omlou/clean/blob/master/public/md/readme-fr.md)
+* [简体中文](https://github.com/omlou/clean/blob/master/docs/md/readme-zh.md)
+* [日本語](https://github.com/omlou/clean/blob/master/docs/md/readme-ja.md)
+* [한국어](https://github.com/omlou/clean/blob/master/docs/md/readme-ko.md)
+* [Français](https://github.com/omlou/clean/blob/master/docs/md/readme-fr.md)
 
-## 개요
+## Introduction
 
-* Clean은 개발을 더 편리하게하는 프론트 엔드 도구 킷입니다.
+* Clean est une boîte à outils frontend pour faciliter le développement.
 
-## 사용법
+## Utilisation
 
-### 스크립트 태그로 추가
+### Inclure via une balise de script
 
 ```html
 <script src="https://unpkg.com/@xlou/clean@1.0.0/dist/umd/clean.min.js"></script>
-<!-- 로컬에서 다운로드하고 사용하는 것을 권장합니다. -->
+<!-- Il est recommandé de télécharger localement et d'utiliser -->
 <script>
-  /* 이 JS 파일을 포함하면 C 객체가 전역에서 사용 가능합니다. */
+  /* Après avoir inclus ce fichier JS, l'objet C sera disponible globalement */
   C("#app").render(`<div>Hello, World!</div>`)
 </script>
 ```
 
-### 노드 프로젝트에서 추가
+### Inclure dans un projet Node
 
-설치
+Installer
 
 ``` bash
 npm i @xlou/clean
 ```
 
-사용
+Utiliser
 
 ```javascript
 import C from '@xlou/clean'
@@ -41,31 +41,31 @@ C("#app").render(`<div>Hello, World!</div>`)
 
 ## API
 
-### 메소드 C
+### Méthode C
 
-일치하는 CSS 선택기의 DOM을 Clean 인스턴스 객체로 변환합니다.
+Transforme les DOM correspondants aux sélecteurs CSS en objets Clean.
 
-사용 방법:
+Utilisation :
 
 ```javascript
 C("#app").render(`<div>Hello, World!</div>`)
-C("#app", C.one(".mydiv")) // .mydiv에서 찾기
+C("#app", C.one(".mydiv")) // Rechercher dans .mydiv
 
-/* 반환되는 Clean 객체는 배열과 유사하며 색인을 통해 DOM 객체로 변환할 수 있습니다. */
+/* L'objet Clean renvoyé est semblable à un tableau, et vous pouvez le convertir en objet DOM en utilisant l'indice */
 C("#app")[0]
 
-/* C 하위 메소드 사용 */
+/* Utiliser les méthodes sous C */
 C.mounted(function () {
   /* ... */
 })
 C.ajax(/* ... */)
 ```
 
-### Getter (요소 가져오기, 배열로 변환)
+### Getter (Obtenir un élément, convertir en tableau)
 
-결과는 Clean 객체입니다.
+Le résultat est un objet Clean.
 
-부모 요소 가져오기를 예로 들어 보겠습니다.
+Prenons l'exemple de l'obtention de l'élément parent :
 
 ```javascript
 C("#app").parent
@@ -73,9 +73,9 @@ C("#app").parent
 
 #### parent
 
-대상의 부모 요소를 가져옵니다.
+Obtient l'élément parent de la cible.
 
-대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
+Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
 
 ```typescript
 get parent(): Clean;
@@ -83,9 +83,9 @@ get parent(): Clean;
 
 #### child
 
-대상의 모든 하위 요소를 가져옵니다.
+Obtient tous les éléments enfants de la cible.
 
-대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
+Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
 
 ```typescript
 get child(): Clean;
@@ -93,9 +93,9 @@ get child(): Clean;
 
 #### next
 
-대상의 다음 요소를 가져옵니다.
+Obtient l'élément suivant de la cible.
 
-대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
+La cible de l'objet Clean peut contenir plusieurs éléments DOM.
 
 ```typescript
 get next(): Clean;
@@ -103,9 +103,9 @@ get next(): Clean;
 
 #### prev
 
-이전 요소를 가져옵니다.
+Obtient l'élément précédent.
 
-대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
+La cible de l'objet Clean peut contenir plusieurs éléments DOM.
 
 ```typescript
 get prev(): Clean;
@@ -113,9 +113,9 @@ get prev(): Clean;
 
 #### first
 
-하위 요소 중 첫 번째 요소를 가져옵니다.
+Obtient le premier élément parmi les éléments enfants.
 
-대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
+La cible de l'objet Clean peut contenir plusieurs éléments DOM.
 
 ```typescript
 get first(): Clean;
@@ -123,9 +123,9 @@ get first(): Clean;
 
 #### last
 
-하위 요소 중 마지막 요소를 가져옵니다.
+Obtient le dernier élément parmi les éléments enfants.
 
-대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
+La cible de l'objet Clean peut contenir plusieurs éléments DOM.
 
 ```typescript
 get last(): Clean;
@@ -133,31 +133,31 @@ get last(): Clean;
 
 #### array
 
-변환된 Clean 객체의 배열을 반환합니다.
+Renvoie un objet Clean converti en tableau.
 
 ```typescript
 get array(): Array<Element>;
 ```
 
-### Getter 및 Setter (속성 가져오기, 속성 설정)
+### Getter et Setter (Obtenir une propriété, définir une propriété)
 
-속성 가져오기와 인라인 스타일 설정을 예로 들어 보겠습니다.
+Prenons l'exemple de l'obtention de styles et de la définition de styles en ligne :
 
 ```javascript
-/* 가져오기 */
+/* Obtenir */
 let style = C("#app").style
 
-/* 설정 */
-C("#app").style="font-size: 14px;"
+/* Définir */
+C("#app").style = "font-size: 14px;"
 ```
 
 #### style
 
-요소의 스타일을 가져오고 설정합니다.
+Obtient et définit les styles de l'élément.
 
-대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
+Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
 
-값은 CSS 문자열 또는 객체여야 하며 다음과 같이 사용할 수 있습니다({ display: "none", fontSize: "20px" 등}).
+La valeur peut être une chaîne CSS, par exemple "display:none;", ou un objet { display: none, fontSize: "20px" }.
 
 ```typescript
 get style(): string;
@@ -166,9 +166,9 @@ set style(value: any);
 
 #### value
 
-양식 요소의 값 가져오기 및 설정하기
+Obtient et définit la valeur des éléments de formulaire.
 
-대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
+Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
 
 ```typescript
 get value(): any;
@@ -177,9 +177,9 @@ set value(value: any);
 
 #### checked
 
-라디오 버튼이나 체크 박스의 선택 상태 가져오기 및 설정하기
+Obtient et définit l'état coché des boutons radio ou des cases à cocher.
 
-대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
+Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
 
 ```typescript
 get checked(): boolean | undefined;
@@ -188,26 +188,26 @@ set checked(value: boolean);
 
 #### text
 
-요소의 innerText 가져오기 및 수정하기
+Obtient et modifie la propriété innerText de l'élément.
 
-대상 Clean 객체가 여러 개의 DOM 요소인 경우 첫 번째 요소를 대상으로 합니다.
+Si l'objet Clean cible contient plusieurs éléments DOM, seul le premier élément est pris en compte.
 
 ```typescript
 get text(): string;
 set text(value: any);
 ```
 
-### Clean 인스턴스 메소드
+### Méthodes de l'objet Clean
 
 #### nth
 
-Clean 객체 내에서 인덱스를 기반으로 요소를 가져와 Clean 객체를 반환합니다.
+Obtient un élément à partir de l'objet Clean en fonction de l'indice et renvoie toujours un objet Clean.
 
 ```javascript
 C("#app").nth(0)
 ```
 
-설명:
+Explication :
 
 ```typescript
 nth: (index: number) => Clean;
@@ -215,16 +215,16 @@ nth: (index: number) => Clean;
 
 #### map
 
-Clean 객체를 반복하고 동일한 길이의 배열 객체를 반환합니다.
+Parcourt l'objet Clean et renvoie un tableau de même longueur.
 
 ```javascript
-C("#app").map((item,i)=>{
+C("#app").map((item, i) => {
   /* ... */
   return i
 }) // [0]
 ```
 
-설명:
+Explication :
 
 ```typescript
 map: (callback: (item: Clean, i: string) => any) => Array<any>;
@@ -232,14 +232,14 @@ map: (callback: (item: Clean, i: string) => any) => Array<any>;
 
 #### push
 
-Clean 객체에 DOM 요소를 추가합니다.
+Ajoute des éléments DOM à l'objet Clean.
 
 ```javascript
 let divs = C(".app")
 divs.push(C.one(".myapp"))
 ```
 
-설명:
+Explication :
 
 ```typescript
 push: (dom: Element) => void;
@@ -247,51 +247,51 @@ push: (dom: Element) => void;
 
 #### concat
 
-Clean 객체 또는 NodeList 객체 등을 연결합니다.
+Concatène des objets Clean ou des objets NodeList, etc.
 
 ```javascript
 C("#app").concat(C(".mydiv"), C.all(".hello"))
 ```
 
-설명:
+Explication :
 
 ```typescript
-concat: (...
-
-arg: any) => void;
+concat: (...arg: any) => void;
 ```
 
 #### render
 
-컨테이너에 HTML을 렌더링합니다.
+Rend du HTML dans un conteneur.
 
 ```typescript
 render: (str: string) => void;
 ```
 
-설명:
+Explication :
 
 ```javascript
 C("#app").render(`<div>Hello, World!</div>`)
 ```
 
-대상은 여러 개의 DOM 요소를 지원하는 Clean 객체입니다.
+La cible prend en charge plusieurs éléments DOM dans l'objet Clean.
 
-매개변수는 HTML 문자열입니다.
+Le paramètre est une chaîne HTML.
 
-다른 DOM 요소 조작 메소드도 render와 동일한 방식으로 사용할 수 있습니다.
+Les autres méthodes de manipulation des éléments DOM peuvent être utilisées de la même manière que render.
 
 #### append
 
-컨테이너의 끝에 HTML을 추가합니다.
+Ajoute du HTML à la fin d'un conteneur.
 
 ```typescript
 append: (str: string) => void;
 ```
 
+
+
 #### prepend
 
-컨테이너의 처음에 HTML을 추가합니다.
+Ajoute du HTML au début d'un conteneur.
 
 ```typescript
 prepend: (str: string) => void;
@@ -299,7 +299,7 @@ prepend: (str: string) => void;
 
 #### before
 
-요소의 앞에 HTML을 추가합니다.
+Ajoute du HTML avant un élément.
 
 ```typescript
 before: (str: string) => void;
@@ -307,7 +307,7 @@ before: (str: string) => void;
 
 #### after
 
-요소의 뒤에 HTML을 추가합니다.
+Ajoute du HTML après un élément.
 
 ```typescript
 after: (str: string) => void;
@@ -315,7 +315,7 @@ after: (str: string) => void;
 
 #### remove
 
-대상 요소를 제거합니다.
+Supprime un élément cible.
 
 ```typescript
 remove: () => void;
@@ -323,14 +323,14 @@ remove: () => void;
 
 #### show
 
-요소를 표시합니다.
+Affiche un élément.
 
 ```javascript
 C("#app").show()
-C("#app").show("block") // 타입은 선택 사항이며 표시 유형의 기본값은 ""입니다.
+C("#app").show("block") // Le type est facultatif, par défaut, c'est ""
 ```
 
-설명:
+Explication :
 
 ```typescript
 show: (type?: string | undefined) => void;
@@ -338,9 +338,9 @@ show: (type?: string | undefined) => void;
 
 #### hide
 
-요소를 숨깁니다. 스타일을 display:none;로 설정합니다.
+Cache un élément en définissant le style sur display:none;.
 
-설명:
+Explication :
 
 ```typescript
 hide: () => void;
@@ -348,49 +348,49 @@ hide: () => void;
 
 #### getAttr
 
-요소의 속성 값을 가져옵니다.
+Obtient la valeur d'un attribut de l'élément.
 
-이 메소드는 대상 Clean 객체가 여러 개의 DOM 요소를 포함하는 경우 첫 번째 요소를 대상으로 합니다.
+Cette méthode prend le premier élément en compte si l'objet Clean cible contient plusieurs éléments DOM.
 
 ```javascript
 C("#app").getAttr("id")
 ```
 
-설명:
+Explication :
 
 ```typescript
-getAttr: (attr: string) => string | null; // attr은 속성 이름입니다.
+getAttr: (attr: string) => string | null; // attr est le nom de l'attribut
 ```
 
 #### setAttr
 
-요소의 속성 값을 설정합니다.
+Définit la valeur d'un attribut de l'élément.
 
 ```javascript
 C("#app").setAttr("data", 1)
 ```
 
-설명:
+Explication :
 
 ```typescript
-setAttr: (attr: string, value: any) => void; // attr는 속성 이름이고, value는 속성 값입니다.
+setAttr: (attr: string, value: any) => void; // attr est le nom de l'attribut et value est la valeur de l'attribut
 ```
 
 #### addClass
 
-요소에 클래스를 추가합니다.
+Ajoute une classe à un élément.
 
-설명:
+Explication :
 
 ```typescript
-addClass: (name: string) => void; // name은 추가할 클래스 이름입니다.
+addClass: (name: string) => void; // name est le nom de la classe à ajouter
 ```
 
 #### removeClass
 
-지정한 클래스를 요소에서 제거합니다.
+Supprime une classe spécifique d'un élément.
 
-설명:
+Explication :
 
 ```typescript
 removeClass: (name: string) => void;
@@ -398,15 +398,15 @@ removeClass: (name: string) => void;
 
 #### hasClass
 
-요소가 지정한 클래스를 가지고 있는지 여부를 판단하여 부울 값을 반환합니다.
+Vérifie si un élément possède une classe spécifiée et renvoie un booléen.
 
-이 메소드는 대상 Clean 객체가 여러 개의 DOM 요소를 포함하는 경우 첫 번째 요소를 대상으로 합니다.
+Cette méthode prend le premier élément en compte si l'objet Clean cible contient plusieurs éléments DOM.
 
 ```javascript
 C("#app").hasClass("hello")
 ```
 
-설명:
+Explication :
 
 ```typescript
 hasClass: (name: string) => boolean;
@@ -414,7 +414,7 @@ hasClass: (name: string) => boolean;
 
 #### bind
 
-이벤트 리스너를 바인딩합니다.
+Lie un écouteur d'événements.
 
 ```javascript
 C("#app").bind("click", function(){
@@ -422,61 +422,61 @@ C("#app").bind("click", function(){
 }, false)
 ```
 
-설명:
+Explication :
 
 ```typescript
 bind: (type: string, callback: Function, option: any) => void;
 /* 
-  type 이벤트 유형
-  callback 바인딩할 이벤트 메소드
-  option 이벤트 바인딩의 옵션입니다.
+  type : type d'événement
+  callback : méthode d'événement à lier
+  option : option d'écoute d'événement (facultatif)
 */
 ```
 
 #### unbind
 
-이벤트 리스너를 제거합니다.
+Supprime un écouteur d'événements.
 
 ```javascript
 C("#app").unbind("click", sayHello)
 ```
 
-설명:
+Explication :
 
 ```typescript
 unbind: (type: string, callback: Function, option: any) => void;
 /* 
-  type 이벤트 유형
-  callback 제거할 이벤트 메소드 (변수여야 하며 익명 함수가 아니어야 함)
+  type : type d'événement
+  callback : méthode d'événement à supprimer (doit être une variable, ne peut pas être une fonction anonyme)
 */
 ```
 
-### C 객체의 메서드
+### Méthodes de l'objet C
 
 #### create
 
-DOM을 Clean 객체로 변환합니다
+Transforme le DOM en un objet Clean
 
 ```javascript
 C.create(C.createDOM(`<div>Hello, World!</div>`))
 ```
 
-설명:
+Description :
 
 ```typescript
 create: (node: any) => Clean | undefined;
-/* node는 개별 DOM 요소, NodeList 객체 또는 DOM 객체의 배열이 될 수 있습니다 */
+/* node peut être un élément DOM unique, une liste de nœuds NodeList ou un tableau d'objets DOM */
 ```
 
 #### createDOM
 
-HTML 문자열을 포함하는 DOM 객체의 배열로 변환합니다
+Transforme une chaîne HTML en un tableau contenant des objets DOM
 
 ```javascript
 C.createDOM(`<div>Hello, World!</div>`)
 ```
 
-설명:
+Description :
 
 ```typescript
 createDOM: (str: string) => Element[];
@@ -484,7 +484,7 @@ createDOM: (str: string) => Element[];
 
 #### htmlCir
 
-배열 또는 객체를 순환하여 HTML 문자열을 생성합니다
+Parcourt un tableau ou un objet pour générer une chaîne HTML
 
 ```javascript
 let arr = [
@@ -501,21 +501,21 @@ C("#app").render(C.htmlCir(arr, (item, i) => {
 }))
 ```
 
-설명:
+Description :
 
 ```typescript
 htmlCir: (obj: any, callback: (item: any, i: any) => string) => string;
 /* 
-  obj는 순환할 배열 또는 객체이며, item은 키이고 i는 인덱스입니다.
-  HTML 문자열을 반환합니다.
+  obj est le tableau ou l'objet à parcourir, item est la clé et i est l'indice
+  Retourne une chaîne HTML
 */
 ```
 
 #### str
 
-템플릿 문자열에서 변수를 처리할 때 속성을 바인딩하고 매개변수를 전달하는 데 사용
+Utilisé pour lier des propriétés et passer des paramètres dans les chaînes de modèle
 
-매개변수가 객체 또는 문자열인 경우에만 str()을 사용해야합니다. 다른 유형은 직접 전달할 수 있습니다.
+Seuls les paramètres de type objet et chaîne doivent être traités avec str(). Les autres types peuvent être directement transmis.
 
 ```javascript
 let arr = [
@@ -526,14 +526,14 @@ C("#app").render(C.htmlCir(arr, (item, i) => {
   return `
     <div onclick="sayHello(${C.str(item)})">
       <div class="name" onclick="sayName(${C.str(item.name)})">${item.name}</div>
-      <div class "age" onclick="sayAge(${item.age})">${item.age}</div>
+      <div class="age" onclick="sayAge(${item.age})">${item.age}</div>
     </div>
   `
 }))
 
 /*
-  매개변수가 객체인 경우, 객체 내의 형식 Function Symbol RegExp의 키 값은 전달할 수 없습니다.
-  이 경우 키를 사용하여 매개변수를 전달할 수 있습니다.
+  Lorsque le paramètre est un objet, les clés de type Function, Symbol et RegExp de l'objet ne peuvent pas être transmises
+  Dans ce cas, les clés peuvent être utilisées pour transmettre des paramètres
 */
 let obj = {
   name: "tom",
@@ -549,7 +549,7 @@ C("#app").render(C.htmlCir(obj, (item, i) => {
 }))
 ```
 
-설명:
+Description :
 
 ```typescript
 str: (arg: any) => string;
@@ -557,41 +557,41 @@ str: (arg: any) => string;
 
 #### one
 
-CSS 선택기로 1개의 DOM 요소를 선택하고 DOM 객체를 반환합니다
+Sélectionne un DOM en fonction d'un sélecteur CSS et renvoie un objet DOM
 
-querySelector()와 동일합니다
+Équivalent à querySelector()
 
 ```javascript
 C.one(".mydiv")
 ```
 
-설명:
+Description :
 
 ```typescript
 one: (target: any, range: any) => Element;
-/* target: CSS 선택기, range: 검색 범위 */
+/* target: sélecteur CSS, range: plage de recherche */
 ```
 
 #### all
 
-CSS 선택기로 여러 개의 DOM 요소를 선택하고 배열을 반환합니다
+Sélectionne plusieurs DOM en fonction d'un sélecteur CSS et renvoie un tableau
 
-querySelectorAll()과 다르게 이 메서드는 배열을 반환합니다
+Contrairement à querySelectorAll(), cette méthode renvoie un tableau
 
 ```javascript
 C.all(".mydiv,.hello")
 ```
 
-설명:
+Description :
 
 ```typescript
 all: (target: any, range: any) => Element[];
-/* target: CSS 선택기, range: 검색 범위 */
+/* target: sélecteur CSS, range: plage de recherche */
 ```
 
 #### setState
 
-전역 변수를 추가합니다
+Ajoute des variables globales
 
 ```javascript
 const data = {
@@ -600,11 +600,11 @@ const data = {
   age: 18,
   hobby: "swim"
 }
-C.setState(data) // data의 모든 속성이 전역 변수가 됩니다
-C.setState(data, "name,age") // name 및 age 속성만 전역 변수로 승격합니다
+C.setState(data) // Toutes les propriétés de data deviendront des variables globales
+C.setState(data, "name,age") // Seules les propriétés name et age sont élevées en tant que variables globales
 ```
 
-설명:
+Description :
 
 ```typescript
 setState: (obj: any, str?: string | undefined) => void;
@@ -612,7 +612,7 @@ setState: (obj: any, str?: string | undefined) => void;
 
 #### proxy
 
-특정 객체의 특정 속성 값 변경을 감시합니다
+Écoute les modifications de la valeur d'une propriété d'un objet donné
 
 ```javascript
 const data = {
@@ -629,7 +629,7 @@ let dataProxy = C.proxy(data, {
 })
 ```
 
-설명:
+Description :
 
 ```typescript
 proxy(conta: any, arg: {
@@ -638,12 +638,12 @@ proxy(conta: any, arg: {
     immediate?: boolean | undefined;
   };
 }): void;
-/* immediate: true를 지정하면 핸들러 함수가 리스너를 추가할 때 한 번 실행됩니다. */
+/* Si immediate: true est spécifié, le gestionnaire sera exécuté une fois lors de l'ajout de l'auditeur */
 ```
 
 #### mounted
 
-페이지 구축이 완료된 후의 후크 함수입니다. 이미지 등 네트워크 리소스의 로드는 포함되지 않습니다
+Crochet de fonction appelé lorsque la construction de la page est terminée, à l'exclusion du chargement d'images et d'autres ressources réseau
 
 ```javascript
 C.mounted(function() {
@@ -651,7 +651,7 @@ C.mounted(function() {
 })
 ```
 
-설명:
+Description :
 
 ```typescript
 mounted: (callback: (event: Event | null) => any) => void;
@@ -659,9 +659,9 @@ mounted: (callback: (event: Event | null) => any) => void;
 
 #### loaded
 
-페이지 로드가 완료된 후의 후크 함수입니다
+Crochet de fonction appelé lorsque la page est chargée
 
-설명:
+Description :
 
 ```typescript
 loaded: (callback: (event: Event) => any) => void;
@@ -669,7 +669,7 @@ loaded: (callback: (event: Event) => any) => void;
 
 #### beforeUnload
 
-페이지를 닫기 전의 후크 함수입니다
+Crochet de fonction appelé avant la fermeture de la page
 
 ```javascript
 C.beforeUnload(function(event) {
@@ -677,11 +677,11 @@ C.beforeUnload(function(event) {
     event.preventDefault()
     event.returnValue = true
   } catch () {}
-  /* 페이지가 닫힐 때 페이지 폼에 변경 사항이 있는 경우 확인 대화 상자가 표시됩니다 */
+  /* Lorsque vous essayez de fermer la page et qu'il y a des modifications dans le formulaire de la page, une boîte de dialogue de confirmation s'affiche */
 })
 ```
 
-설명:
+Description :
 
 ```typescript
 beforeUnload: (callback: (event: Event) => any) => void;
@@ -689,18 +689,16 @@ beforeUnload: (callback: (event: Event) => any) => void;
 
 #### visible
 
-페이지를 닫고, 이동하고, 창을 전환하고, 브라우저를 최소화하면 모두 이 후크 함수가 트리거됩니다.
+Crochet de fonction appelé lorsque la page se ferme, bascule, se réduit ou se minimise
 
 ```javascript
 C.visible(function(msg) {
   console.log("C.visible", msg.event, msg.state)
-  /* state가 hidden이면 숨김, visible이면 표시입니다 */
+  /* state est hidden s'il est caché, visible s'il est affiché */
 })
-``
+```
 
-`
-
-설명:
+Description :
 
 ```typescript
 visible: (callback: (event: {
@@ -711,20 +709,22 @@ visible: (callback: (event: {
 
 #### pageShow
 
-페이지가 표시되었을 때의 후크 함수입니다
+Crochet de fonction appelé lorsque la page est affichée
 
-설명:
+Description :
 
 ```typescript
 pageShow: (callback: (event: PageTransitionEvent) => any) => void;
-/* event.persisted를 사용하여 문서가 캐시에서 로드되었는지 여부를 확인할 수 있습니다 */
+/* Utilisez event.persisted pour vérifier si le document est chargé à partir du cache */
 ```
 
 #### pageHide
 
-페이지가 숨겼을 때의 후크 함수입니다
+Cro
 
-설명:
+chet de fonction appelé lorsque la page est masquée
+
+Description :
 
 ```typescript
 pageHide: (callback: (event: PageTransitionEvent) => any) => void;
@@ -732,24 +732,24 @@ pageHide: (callback: (event: PageTransitionEvent) => any) => void;
 
 #### prevent
 
-기본 이벤트를 중지합니다
+Empêche l'événement par défaut
 
 ```html
-<a class="hello" onclick="C.prevent(sayHello, event, 123)">클릭</a>
+<a class="hello" onclick="C.prevent(sayHello, event, 123)">Cliquez</a>
 ```
 
-설명:
+Description :
 
 ```typescript
 prevent: (callback: Function, ev: Event, ...arg: any) => void;
-/* callback은 바인딩할 메서드, ev는 이벤트 객체, arg는 메서드에 전달해야하는 매개 변수입니다 */
+/* callback est la méthode à lier, ev est l'objet événement, arg est le paramètre à transmettre à la méthode */
 ```
 
 #### stop
 
-이벤트 버블링을 중지합니다
+Empêche la propagation de l'événement
 
-설명:
+Description :
 
 ```typescript
 stop: (callback: Function, ev: Event, ...arg: any) => void;
@@ -757,9 +757,9 @@ stop: (callback: Function, ev: Event, ...arg: any) => void;
 
 #### self
 
-대상이 자체인 경우에만 트리거됩니다
+Le déclencheur se produit uniquement si la cible est elle-même
 
-설명:
+Description :
 
 ```typescript
 self: (callback: Function, ev: Event, ...arg: any) => void;
@@ -767,7 +767,7 @@ self: (callback: Function, ev: Event, ...arg: any) => void;
 
 #### push
 
-히스토리를 유지하고 페이지로 이동합니다
+Conserve l'historique et navigue vers une page
 
 ```javascript
 C.push("./page/home.html?id=1")
@@ -783,7 +783,7 @@ C.push({
 })
 ```
 
-설명:
+Description :
 
 ```typescript
 push: (msg: any) => void;
@@ -791,9 +791,9 @@ push: (msg: any) => void;
 
 #### replace
 
-현재 페이지를 교체하고 히스토리를 유지하지 않습니다
+Remplace la page actuelle sans conserver l'historique
 
-설명:
+Description :
 
 ```typescript
 replace: (msg: any) => void;
@@ -801,9 +801,9 @@ replace: (msg: any) => void;
 
 #### reload
 
-현재 페이지를 다시로드합니다
+Recharge la page actuelle
 
-설명:
+Description :
 
 ```typescript
 reload: () => void;
@@ -811,9 +811,9 @@ reload: () => void;
 
 #### back
 
-이전 히스토리 페이지로 돌아갑니다
+Revenir à la page d'historique précédente
 
-설명:
+Description :
 
 ```typescript
 back: () => void;
@@ -821,9 +821,9 @@ back: () => void;
 
 #### forward
 
-다음 히스토리 페이지로 이동합니다
+Avancer vers la page d'historique suivante
 
-설명:
+Description :
 
 ```typescript
 forward: () => void;
@@ -831,29 +831,29 @@ forward: () => void;
 
 #### go
 
-히스토리 페이지로 이동합니다
+Accéder à une page de l'historique
 
 ```javascript
-C.go(-1) // 1 페이지 뒤로 이동, 즉 이전 페이지로 돌아갑니다
-C.go(1) // 1 페이지 앞으로 이동합니다
+C.go(-1) // Revenir en arrière d'une page, c'est-à-dire revenir à la page précédente
+C.go(1) // Avancer d'une page
 ```
 
-설명:
+Description :
 
 ```typescript
 go: (index: number) => void;
-/* index는 이동할 페이지 수를 나타내며 음수는 이전 페이지, 양수는 이후 페이지를 나타냅니다 */
+/* index représente le nombre de pages à naviguer, un nombre négatif signifie les pages précédentes, un nombre positif signifie les pages suivantes */
 ```
 
 #### route
 
-루트 매개변수를 가져옵니다
+Obtient les paramètres de la route
 
 ```javascript
 const route = C.route()
 ```
 
-설명:
+Description :
 
 ```typescript
 route: () => {
@@ -864,20 +864,20 @@ route: () => {
 
 #### formatInput
 
-입력을 제한하는 정규식을 지원합니다
+Limite l'entrée en utilisant des expressions régulières
 
-여러 규칙을 지원합니다
+Prend en charge plusieurs règles
 
 ```javascript
-/* 단일 규칙 */
+/* Règle unique */
 C.formatInput({
-  el: "", // CSS 선택기, 하나의 요소를 지원합니다
-  reg: "", // 충족해야하는 정규식
-  nopass: e => {}, // 충족하지 않는 경우의 콜백
-  pass: (nv, ov) => {} // 정규식을 충족하는 경우의 콜백, nv는 새 값, ov는 이전 값입니다
+  el: "", // Sélecteur CSS, prenant en charge un type d'élément
+  reg: "", // L'expression régulière à satisfaire
+  nopass: e => {}, // Callback en cas d'échec
+  pass: (nv, ov) => {} // Callback en cas de réussite de l'expression régulière, nv est la nouvelle valeur, ov est l'ancienne valeur
 })
 
-/* 여러 규칙 */
+/* Plusieurs règles */
 C.formatInput({
   el: "",
   rules: [
@@ -894,7 +894,7 @@ C.formatInput({
 })
 ```
 
-설명:
+Description :
 
 ```typescript
 formatInput: (msg: any) => void;
@@ -902,26 +902,26 @@ formatInput: (msg: any) => void;
 
 #### ajax
 
-Ajax 요청을 보냅니다
+Envoie une requête Ajax
 
-자세한 사용법은 https://github.com/omlou/ajax를 참조하십시오
+Pour des exemples détaillés, veuillez consulter https://github.com/omlou/ajax
 
 #### webtools
 
-webtools의 모든 메서드가 통합되어 있습니다
+Intègre toutes les méthodes de webtools
 
-사용법은 https://github.com/omlou/webtools를 참조하십시오
+Pour des exemples d'utilisation, veuillez consulter https://github.com/omlou/webtools
 
-예시:
+Exemple :
 
 ```javascript
-C.clipboardWrite("Hello, World!")
+C.clipboardWrite("Bonjour, le monde !")
 .then(() => {
-  console.log("복사 성공")
+  console.log("Copie réussie")
 })
 ```
 
-### 유형 설명
+### Description des types
 
 ```typescript
 import * as _xlou_ajax from '@xlou/ajax';
